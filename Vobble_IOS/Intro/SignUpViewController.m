@@ -7,9 +7,14 @@
 //
 
 #import "SignUpViewController.h"
-
+#import <MHTextField/MHTextField.h>
+#import <NSString+CJStringValidator.h>
 @interface SignUpViewController ()
 
+@property (nonatomic, weak) IBOutlet MHTextField* nameTextField;
+@property (nonatomic, weak) IBOutlet MHTextField* emailTextField;
+@property (nonatomic, weak) IBOutlet MHTextField* passwordTextField;
+@property (nonatomic, weak) IBOutlet MHTextField* passwordConfirmTextField;
 @end
 
 @implementation SignUpViewController
@@ -26,11 +31,64 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    JY_LOG(@"TEXE BEGIN EDITING");
+    [UIView animateWithDuration:0.4f delay:0.0f options:UIViewAnimationOptionCurveLinear animations:^(void){
+        if (textField == _passwordTextField) {
+            self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-30, self.view.frame.size.width, self.view.frame.size.height);
+        }
+        if (textField == _passwordConfirmTextField) {
+            self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-80, self.view.frame.size.width, self.view.frame.size.height);
+        }
+    }completion:^(BOOL finished){
+        
+    }];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    JY_LOG(@"TEXE END EDITING");
+    [UIView animateWithDuration:0.4f delay:0.0f options:UIViewAnimationOptionCurveLinear animations:^(void){
+        if (textField == _passwordTextField) {
+            self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+30, self.view.frame.size.width, self.view.frame.size.height);
+        }
+        if (textField == _passwordConfirmTextField) {
+            self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+80, self.view.frame.size.width, self.view.frame.size.height);
+        }
+    }completion:^(BOOL finished){
+        
+    }];
 }
 
 - (IBAction)signUpClick:(id)sender{
-    [self performSegueWithIdentifier:@"ToMainInSegue" sender:self];
+    if (![_emailTextField.text isEmail]) {
+        [self alertNetworkError:NSLocalizedString(@"EMAIL_VALID_ERROR", @"이메일 인증 실패")];
+        return ;
+    }else if(![_passwordTextField.text isMinLength:6]){
+        [self alertNetworkError:NSLocalizedString(@"EMAIL_LENGTH_ERROR", @"패스워드 길이")];
+        return ;
+    }else if(![_passwordTextField.text isEqualToString:_passwordConfirmTextField.text]){
+        [self alertNetworkError:NSLocalizedString(@"PASSWORD_VALID_ERROR", @"패스워드 확인")];
+        return ;
+    }else if (![_nameTextField.text isMinLength:1]){
+        [self alertNetworkError:NSLocalizedString(@"NAME_VALID_ERROR", @"이름 입력")];
+        return ;
+    }
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *parameters = @{@"email": _emailTextField.text,@"username": _nameTextField.text, @"password": _passwordTextField};
+    [manager POST:[URL getSignUpURL] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([[responseObject objectForKey:@"result"] integerValue] != 0) {
+            [self  performSegueWithIdentifier:@"ToSignInSegue" sender:self];
+        }else{
+            [self alertNetworkError:[responseObject objectForKey:@"msg"]];
+        }
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self alertNetworkError:NSLocalizedString(@"NETWORK_ERROR", @"네트워크 실패")];
+    }];
 }
 
 - (void)didReceiveMemoryWarning

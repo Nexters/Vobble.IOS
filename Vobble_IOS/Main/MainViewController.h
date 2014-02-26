@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface MainViewController : UIViewController
-
+#import <CoreLocation/CoreLocation.h>
+#import "EasyViewPager.h"
+#import "MainVobbleViewController.h"
+#import "Vobble.h"
+@interface MainViewController : UIViewController <EKViewPagerDataSource, EKViewPagerDelegate, CLLocationManagerDelegate>
+@property (nonatomic, weak) IBOutlet EKViewPager *viewPager;
+@property (nonatomic, weak) IBOutlet UILabel* vobbleCntLabel;
+@property (nonatomic, weak) IBOutlet UILabel* vobbleDescLabel;
+@property (nonatomic, strong) UIButton* clickVobbleBtn;
+@property (nonatomic, strong) Vobble* clickVobble;
+@property (nonatomic, strong) MainVobbleViewController* myVobbleViewCont;
+@property (nonatomic, strong) MainVobbleViewController* allVobbleViewCont;
 @end

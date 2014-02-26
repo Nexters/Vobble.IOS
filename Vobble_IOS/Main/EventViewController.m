@@ -7,7 +7,7 @@
 //
 
 #import "EventViewController.h"
-
+#import "BlurryModalSegue.h"
 @interface EventViewController ()
 
 @end
@@ -26,9 +26,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    NSURLRequest* request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:[URL getEventURL]]];
+    [_webView loadRequest:request];
 }
 
+- (IBAction)backClick:(id)sender{
+    [self.presentingViewController dismissViewControllerAnimated:TRUE completion:nil];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

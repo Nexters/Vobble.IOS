@@ -7,7 +7,7 @@
 //
 
 #import "SuperViewController.h"
-
+#import <FSExtendedAlertKit.h>
 @interface SuperViewController ()
 
 @end
@@ -27,6 +27,13 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+}
+
+- (void)alertNetworkError:(NSString*)msg{
+    FSAlertView *alert = [[FSAlertView alloc] initWithTitle:@"Vobble" message:msg cancelButton:[FSBlockButton blockButtonWithTitle:@"확인" block:^ {
+        
+    }] otherButtons: nil];
+    [alert show];
 }
 
 - (void)didReceiveMemoryWarning

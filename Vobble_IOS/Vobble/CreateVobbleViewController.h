@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface CreateVobbleViewController : UIViewController
+#import <MapKit/MapKit.h>
+#import "SuperViewController.h"
+@interface CreateVobbleViewController : SuperViewController  <MKMapViewDelegate>
 
 @end

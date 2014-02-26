@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-static NSString* INTRO_MOVIE_URL = @"http://54.199.171.240:3000/videos/video.mp4";
+#define CLICK_GRAY_COLOR [UIColor colorWithRed:95/255.0f green:109/255.0f blue:125/255.0f alpha:0.5f]
 #define MINT_COLOR [UIColor colorWithRed:41/255.0f green:240/255.0f blue:186/255.0f alpha:1]
+#define ORANGE_COLOR [UIColor colorWithRed:253/255.0f green:98/255.0f blue:82/255.0f alpha:1]
 @interface App : NSObject
 +(void)LOG:(NSString*)str;
 @end

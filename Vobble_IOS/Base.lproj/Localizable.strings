@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings.strings
+  Vobble_IOS
+
+  Created by Rangken on 2014. 2. 24..
+  Copyright (c) 2014년 Nexters. All rights reserved.
+*/
+"NETWORK_ERROR" = "네트워크를 연결 할 수 없습니다.";
+"EMAIL_VALID_ERROR" = "이메일을 재대로 입력해주세요.";
+"EMAIL_LENGTH_ERROR" = "이메일을 6~30 글자로 입력해주세요";
+"EMAIL_LENGTH_ERROR" = "패스워드를 6글자 이상으로 입력해주세요";

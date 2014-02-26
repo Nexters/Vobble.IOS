@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <MediaPlayer/MediaPlayer.h>
 @interface SignViewController : UIViewController
-
+{
+    MPMoviePlayerController *moviePlayerController;
+}
 @end

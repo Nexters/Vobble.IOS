@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "App.h"
+#import "URL.h"
+#import <MBProgressHUD/MBProgressHUD.h>
+#import <AFNetworking/AFNetworking.h>
 @interface SuperViewController : UIViewController
-
+- (void)alertNetworkError:(NSString*)msg;
 @end

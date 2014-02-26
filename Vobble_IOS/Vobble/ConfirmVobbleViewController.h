@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ConfirmVobbleViewController : UIViewController
-
+#import <MapKit/MapKit.h>
+#import "SuperViewController.h"
+@interface ConfirmVobbleViewController : SuperViewController
+@property (nonatomic, strong) NSURL* voiceURL;
+@property (nonatomic, strong) NSURL* imageURL;
 @end

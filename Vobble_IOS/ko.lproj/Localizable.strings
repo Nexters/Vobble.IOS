@@ -1,0 +1,26 @@
+/* 
+  Localizable.strings.strings
+  Vobble_IOS
+
+  Created by Rangken on 2014. 2. 24..
+  Copyright (c) 2014년 Nexters. All rights reserved.
+*/
+"TEST"="JAEYOUNG";
+"NETWORK_ERROR" = "네트워크를 연결 할 수 없습니다.";
+"EMAIL_VALID_ERROR" = "이메일을 재대로 입력해주세요.";
+"EMAIL_LENGTH_ERROR" = "이메일을 6~30 글자로 입력해주세요.";
+"EMAIL_LENGTH_ERROR" = "패스워드를 6글자 이상으로 입력해주세요.";
+"PASSWORD_VALID_ERROR" = "패스워드를 확인해주세요.";
+"NAME_VALID_ERROR" = "이름을 입력해주세요";
+"CONFIRM" = "확인";
+"CANCEL" = "취소";
+"LOGOUT_DESCRIPTION" = "로그아웃 하시겠습니까?";
+"VOBBLE_NAME_TIME_DESCTIPTION" = "%@ made vobble on %@";
+"RECORDER_FAIL" = "녹음을 진행할 수 없습니다.";
+"PLAY_FAIL" = "재생 할 수 없습니다.";
+"PLAY_FAIL" = "재생 할 수 없습니다.";
+"IMG_NOT_ATTACHED_ERROR" = "사진을 선택해주세요.";
+"VOICE_NOT_ATTACHED_ERROR" = "녹음을 진행해주세요.";
+"IMG_SELECT_CAMERA" = "사진찍기";
+"IMG_SELECT_GALLERY" = "이미지 갤러리";
+"IMG_SELECT_WEB" = "웹에서 선택";

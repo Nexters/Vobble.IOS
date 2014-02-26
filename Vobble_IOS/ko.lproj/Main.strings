@@ -1,0 +1,36 @@
+
+/* Class = "IBUILabel"; text = "Sign Up"; ObjectID = "ANh-3h-Ye3"; */
+"ANh-3h-Ye3.text" = "Sign Up";
+
+/* Class = "IBUIButton"; normalTitle = "Button"; ObjectID = "CLr-OX-cwy"; */
+"CLr-OX-cwy.normalTitle" = "Button";
+
+/* Class = "IBUITextField"; placeholder = "Password"; ObjectID = "JLa-Tc-eAI"; */
+"JLa-Tc-eAI.placeholder" = "Password";
+
+/* Class = "IBUILabel"; text = "Listen a Vobble"; ObjectID = "KM2-FK-64C"; */
+"KM2-FK-64C.text" = "Listen a Vobble";
+
+/* Class = "IBUILabel"; text = "Make Vobble"; ObjectID = "MEV-B7-19o"; */
+"MEV-B7-19o.text" = "Make Vobble";
+
+/* Class = "IBUITextField"; placeholder = "Password"; ObjectID = "UAG-KP-Nc1"; */
+"UAG-KP-Nc1.placeholder" = "Password";
+
+/* Class = "IBUILabel"; text = "Sign Up"; ObjectID = "ZPy-wQ-QYN"; */
+"ZPy-wQ-QYN.text" = "Sign Up";
+
+/* Class = "IBUITextField"; placeholder = "E-mail"; ObjectID = "ac7-v3-ND1"; */
+"ac7-v3-ND1.placeholder" = "E-mail";
+
+/* Class = "IBUITextField"; placeholder = "User name"; ObjectID = "f5p-0X-fEX"; */
+"f5p-0X-fEX.placeholder" = "User name";
+
+/* Class = "IBUITextField"; placeholder = "E-mail"; ObjectID = "noG-Oo-BVX"; */
+"noG-Oo-BVX.placeholder" = "E-mail";
+
+/* Class = "IBUITextField"; placeholder = "Password Check"; ObjectID = "vlr-1O-J9x"; */
+"vlr-1O-J9x.placeholder" = "Password Check";
+
+/* Class = "IBUIButton"; normalTitle = "Button"; ObjectID = "xRV-e5-VYi"; */
+"xRV-e5-VYi.normalTitle" = "Button";

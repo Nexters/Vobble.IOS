@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SuperViewController.h"
+@interface EventViewController : SuperViewController
 
-@interface EventViewController : UIViewController
-
+@property (nonatomic, weak) IBOutlet UIWebView* webView;
 @end

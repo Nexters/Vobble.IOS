@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface VobbleViewController : UIViewController
-
+#import <MapKit/MapKit.h>
+#import "Vobble.h"
+#import "SuperViewController.h"
+@interface VobbleViewController : SuperViewController <MKMapViewDelegate>
+@property (readwrite, nonatomic) CGPoint vobbleOrignalCenter;
+@property (readwrite, nonatomic) CGRect vobbleOriginalRect;
+@property (nonatomic, strong) Vobble* vobble;
 @end

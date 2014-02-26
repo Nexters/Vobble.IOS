@@ -16,3 +16,6 @@ https://github.com/mehfuzh/MHTextField - 회원가입 텍스트창
 
 https://github.com/Citrrus/BlurryModalSegue - 블러 모달
 https://github.com/zetachang/DCModalSegue - gmail 스타일 모달 
+
+https://github.com/donobono/DoActionSheet - float action sheet
+https://github.com/Grouper/FlatUIKit/tree/master/Classes/ios - flat ui alertview
