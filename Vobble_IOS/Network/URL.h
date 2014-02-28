@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-//#define BASE_URL @"http://54.199.171.240:3000";
-#define BASE_URL @"http://54.199.171.240:3001";
+#define BASE_URL @"http://54.199.171.240:3000";
+//#define BASE_URL @"http://54.199.171.240:3001";
 @interface URL : NSObject
 
 + (NSString*)getBaseURL;

@@ -11,10 +11,12 @@
 #import "EasyViewPager.h"
 #import "MainVobbleViewController.h"
 #import "Vobble.h"
-@interface MainViewController : UIViewController <EKViewPagerDataSource, EKViewPagerDelegate, CLLocationManagerDelegate>
+@interface MainViewController : UIViewController <EKViewPagerDataSource, EKViewPagerDelegate, CLLocationManagerDelegate, UINavigationControllerDelegate >
+@property (nonatomic, assign) Class prevNaviClass;
 @property (nonatomic, weak) IBOutlet EKViewPager *viewPager;
 @property (nonatomic, weak) IBOutlet UILabel* vobbleCntLabel;
 @property (nonatomic, weak) IBOutlet UILabel* vobbleDescLabel;
+@property (nonatomic, weak) IBOutlet UIPageControl* pageControl;
 @property (nonatomic, strong) UIButton* clickVobbleBtn;
 @property (nonatomic, strong) Vobble* clickVobble;
 @property (nonatomic, strong) MainVobbleViewController* myVobbleViewCont;

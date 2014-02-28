@@ -34,7 +34,6 @@
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
-    JY_LOG(@"TEXE BEGIN EDITING");
     [UIView animateWithDuration:0.4f delay:0.0f options:UIViewAnimationOptionCurveLinear animations:^(void){
         if (textField == _passwordTextField) {
             self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-30, self.view.frame.size.width, self.view.frame.size.height);
@@ -48,7 +47,6 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    JY_LOG(@"TEXE END EDITING");
     [UIView animateWithDuration:0.4f delay:0.0f options:UIViewAnimationOptionCurveLinear animations:^(void){
         if (textField == _passwordTextField) {
             self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+30, self.view.frame.size.width, self.view.frame.size.height);
@@ -59,6 +57,11 @@
     }completion:^(BOOL finished){
         
     }];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return TRUE;
 }
 
 - (IBAction)signUpClick:(id)sender{

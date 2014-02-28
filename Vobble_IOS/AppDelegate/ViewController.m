@@ -50,7 +50,9 @@
         }
         
     }*/
-    if ([[User getToken] length] == 0) {
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"IsAgreeCheck"]) {
+        [self performSegueWithIdentifier:@"ToAgreeSegue" sender:self];
+    }else if ([[User getToken] length] == 0) {
         [self performSegueWithIdentifier:@"ToSignSegue" sender:self];
     }else{
         [self performSegueWithIdentifier:@"ToMainSegue" sender:self];
@@ -60,6 +62,7 @@
 -(void)finishedPlayerViewCont:(NSNotification*)userInfo{
     [self performSegueWithIdentifier:@"ToIntroSegue" sender:self];
 }
+
 
 - (void)didReceiveMemoryWarning
 {

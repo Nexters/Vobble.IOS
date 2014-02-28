@@ -112,6 +112,7 @@
 		CDB7295318BA3052009EC23F /* IBCellFlipSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB7295218BA3052009EC23F /* IBCellFlipSegue.m */; };
 		CDB7295618BA30FC009EC23F /* back_icon_o@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB7295418BA30FC009EC23F /* back_icon_o@2x.png */; };
 		CDB7295718BA30FC009EC23F /* back_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB7295518BA30FC009EC23F /* back_icon@2x.png */; };
+		CDBE816B18C05B6D00588A8F /* AgreeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDBE816A18C05B6D00588A8F /* AgreeViewController.m */; };
 		CDD0246718BA5DDC005CD08D /* NavagtionBlurSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD0246618BA5DDC005CD08D /* NavagtionBlurSegue.m */; };
 		CDD0246918BA62C6005CD08D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD0246818BA62C6005CD08D /* CoreLocation.framework */; };
 		CDD0247218BA659C005CD08D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD0247118BA659C005CD08D /* SystemConfiguration.framework */; };
@@ -272,6 +273,8 @@
 		CDB7295218BA3052009EC23F /* IBCellFlipSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBCellFlipSegue.m; sourceTree = "<group>"; };
 		CDB7295418BA30FC009EC23F /* back_icon_o@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_icon_o@2x.png"; sourceTree = "<group>"; };
 		CDB7295518BA30FC009EC23F /* back_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_icon@2x.png"; sourceTree = "<group>"; };
+		CDBE816918C05B6D00588A8F /* AgreeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgreeViewController.h; sourceTree = "<group>"; };
+		CDBE816A18C05B6D00588A8F /* AgreeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgreeViewController.m; sourceTree = "<group>"; };
 		CDD0246518BA5DDC005CD08D /* NavagtionBlurSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavagtionBlurSegue.h; sourceTree = "<group>"; };
 		CDD0246618BA5DDC005CD08D /* NavagtionBlurSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavagtionBlurSegue.m; sourceTree = "<group>"; };
 		CDD0246818BA62C6005CD08D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -560,6 +563,8 @@
 				CD264C6018B9C88800D9035A /* SignViewController.m */,
 				CD93CB7318BA13BD000FAD13 /* SignNavigationViewController.h */,
 				CD93CB7418BA13BD000FAD13 /* SignNavigationViewController.m */,
+				CDBE816918C05B6D00588A8F /* AgreeViewController.h */,
+				CDBE816A18C05B6D00588A8F /* AgreeViewController.m */,
 			);
 			path = Intro;
 			sourceTree = "<group>";
@@ -834,6 +839,7 @@
 				CD264C6918B9CC3F00D9035A /* EventViewController.m in Sources */,
 				CD264C6C18B9CC4A00D9035A /* CreateVobbleViewController.m in Sources */,
 				CD264C5E18B9C85700D9035A /* SignUpViewController.m in Sources */,
+				CDBE816B18C05B6D00588A8F /* AgreeViewController.m in Sources */,
 				CD67084D18BCFB49001EA671 /* UIImage+ResizeMagick.m in Sources */,
 				CD67084F18BCFB49001EA671 /* DoActionSheet.m in Sources */,
 				CD5CDE8C18BD993E00C77413 /* FriendVobbleViewController.m in Sources */,

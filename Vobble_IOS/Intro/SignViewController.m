@@ -56,6 +56,9 @@
                                                object:nil];
 }
 - (void)viewDidAppear:(BOOL)animated{
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"IsAgreeCheck"]) {
+        [self performSegueWithIdentifier:@"ToAgreeSegue" sender:self];
+    }
     if (moviePlayerController) {
         [moviePlayerController play];
     }
@@ -90,6 +93,11 @@
     }completion:^(BOOL finished){
         
     }];
+}
+- (void)applicationDidBecomeActive:(UIApplication *)application{
+    if (moviePlayerController) {
+        [moviePlayerController pause];
+    }
 }
 - (void)didReceiveMemoryWarning
 {

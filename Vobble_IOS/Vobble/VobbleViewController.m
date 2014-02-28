@@ -102,12 +102,32 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
     zoomLocation.longitude= _vobble.longitude;
     JY_LOG(@" _vobble.latitude : %lf", _vobble.latitude);
     JY_LOG(@" _vobble.longitude : %lf", _vobble.longitude);
+    
+    CLLocationDistance mapSizeMeters = 5000;
+    
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, mapSizeMeters, mapSizeMeters);
+    
+    MKCoordinateRegion adjustedRegion = [_mapView regionThatFits:viewRegion];
+    if(adjustedRegion.center.longitude != -180.00000000){
+        if (isnan(adjustedRegion.center.latitude)) {
+            // iOS 6 will result in nan. 2012-10-15
+            adjustedRegion.center.latitude = viewRegion.center.latitude;
+            adjustedRegion.center.longitude = viewRegion.center.longitude;
+            adjustedRegion.span.latitudeDelta = 0;
+            adjustedRegion.span.longitudeDelta = 0;
+        }
+        
+        
+        [_mapView setRegion:adjustedRegion animated:YES];
+    }
     /*
      MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
      [_mapView setRegion:viewRegion animated:YES];
+    */
+    
     Pin* pin = [[Pin alloc] initWithCoordinates:zoomLocation placeName:@"Start" description:@""];
     [_mapView addAnnotation:pin];
-     */
+    
     [self resetStreamer];
 }
 - (void)viewWillDisappear:(BOOL)animated

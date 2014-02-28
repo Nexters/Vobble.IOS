@@ -11,6 +11,7 @@
 #import "User.h"
 #import "VobbleViewController.h"
 #import "FriendVobbleViewController.h"
+#import "ConfirmVobbleViewController.h"
 #import <FSExtendedAlertKit.h>
 @interface MainViewController ()
 @property (nonatomic, strong) CLLocationManager *locationManager;
@@ -34,6 +35,7 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
+    [self.navigationController setDelegate:self];
     UIBarButtonItem *backBtn =
     [[UIBarButtonItem alloc] initWithTitle:@""
                                      style:UIBarButtonItemStyleBordered
@@ -61,10 +63,6 @@
 }
 - (void)viewDidAppear:(BOOL)animated{
     [self.navigationController.navigationBar setHidden:TRUE];
-    if (_myVobbleViewCont && _allVobbleViewCont) {
-        [_myVobbleViewCont initVobbles];
-        [_allVobbleViewCont initVobbles];
-    }
 }
 - (void)viewDidDisappear:(BOOL)animated{
     [self.navigationController.navigationBar setHidden:FALSE];
@@ -86,6 +84,7 @@
     }else{
         return ;
     }
+     [mainVobbleViewCont resetVobbleImgs];
     [mainVobbleViewCont initVobbles];
 }
 - (IBAction)eventClick:(id)sender
@@ -102,6 +101,7 @@
         mainVobbleViewCont = _myVobbleViewCont;
     }
     if (tag >= [[mainVobbleViewCont vobbleArray] count]) {
+        [mainVobbleViewCont stopAllAnimation];
         return ;
     }
     _clickVobble = [[mainVobbleViewCont vobbleArray] objectAtIndex:tag];
@@ -116,6 +116,7 @@
     FSAlertView *alert = [[FSAlertView alloc] initWithTitle:@"Vobble" message:NSLocalizedString(@"LOGOUT_DESCRIPTION", @"로그아웃") cancelButton: [FSBlockButton blockButtonWithTitle:NSLocalizedString(@"CANCEL",@"취소") block:^ {
         
     }]otherButtons: [FSBlockButton blockButtonWithTitle:NSLocalizedString(@"CONFIRM",@"확인") block:^ {
+        [User setLogOut];
         [self performSegueWithIdentifier:@"ToSignSegue" sender:self];
         
     }],nil];
@@ -154,6 +155,21 @@
     [User setLongitude:[NSString stringWithFormat:@"%lf",37.566535]];
     [_myVobbleViewCont initVobbles];
     [_allVobbleViewCont initVobbles];
+}
+#pragma mark - UINavigationControllerDelegate
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+    NSLog(@"%@",[viewController class]);
+    if ([viewController isKindOfClass:[MainViewController class]]) {
+        if (_prevNaviClass == [ConfirmVobbleViewController class]) {
+            if (_myVobbleViewCont && _allVobbleViewCont) {
+                [_myVobbleViewCont resetVobbleImgs];
+                [_myVobbleViewCont initVobbles];
+                [_allVobbleViewCont resetVobbleImgs];
+                [_allVobbleViewCont initVobbles];
+            }
+        }
+    }
+    _prevNaviClass = [viewController class];
 }
 #pragma mark - EKViewPagerDataSource
 - (NSInteger)numberOfItemsForViewPager:(EKViewPager *)viewPager
@@ -210,10 +226,13 @@
 
 - (void)viewPager:(EKViewPager *)viewPager willMoveFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex
 {
+    [_myVobbleViewCont stopAllAnimation];
 }
 
 - (void)viewPager:(EKViewPager *)viewPager didMoveFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex
 {
+    _pageControl.currentPage = toIndex;
+    
     EKTabHost* select_tab = [viewPager.tabHostsContainer.tabs objectAtIndex:toIndex];
     for (EKTabHost* tab in viewPager.tabHostsContainer.tabs) {
         if (select_tab == tab) {
@@ -229,6 +248,8 @@
     if (toIndex == MY) {
         _vobbleCntLabel.text = [NSString stringWithFormat:@"%ld",_myVobbleViewCont.vobbleCnt];
         _vobbleDescLabel.text = @"My vobbles";
+    }
+    if (toIndex == FRIEND) {
     }
 }
 @end

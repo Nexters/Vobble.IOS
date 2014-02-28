@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSString* userName;
 +(NSString*)getToken;
 +(NSString*)getUserId;
++(void)setLogOut;
 +(NSString*)getLatitude;
 +(NSString*)getLongitude;
 +(void)setLatitude:(NSString*)str;

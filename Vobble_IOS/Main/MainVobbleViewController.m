@@ -15,7 +15,9 @@
 #import "User.h"
 #import "Vobble.h"
 #define MAX_VOBBLE_CNT 12
-@interface MainVobbleViewController ()
+@interface MainVobbleViewController (){
+    BOOL isConnecting;
+}
 @property (nonatomic, weak) IBOutlet UIButton* recordBtn;
 @property (nonatomic, strong) IBOutletCollection(UIButton) NSArray *buttons;
 @property (nonatomic, strong) IBOutletCollection(NZCircularImageView) NSArray *imgViews;
@@ -36,6 +38,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    isConnecting = FALSE;
     _vobbleArray = [NSMutableArray new];
     NSInteger idx = 0;
     for (NZCircularImageView* imgView in _imgViews) {
@@ -44,10 +47,42 @@
         [button setTag:idx++];
         [button addTarget:self.mainViewCont action:@selector(vobbleClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:button];
+        if (_type == MY) {
+            UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc]
+                                                               initWithTarget:self
+                                                               action:@selector(longPress:)];
+            [longPressGesture setMinimumPressDuration:1];
+            [button addGestureRecognizer:longPressGesture];
+        }
     }
     [_recordBtn addTarget:self.mainViewCont action:@selector(recordClick:) forControlEvents:UIControlEventTouchUpInside];
+  
+    
+    [self resetVobbleImgs];
+}
+- (void)viewDidDisappear:(BOOL)animated{
+    [self stopAllAnimation];
+}
+- (IBAction)tap:(UITapGestureRecognizer*)sender{
+    [self stopAllAnimation];
+}
+- (void)longPress:(UILongPressGestureRecognizer*)gesture {
+    if ( gesture.state == UIGestureRecognizerStateBegan ) {
+        UIImageView* imgView = [_imgViews objectAtIndex:gesture.view.tag];
+        [self earthquake:imgView];
+    }
+}
+
+- (void)resetVobbleImgs{
+    for (int i=0; i < MAX_VOBBLE_CNT; i++) {
+        NZCircularImageView* imgView = [_imgViews objectAtIndex:i];
+        imgView.image = NULL;
+    }
 }
 - (void)initVobbles{
+    if (isConnecting) {
+        return ;
+    }
     NSString* url = @"";
     if (_type == ALL) {
         url = [URL getAllVobbleURL];
@@ -60,12 +95,14 @@
     }
     NSString* latitude = [User getLatitude];
     NSString* longitude = [User getLongitude];
-    [_vobbleArray removeAllObjects];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    isConnecting = TRUE;
+    
     NSDictionary *parameters = @{@"latitude": latitude,@"longitude": longitude, @"limit": @"12"};
     [manager GET:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         JY_LOG(@"%@ : %@",[URL getAllVobbleURL],responseObject);
         if ([[responseObject objectForKey:@"result"] integerValue] != 0) {
+            [_vobbleArray removeAllObjects];
             for (NSDictionary* dic in [responseObject objectForKey:@"vobbles"]) {
                 Vobble* vobble = [Vobble new];
                 [vobble setVobble:dic];
@@ -75,8 +112,10 @@
         }else{
             [self alertNetworkError:[responseObject objectForKey:@"msg"]];
         }
+        isConnecting = FALSE;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self alertNetworkError:NSLocalizedString(@"NETWORK_ERROR", @"네트워크 실패")];
+        isConnecting = FALSE;
     }];
     if (_type == ALL) {
         url = [URL getAllVobbleCountURL];
@@ -100,13 +139,16 @@
 }
 - (void)initVobblesAnimation{
     for (int i=0; i < MAX_VOBBLE_CNT; i++) {
-        if (i >= [_vobbleArray count]) {
-            return ;
-        }
         NZCircularImageView* imgView = [_imgViews objectAtIndex:i];
+        if (i >= [_vobbleArray count]) {
+            imgView.image = NULL;
+            return ;
+        }else{
+            imgView.image = [UIImage imageNamed:@"vobble_loading_icon.png"];
+        }
         Vobble* vobble = [_vobbleArray objectAtIndex:i];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.2 * i * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-            [imgView setHidden:FALSE];
+            //[imgView setHidden:FALSE];
             [imgView setImageWithResizeURL:[vobble getImgUrl]];
             
             NSString *keyPath = @"transform";
@@ -137,6 +179,49 @@
         });
     }
 }
+- (void)stopAllAnimation{
+    for (int i=0; i < MAX_VOBBLE_CNT; i++) {
+        NZCircularImageView* imgView = [_imgViews objectAtIndex:i];
+        [imgView stopAnimating];
+        [imgView.layer removeAllAnimations];
+    }
+}
+- (void)earthquakeAllVobbles{
+    for (int i=0; i < MAX_VOBBLE_CNT; i++) {
+        NZCircularImageView* imgView = [_imgViews objectAtIndex:i];
+        [self earthquake:imgView];
+    }
+}
+- (void)earthquake:(UIView*)itemView
+{
+    CGFloat t = 2.0;
+    
+    CGAffineTransform leftQuake  = CGAffineTransformTranslate(CGAffineTransformIdentity, t, -t);
+    CGAffineTransform rightQuake = CGAffineTransformTranslate(CGAffineTransformIdentity, -t, t);
+    
+    itemView.transform = leftQuake;  // starting point
+    
+    [UIView beginAnimations:@"earthquake" context:(__bridge void *)(itemView)];
+    [UIView setAnimationRepeatAutoreverses:YES]; // important
+    [UIView setAnimationRepeatCount:INFINITY];
+    [UIView setAnimationDuration:0.1];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(earthquakeEnded:finished:context:)];
+    
+    itemView.transform = rightQuake; // end here & auto-reverse
+    
+    [UIView commitAnimations];
+}
+
+- (void)earthquakeEnded:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
+{
+    if ([finished boolValue])
+    {
+    	UIView* item = (__bridge UIView *)context;
+    	item.transform = CGAffineTransformIdentity;
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

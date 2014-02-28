@@ -53,8 +53,8 @@
 #define DO_BACK_COLOR               DO_RGB(232, 229, 222)
 
 // button background color
-#define DO_BUTTON_COLOR             DO_RGB(41, 240, 186)//DO_RGB(158, 132, 103)
-#define DO_CANCEL_COLOR             DO_RGB(253, 98, 82)//DO_RGB(240, 185, 103)
+#define DO_BUTTON_COLOR             DO_RGB(0x40, 0xdd, 0xc2)//DO_RGB(158, 132, 103)
+#define DO_CANCEL_COLOR             DO_RGB(0xff, 0x79, 0x63)//DO_RGB(240, 185, 103)
 #define DO_DESTRUCTIVE_COLOR        DO_RGB(124, 192, 134)
 
 // button text color

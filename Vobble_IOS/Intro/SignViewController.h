@@ -12,4 +12,5 @@
 {
     MPMoviePlayerController *moviePlayerController;
 }
+- (void)applicationDidBecomeActive:(UIApplication *)application;
 @end
