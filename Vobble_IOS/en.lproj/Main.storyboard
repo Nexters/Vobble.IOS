@@ -45,12 +45,30 @@
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="6" id="dLX-uv-mNw">
                                 <rect key="frame" x="140" y="520" width="39" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <color key="tintColor" red="0.3888723078583276" green="1" blue="0.84945028405419865" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="currentPageIndicatorTintColor" red="0.24313725489999999" green="0.63529411759999999" blue="0.69411764710000001" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Lri-9Q-5Ua">
+                                <rect key="frame" x="260" y="20" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" image="back_icon.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" image="back_icon_o.png"/>
+                                <state key="highlighted" image="back_icon_o.png"/>
+                                <connections>
+                                    <action selector="backClick:" destination="7Cx-CO-5xP" eventType="touchUpInside" id="Qoq-4z-YgF"/>
+                                    <action selector="backClick:" destination="OG4-GP-7L5" eventType="touchUpInside" id="mky-lk-Jln"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="backBtn" destination="Lri-9Q-5Ua" id="B9q-W0-2lt"/>
+                        <outlet property="pageControl" destination="dLX-uv-mNw" id="PRT-Xn-j0O"/>
                         <outlet property="scrollView" destination="3Iw-td-1ka" id="FHo-On-Xpn"/>
                         <segue destination="rCz-GN-RPZ" kind="custom" identifier="ToSignSegue" customClass="RootTransitionFlipSegue" id="Vx5-lg-Tow"/>
                     </connections>
@@ -71,32 +89,32 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="start_logo.png" id="n6q-hW-gHJ">
-                                <rect key="frame" x="58" y="91" width="205" height="205"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" id="n6q-hW-gHJ">
+                                <rect key="frame" x="60" y="110" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rTm-Lc-1kM">
-                                <rect key="frame" x="10" y="412" width="300" height="60"/>
+                                <rect key="frame" x="30" y="473" width="127" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" image="start_signup_btn.png">
+                                <state key="normal" image="sign_up_btn.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="selected" image="start_signup_btn_o.png"/>
-                                <state key="highlighted" image="start_signup_btn_o.png"/>
+                                <state key="selected" image="sign_up_btn_press.png"/>
+                                <state key="highlighted" image="sign_up_btn_press.png"/>
                                 <connections>
                                     <action selector="signUpClick:" destination="rWY-VK-OOR" eventType="touchUpInside" id="Mou-eU-zDF"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="o61-au-hNZ">
-                                <rect key="frame" x="10" y="480" width="300" height="60"/>
+                                <rect key="frame" x="162" y="473" width="127" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" image="start_login_btn.png">
+                                <state key="normal" image="log_in_btn.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="selected" image="start_login_btn_o.png"/>
-                                <state key="highlighted" image="start_login_btn_o.png"/>
+                                <state key="selected" image="log_in_btn_press.png"/>
+                                <state key="highlighted" image="log_in_btn_press.png"/>
                                 <connections>
                                     <action selector="signInClick:" destination="rWY-VK-OOR" eventType="touchUpInside" id="Nim-K9-YW3"/>
                                 </connections>
@@ -229,22 +247,6 @@
                             <view contentMode="scaleToFill" id="nJQ-R6-9wh" customClass="EKViewPager">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Vobble" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4F0-Wp-y4w">
-                                        <rect key="frame" x="80" y="527" width="160" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dae-dC-rjO">
-                                        <rect key="frame" x="104" y="496" width="113" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -252,8 +254,55 @@
                                     <outlet property="delegate" destination="e33-UO-idf" id="tiZ-yK-gDZ"/>
                                 </connections>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9rd-db-Lk6">
+                                <rect key="frame" x="279" y="471" width="41" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <state key="normal">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dae-dC-rjO">
+                                <rect key="frame" x="103" y="91" width="113" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Vobbles" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4F0-Wp-y4w">
+                                <rect key="frame" x="80" y="115" width="160" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sQD-Yz-i4I">
+                                <rect key="frame" x="45" y="539" width="64" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DRd-79-EZU">
+                                <rect key="frame" x="65" y="509" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" image="event_icn.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="eventClick:" destination="e33-UO-idf" eventType="touchUpInside" id="g9O-Wa-i0h"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reload" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Z0B-tl-Hfa">
+                                <rect key="frame" x="128" y="539" width="64" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Fae-aO-a1O">
-                                <rect key="frame" x="40" y="501" width="38" height="36"/>
+                                <rect key="frame" x="148" y="509" width="25" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" image="reload_icn.png">
@@ -264,38 +313,64 @@
                                     <action selector="refreshClick:" destination="e33-UO-idf" eventType="touchUpInside" id="eMM-Y9-J48"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DRd-79-EZU">
-                                <rect key="frame" x="242" y="501" width="38" height="36"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Setting" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YTZ-Xf-bdW">
+                                <rect key="frame" x="211" y="539" width="64" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jlN-Fb-fRM">
+                                <rect key="frame" x="232" y="509" width="25" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" image="event_icn.png">
+                                <state key="normal" image="setting_icn.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="selected" image="setting_icn_press.png"/>
+                                <state key="highlighted" image="setting_icn_press.png"/>
                                 <connections>
-                                    <action selector="eventClick:" destination="e33-UO-idf" eventType="touchUpInside" id="g9O-Wa-i0h"/>
+                                    <action selector="settingClick:" destination="e33-UO-idf" eventType="touchUpInside" id="xuN-JA-4UK"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9rd-db-Lk6">
-                                <rect key="frame" x="279" y="471" width="41" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jQd-M2-Cq8">
+                                <rect key="frame" x="54" y="494" width="46" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="logOutClick:" destination="e33-UO-idf" eventType="touchUpInside" id="WHH-5E-h2B"/>
+                                    <action selector="eventClick:" destination="e33-UO-idf" eventType="touchUpInside" id="W9x-JC-AwN"/>
                                 </connections>
                             </button>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" id="2wY-9W-K9d">
-                                <rect key="frame" x="140" y="85" width="39" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </pageControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="FPh-9h-jn1">
+                                <rect key="frame" x="137" y="495" width="46" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="refreshClick:" destination="e33-UO-idf" eventType="touchUpInside" id="gVX-FA-gPf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="91P-p3-SkX">
+                                <rect key="frame" x="220" y="495" width="46" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="settingClick:" destination="e33-UO-idf" eventType="touchUpInside" id="Iph-Eo-tT0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="Gwm-DM-O7w"/>
                     <connections>
-                        <outlet property="pageControl" destination="2wY-9W-K9d" id="Uy9-vO-w7W"/>
                         <outlet property="viewPager" destination="nJQ-R6-9wh" id="WKS-FW-gZ9"/>
                         <outlet property="vobbleCntLabel" destination="dae-dC-rjO" id="kbA-Dt-4VN"/>
                         <outlet property="vobbleDescLabel" destination="4F0-Wp-y4w" id="tYc-mb-uLu"/>
@@ -303,11 +378,13 @@
                         <segue destination="kPN-CA-fwZ" kind="push" identifier="ToCreateVobbleSegue" customClass="DCModalSegue" id="vnJ-dn-o1C"/>
                         <segue destination="7Cx-CO-5xP" kind="modal" identifier="ToVobbleSegue" customClass="DCModalSegue" modalTransitionStyle="crossDissolve" animates="NO" id="9hB-s5-mbR"/>
                         <segue destination="rCz-GN-RPZ" kind="custom" identifier="ToSignSegue" customClass="RootTransitionDissolve" id="QXQ-a2-oA5"/>
+                        <segue destination="7Jb-AS-BNG" kind="custom" identifier="ToWebSegue" customClass="DCModalSegue" id="nQS-Cf-yCe"/>
+                        <segue destination="OG4-GP-7L5" kind="custom" identifier="ToIntroSegue" customClass="DCModalSegue" id="pCl-nd-Uso"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jf5-jK-F1C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1296" y="789"/>
+            <point key="canvasLocation" x="1296" y="777"/>
         </scene>
         <!--Vobble View Controller-->
         <scene sceneID="B1g-kX-Z1g">
@@ -329,7 +406,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="WaY-xa-eiF">
-                                <rect key="frame" x="273" y="30" width="40" height="40"/>
+                                <rect key="frame" x="260" y="20" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" image="back_icon.png">
@@ -374,9 +451,17 @@
                                 <rect key="frame" x="0.0" y="440" width="320" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </mapView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow_top.png" id="d7r-3D-pCV">
+                                <rect key="frame" x="0.0" y="441" width="320" height="62"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow_bottom.png" id="2SP-VT-fyl">
+                                <rect key="frame" x="0.0" y="506" width="320" height="62"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TF6-bk-RwN" customClass="TTTAttributedLabel">
                                 <rect key="frame" x="29" y="351" width="263" height="59"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -413,7 +498,7 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7qW-sp-UmE">
                                 <rect key="frame" x="0.0" y="488" width="320" height="80"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Save">
@@ -432,25 +517,47 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="record_camera_icon.png" id="djd-8x-N9f" customClass="NZCircularImageView">
-                                <rect key="frame" x="61" y="111" width="198" height="198"/>
+                                <rect key="frame" x="61" y="103" width="198" height="198"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="CF0-5w-6yp" customClass="M13ProgressViewRing">
-                                <rect key="frame" x="58" y="107" width="205" height="205"/>
+                                <rect key="frame" x="58" y="100" width="205" height="205"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="cex-Xm-FCv">
-                                <rect key="frame" x="0.0" y="358" width="320" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <rect key="frame" x="0.0" y="361" width="320" height="128"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="V1z-IM-cWs">
+                                <rect key="frame" x="19" y="318" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" image="myplace.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" image="myplace_press.png"/>
+                                <state key="highlighted" image="myplace_press.png"/>
+                                <connections>
+                                    <action selector="reloadLocationClick:" destination="ycR-cJ-g1h" eventType="touchUpInside" id="9hR-ns-BvR"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow_top.png" id="MKY-Fv-u7J">
+                                <rect key="frame" x="0.0" y="361" width="320" height="62"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow_bottom.png" id="EXY-i2-cid">
+                                <rect key="frame" x="0.0" y="426" width="320" height="62"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="zXj-PZ-3r7"/>
                     <connections>
                         <outlet property="bgImgView" destination="tWS-zL-GrR" id="PH2-vb-s0J"/>
+                        <outlet property="locationBtn" destination="V1z-IM-cWs" id="Ihb-GC-bWw"/>
                         <outlet property="mapView" destination="cex-Xm-FCv" id="Lqh-Jf-a30"/>
                         <outlet property="progressView" destination="CF0-5w-6yp" id="dup-1g-t1O"/>
                         <outlet property="vobbleImgView" destination="djd-8x-N9f" id="U7T-qD-Cau"/>
@@ -481,17 +588,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="record_camera_icon.png" id="2XU-Eg-yJF" customClass="NZCircularImageView">
-                                <rect key="frame" x="61" y="111" width="198" height="198"/>
+                                <rect key="frame" x="61" y="103" width="198" height="198"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="bRL-BE-1su" customClass="M13ProgressViewRing">
-                                <rect key="frame" x="58" y="108" width="205" height="205"/>
+                                <rect key="frame" x="58" y="100" width="205" height="205"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xRV-e5-VYi">
-                                <rect key="frame" x="61" y="111" width="198" height="198"/>
+                                <rect key="frame" x="61" y="103" width="198" height="198"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -503,7 +610,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="aX5-zN-xpc">
                                 <rect key="frame" x="78" y="349" width="59" height="59"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" image="record_record_btn.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -514,7 +621,7 @@
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gHe-pL-8oz">
                                 <rect key="frame" x="78" y="349" width="59" height="59"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" image="play_btn.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -527,7 +634,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="KdF-a9-JC8">
                                 <rect key="frame" x="188" y="349" width="59" height="59"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" image="record_re_btn.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -540,7 +647,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="h84-YH-JMK">
                                 <rect key="frame" x="0.0" y="488" width="320" height="80"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Confirm">
@@ -560,6 +667,7 @@
                         <outlet property="playBtn" destination="gHe-pL-8oz" id="kwE-mg-2Mm"/>
                         <outlet property="progressView" destination="bRL-BE-1su" id="Bwy-2G-9er"/>
                         <outlet property="recordBtn" destination="aX5-zN-xpc" id="90w-na-5tp"/>
+                        <outlet property="rewindBtn" destination="KdF-a9-JC8" id="Sw8-BR-D8v"/>
                         <outlet property="vobbleImgView" destination="2XU-Eg-yJF" id="6q0-mq-Y39"/>
                         <segue destination="ycR-cJ-g1h" kind="push" identifier="ToConfirmSegue" id="htJ-Wl-ljd"/>
                     </connections>
@@ -576,102 +684,198 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_vobble.png" id="74r-rD-VaS">
-                                <rect key="frame" x="122" y="107" width="76" height="77"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vobble_loading_icon.png" id="3bL-fd-atb" customClass="NZCircularImageView">
-                                <rect key="frame" x="124" y="109" width="73" height="73"/>
+                            <view contentMode="scaleToFill" id="up8-rV-JQJ">
+                                <rect key="frame" x="122" y="107" width="78" height="78"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_vobble.png" id="OVT-eM-xv4">
-                                <rect key="frame" x="200" y="155" width="77" height="77"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vobble_loading_icon.png" id="V1z-4S-qS0" customClass="NZCircularImageView">
-                                <rect key="frame" x="202" y="157" width="73" height="73"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_vobble.png" id="74r-rD-VaS">
+                                        <rect key="frame" x="0.0" y="0.0" width="78" height="78"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vobble_loading_icon.png" id="3bL-fd-atb" customClass="NZCircularImageView">
+                                        <rect key="frame" x="2" y="2" width="74" height="74"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="jFa-CB-BLD">
+                                <rect key="frame" x="199" y="156" width="78" height="78"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_vobble.png" id="Q0c-um-yjW">
-                                <rect key="frame" x="200" y="251" width="77" height="77"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vobble_loading_icon.png" id="LqM-5O-9JB" customClass="NZCircularImageView">
-                                <rect key="frame" x="202" y="253" width="73" height="73"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_vobble.png" id="OVT-eM-xv4">
+                                        <rect key="frame" x="0.0" y="0.0" width="78" height="78"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vobble_loading_icon.png" id="V1z-4S-qS0" customClass="NZCircularImageView">
+                                        <rect key="frame" x="2" y="2" width="74" height="74"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="Vr2-NY-eIN">
+                                <rect key="frame" x="199" y="251" width="78" height="78"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_vobble.png" id="GCT-qk-zwa">
-                                <rect key="frame" x="122" y="297" width="76" height="77"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vobble_loading_icon.png" id="cP5-Ls-A43" customClass="NZCircularImageView">
-                                <rect key="frame" x="124" y="299" width="73" height="73"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_vobble.png" id="Q0c-um-yjW">
+                                        <rect key="frame" x="0.0" y="0.0" width="78" height="78"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vobble_loading_icon.png" id="LqM-5O-9JB" customClass="NZCircularImageView">
+                                        <rect key="frame" x="2" y="2" width="74" height="74"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="nKP-6X-0HV">
+                                <rect key="frame" x="121" y="297" width="78" height="78"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_vobble.png" id="69E-Ax-PhC">
-                                <rect key="frame" x="43" y="251" width="77" height="77"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vobble_loading_icon.png" id="nzB-GD-fk6" customClass="NZCircularImageView">
-                                <rect key="frame" x="45" y="253" width="73" height="73"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_vobble.png" id="GCT-qk-zwa">
+                                        <rect key="frame" x="0.0" y="0.0" width="78" height="78"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vobble_loading_icon.png" id="cP5-Ls-A43" customClass="NZCircularImageView">
+                                        <rect key="frame" x="2" y="2" width="74" height="74"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="hxW-8V-AZx">
+                                <rect key="frame" x="43" y="251" width="78" height="78"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_vobble.png" id="MKq-K8-I6V">
-                                <rect key="frame" x="43" y="157" width="77" height="77"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vobble_loading_icon.png" id="2ic-FS-e7u" customClass="NZCircularImageView">
-                                <rect key="frame" x="45" y="159" width="73" height="73"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_vobble.png" id="69E-Ax-PhC">
+                                        <rect key="frame" x="0.0" y="0.0" width="78" height="78"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vobble_loading_icon.png" id="nzB-GD-fk6" customClass="NZCircularImageView">
+                                        <rect key="frame" x="2" y="2" width="74" height="74"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="z8Q-5G-Es3">
+                                <rect key="frame" x="43" y="157" width="78" height="78"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_vobble.png" id="yFQ-zi-Efm">
-                                <rect key="frame" x="198" y="56" width="77" height="77"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vobble_loading_icon.png" id="aJZ-lx-bTv" customClass="NZCircularImageView">
-                                <rect key="frame" x="200" y="58" width="73" height="73"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_vobble.png" id="MKq-K8-I6V">
+                                        <rect key="frame" x="0.0" y="0.0" width="78" height="78"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vobble_loading_icon.png" id="2ic-FS-e7u" customClass="NZCircularImageView">
+                                        <rect key="frame" x="2" y="2" width="74" height="74"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="KTu-4b-8AQ">
+                                <rect key="frame" x="197" y="55" width="78" height="78"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_vobble.png" id="1lq-mF-hMN">
-                                <rect key="frame" x="282" y="202" width="77" height="77"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vobble_loading_icon.png" id="AzC-gP-QIK" customClass="NZCircularImageView">
-                                <rect key="frame" x="284" y="204" width="73" height="73"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_vobble.png" id="yFQ-zi-Efm">
+                                        <rect key="frame" x="0.0" y="0.0" width="78" height="78"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vobble_loading_icon.png" id="aJZ-lx-bTv" customClass="NZCircularImageView">
+                                        <rect key="frame" x="2" y="2" width="74" height="74"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="LQI-J9-1kU">
+                                <rect key="frame" x="281" y="201" width="78" height="78"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_vobble.png" id="rd2-Gh-8rl">
-                                <rect key="frame" x="198" y="347" width="77" height="76"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vobble_loading_icon.png" id="vAo-uY-gwV" customClass="NZCircularImageView">
-                                <rect key="frame" x="200" y="349" width="73" height="73"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_vobble.png" id="1lq-mF-hMN">
+                                        <rect key="frame" x="0.0" y="0.0" width="78" height="78"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vobble_loading_icon.png" id="AzC-gP-QIK" customClass="NZCircularImageView">
+                                        <rect key="frame" x="2" y="2" width="74" height="74"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="u24-JD-fmr">
+                                <rect key="frame" x="197" y="347" width="78" height="78"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_vobble.png" id="DiJ-K2-ZUy">
-                                <rect key="frame" x="45" y="347" width="77" height="76"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vobble_loading_icon.png" id="Rze-m7-kgx" customClass="NZCircularImageView">
-                                <rect key="frame" x="47" y="349" width="73" height="73"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_vobble.png" id="rd2-Gh-8rl">
+                                        <rect key="frame" x="0.0" y="0.0" width="78" height="78"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vobble_loading_icon.png" id="vAo-uY-gwV" customClass="NZCircularImageView">
+                                        <rect key="frame" x="2" y="2" width="74" height="74"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="jZM-bD-XBC">
+                                <rect key="frame" x="45" y="347" width="78" height="78"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_vobble.png" id="lKI-cZ-txs">
-                                <rect key="frame" x="-39" y="202" width="77" height="77"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vobble_loading_icon.png" id="PAB-g5-opd" customClass="NZCircularImageView">
-                                <rect key="frame" x="-37" y="204" width="73" height="73"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_vobble.png" id="DiJ-K2-ZUy">
+                                        <rect key="frame" x="0.0" y="0.0" width="78" height="78"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vobble_loading_icon.png" id="Rze-m7-kgx" customClass="NZCircularImageView">
+                                        <rect key="frame" x="2" y="2" width="74" height="74"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="bZQ-KV-ALM">
+                                <rect key="frame" x="-39" y="201" width="78" height="78"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_vobble.png" id="vRz-uK-BtO">
-                                <rect key="frame" x="43" y="56" width="77" height="77"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vobble_loading_icon.png" id="MUb-ND-BJY" customClass="NZCircularImageView">
-                                <rect key="frame" x="45" y="58" width="73" height="73"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_vobble.png" id="lKI-cZ-txs">
+                                        <rect key="frame" x="0.0" y="0.0" width="78" height="78"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vobble_loading_icon.png" id="PAB-g5-opd" customClass="NZCircularImageView">
+                                        <rect key="frame" x="2" y="2" width="74" height="74"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="Swj-O7-EcZ">
+                                <rect key="frame" x="43" y="55" width="78" height="78"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_vobble.png" id="vRz-uK-BtO">
+                                        <rect key="frame" x="0.0" y="0.0" width="78" height="78"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vobble_loading_icon.png" id="MUb-ND-BJY" customClass="NZCircularImageView">
+                                        <rect key="frame" x="2" y="2" width="74" height="74"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="B5X-Fq-3bP">
                                 <rect key="frame" x="127" y="207" width="67" height="67"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -703,6 +907,18 @@
                         <outletCollection property="imgViews" destination="Rze-m7-kgx" id="KF7-4W-Vmn"/>
                         <outletCollection property="imgViews" destination="PAB-g5-opd" id="xW9-de-zEE"/>
                         <outletCollection property="imgViews" destination="MUb-ND-BJY" id="Vy9-W1-G4b"/>
+                        <outletCollection property="vobbleViews" destination="up8-rV-JQJ" id="5JJ-4S-0SA"/>
+                        <outletCollection property="vobbleViews" destination="jFa-CB-BLD" id="B9M-gK-AK4"/>
+                        <outletCollection property="vobbleViews" destination="Vr2-NY-eIN" id="jvV-d6-wxm"/>
+                        <outletCollection property="vobbleViews" destination="nKP-6X-0HV" id="pge-ZX-6PD"/>
+                        <outletCollection property="vobbleViews" destination="hxW-8V-AZx" id="4T7-hu-7zg"/>
+                        <outletCollection property="vobbleViews" destination="z8Q-5G-Es3" id="qg5-zH-xkc"/>
+                        <outletCollection property="vobbleViews" destination="KTu-4b-8AQ" id="mxO-Y3-h0a"/>
+                        <outletCollection property="vobbleViews" destination="LQI-J9-1kU" id="0Fk-AJ-L7R"/>
+                        <outletCollection property="vobbleViews" destination="u24-JD-fmr" id="kAh-gl-805"/>
+                        <outletCollection property="vobbleViews" destination="jZM-bD-XBC" id="wow-C1-HeI"/>
+                        <outletCollection property="vobbleViews" destination="bZQ-KV-ALM" id="Z5y-G9-7nA"/>
+                        <outletCollection property="vobbleViews" destination="Swj-O7-EcZ" id="XjF-hh-aX2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LGV-UB-vqg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -726,35 +942,17 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Yw8-CP-1GN">
-                                <rect key="frame" x="35" y="473" width="115" height="56"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="DisAgree">
-                                    <color key="titleColor" red="0.25098039220000001" green="0.93333333330000001" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="disAgreeClick:" destination="cHO-5C-MTx" eventType="touchUpInside" id="HDD-lI-wfa"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uhX-b9-mJt">
-                                <rect key="frame" x="170" y="473" width="115" height="56"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" red="0.25098039215686274" green="0.93333333333333335" blue="0.82352941176470584" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Agree">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="agreeClick:" destination="cHO-5C-MTx" eventType="touchUpInside" id="sxJ-dy-H8w"/>
-                                </connections>
-                            </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="PV1-OA-NIx">
-                                <rect key="frame" x="11" y="32" width="298" height="433"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <mutableString key="text">&lt;서비스 이용 약관&gt;
+                            <view contentMode="scaleToFill" id="XS4-O7-hRS" customClass="AMBlurView">
+                                <rect key="frame" x="15" y="45" width="290" height="498"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" selectable="NO" id="PV1-OA-NIx">
+                                <rect key="frame" x="45" y="85" width="230" height="355"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <string key="text">&lt;서비스 이용 약관&gt;
 
 제 1 조 (목적)
 이 약관은 넥스터즈(이하 '회사')가 제공하는 보블(vobble) 서비스의 이용과 관련하여 회사와 회원과의 권리, 의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 합니다.
@@ -910,15 +1108,49 @@
 부칙
 공고일자: 2014년 3월 1일
 시행일자: 2014년 3월 1일
-vobble</mutableString>
+vobble</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uhX-b9-mJt">
+                                <rect key="frame" x="165" y="471" width="110" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.25098039215686274" green="0.93333333333333335" blue="0.82352941176470584" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" image="agree_btn.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" image="agree_btn_press.png"/>
+                                <state key="highlighted" image="agree_btn_press.png"/>
+                                <connections>
+                                    <action selector="agreeClick:" destination="cHO-5C-MTx" eventType="touchUpInside" id="sxJ-dy-H8w"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Yw8-CP-1GN">
+                                <rect key="frame" x="45" y="471" width="110" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" image="disagree_btn.png">
+                                    <color key="titleColor" red="0.25098039220000001" green="0.93333333330000001" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" image="disagree_btn_press.png"/>
+                                <state key="highlighted" image="disagree_btn_press.png"/>
+                                <connections>
+                                    <action selector="disAgreeClick:" destination="cHO-5C-MTx" eventType="touchUpInside" id="HDD-lI-wfa"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="rCz-GN-RPZ" kind="custom" identifier="ToSignSegue" customClass="RootTransitionDissolve" id="2iA-jB-hoP"/>
+                        <outlet property="agreeBtn" destination="uhX-b9-mJt" id="TV1-DG-lzX"/>
+                        <outlet property="bgImgView" destination="YR0-wJ-cw7" id="Bym-r2-7To"/>
+                        <outlet property="blurView" destination="XS4-O7-hRS" id="tlq-xX-udn"/>
+                        <outlet property="disAgreeBtn" destination="Yw8-CP-1GN" id="QVr-FJ-ycE"/>
+                        <segue destination="OG4-GP-7L5" kind="custom" identifier="ToIntroSegue" customClass="RootTransitionDissolve" id="i4X-SC-uB8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ReF-CF-O5q" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -933,7 +1165,7 @@ vobble</mutableString>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log in" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ANh-3h-Ye3">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log In" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ANh-3h-Ye3">
                                 <rect key="frame" x="97" y="31" width="126" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1009,7 +1241,7 @@ vobble</mutableString>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </webView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="IUn-NB-LQv">
-                                <rect key="frame" x="260" y="46" width="40" height="40"/>
+                                <rect key="frame" x="260" y="20" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" image="back_icon.png">
@@ -1042,23 +1274,23 @@ vobble</mutableString>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="friends.png" id="QfW-rs-CuK">
-                                <rect key="frame" x="90" y="74" width="141" height="103"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <rect key="frame" x="96" y="91" width="129" height="69"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="페이스북과 연동된" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QzO-s1-w2s">
-                                <rect key="frame" x="31" y="215" width="258" height="21"/>
+                                <rect key="frame" x="31" y="187" width="258" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="내 친구들의 보블 듣기 서비스!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2fO-tw-T2C">
-                                <rect key="frame" x="37" y="239" width="246" height="21"/>
+                                <rect key="frame" x="37" y="211" width="246" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="곧 찾아옵니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Paf-dV-Mj3">
-                                <rect key="frame" x="40" y="262" width="241" height="21"/>
+                                <rect key="frame" x="40" y="234" width="241" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="highlightedColor"/>
@@ -1111,13 +1343,22 @@ vobble</mutableString>
         </scene>
     </scenes>
     <resources>
+        <image name="agree_btn.png" width="110" height="42"/>
+        <image name="agree_btn_press.png" width="110" height="42"/>
         <image name="back_icon.png" width="40" height="40"/>
         <image name="back_icon_o.png" width="40" height="40"/>
-        <image name="bg.png" width="640" height="1136"/>
+        <image name="bg.png" width="720" height="1280"/>
+        <image name="disagree_btn.png" width="110" height="42"/>
+        <image name="disagree_btn_press.png" width="110" height="42"/>
         <image name="event_icn.png" width="38" height="36"/>
         <image name="friends.png" width="258" height="139"/>
-        <image name="intro.png" width="640" height="1136"/>
+        <image name="intro.png" width="720" height="1230"/>
         <image name="join_line.png" width="600" height="1"/>
+        <image name="log_in_btn.png" width="127" height="60"/>
+        <image name="log_in_btn_press.png" width="127" height="60"/>
+        <image name="logo.png" width="200" height="200"/>
+        <image name="myplace.png" width="30" height="30"/>
+        <image name="myplace_press.png" width="30" height="30"/>
         <image name="play_btn.png" width="134" height="134"/>
         <image name="play_btn_o.png" width="134" height="134"/>
         <image name="record_camera_icon.png" width="366" height="366"/>
@@ -1126,9 +1367,14 @@ vobble</mutableString>
         <image name="record_record_btn.png" width="134" height="134"/>
         <image name="record_vobble_btn.png" width="174" height="174"/>
         <image name="reload_icn.png" width="43" height="38"/>
+        <image name="setting_icn.png" width="44" height="44"/>
+        <image name="setting_icn_press.png" width="44" height="44"/>
+        <image name="shadow_bottom.png" width="320" height="62"/>
+        <image name="shadow_top.png" width="320" height="62"/>
+        <image name="sign_up_btn.png" width="127" height="60"/>
+        <image name="sign_up_btn_press.png" width="127" height="60"/>
         <image name="start_login_btn.png" width="600" height="120"/>
         <image name="start_login_btn_o.png" width="600" height="120"/>
-        <image name="start_logo.png" width="410" height="410"/>
         <image name="start_signup_btn.png" width="600" height="120"/>
         <image name="start_signup_btn_o.png" width="600" height="120"/>
         <image name="vobble_loading_icon.png" width="188" height="188"/>
@@ -1141,7 +1387,9 @@ vobble</mutableString>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="XRZ-hq-AjO"/>
-        <segue reference="Gsu-Em-G3i"/>
-        <segue reference="2iA-jB-hoP"/>
+        <segue reference="zuL-f6-vW4"/>
+        <segue reference="QXQ-a2-oA5"/>
+        <segue reference="nQS-Cf-yCe"/>
+        <segue reference="i4X-SC-uB8"/>
     </inferredMetricsTieBreakers>
 </document>
