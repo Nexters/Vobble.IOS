@@ -10,13 +10,23 @@
 #import "App.h"
 #import "User.h"
 #import "NZCircularImageView.h"
+#import "Pin.h"
 #import <M13ProgressSuite/M13ProgressViewRing.h>
 #import <AFNetworking/AFNetworking.h>
-@interface ConfirmVobbleViewController ()
+#import <FSExtendedAlertKit.h>
+#import <AVFoundation/AVFoundation.h>
+@interface ConfirmVobbleViewController () < AVAudioPlayerDelegate>
+{
+    @private
+    AVAudioPlayer* _player;
+    NSTimer *_timer;
+}
 @property (nonatomic, weak) IBOutlet UIImageView* bgImgView;
 @property (nonatomic, weak) IBOutlet M13ProgressViewRing *progressView;
 @property (nonatomic, weak) IBOutlet NZCircularImageView* vobbleImgView;
 @property (nonatomic, weak) IBOutlet MKMapView* mapView;
+@property (nonatomic, weak) IBOutlet UIButton* locationBtn;
+@property (nonatomic, strong) CLLocationManager *locationManager;
 @end
 
 @implementation ConfirmVobbleViewController
@@ -33,19 +43,46 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.navigationItem setHidesBackButton:YES];
+    UIBarButtonItem *backBtn =
+    [[UIBarButtonItem alloc] initWithTitle:@""
+                                     style:UIBarButtonItemStyleBordered
+                                    target:nil
+                                    action:nil];
+    [self.navigationItem setBackBarButtonItem:backBtn];
+    self.navigationItem.backBarButtonItem.title = @"";
+    self.navigationController.navigationBar.topItem.title = @"";
+    //[self.navigationItem setHidesBackButton:YES];
     [_mapView showsUserLocation];
 	[_progressView setShowPercentage:NO];
-    //[_progressView setBackgroundRingWidth:15];
+    [_progressView setBackgroundRingWidth:10];
     [_progressView setProgressRingWidth:10];
     [_progressView setProgress:0.0f animated:NO];
-    [_progressView setPrimaryColor:ORANGE_COLOR];
+    [_progressView setPrimaryColor:MINT_COLOR];
     [_progressView setSecondaryColor:[UIColor whiteColor]];
     NSData* vobbleImgData = [[NSData alloc] initWithContentsOfURL:_imageURL];
     UIImage* vobbleImg = [[UIImage alloc] initWithData:vobbleImgData];
     _vobbleImgView.image = vobbleImg;
+    
+    _locationManager = [[CLLocationManager alloc] init];
+    _locationManager.delegate = self;
+    _locationManager.distanceFilter = kCLDistanceFilterNone;
+    //_locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    _locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
+    [_locationManager startUpdatingLocation];
+    
+    if (IPHONE4) {
+        [_mapView setFrame:CGRectMake(_mapView.frame.origin.x, _mapView.frame.origin.y+30, _mapView.frame.size.width, _mapView.frame.size.height-30)];
+        [_locationBtn setFrame:CGRectMake(_locationBtn.frame.origin.x, _locationBtn.frame.origin.y-30, _locationBtn.frame.size.width, _locationBtn.frame.size.height)];
+    }
+    [self playClick:NULL];
 }
-
+- (void)viewDidAppear:(BOOL)animated{
+    [self reloadMap];
+    /*
+     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
+     [_mapView setRegion:viewRegion animated:YES];
+     */
+}
 - (IBAction)saveClick:(id)sender{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
@@ -71,10 +108,108 @@
     }];
 }
 
+- (IBAction)playClick:(id)sender{
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    [audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
+    
+    NSError *err = nil;
+    _player = [[AVAudioPlayer alloc] initWithContentsOfURL:_voiceURL error:&err];
+    [_player setDelegate:self];
+    [_player setMeteringEnabled:YES];
+    [_player setVolume:1.0f];
+    [_player play];
+    if (_timer) {
+        [_timer invalidate];
+        _timer = NULL;
+    }
+    _timer = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(_audioTimerAction:) userInfo:nil repeats:YES];
+}
+
+- (void)_audioTimerAction:(id)timer
+{
+    if (_player) {
+        float total=_player.duration;
+        float f=_player.currentTime / total;
+        [_progressView setProgress:f animated:NO];
+        if (f > 0.99) {
+            [self stopPlay];
+        }
+    }
+}
+
+- (void)stopPlay{
+    [_timer invalidate];
+    [_player stop];
+    _player = NULL;
+    [_progressView setProgress:1.0f animated:FALSE];
+}
+
+- (void)reloadMap{
+    CLLocationCoordinate2D zoomLocation;
+    zoomLocation.latitude = [[User getLatitude] floatValue];
+    zoomLocation.longitude= [[User getLongitude] floatValue];
+    
+    CLLocationDistance mapSizeMeters = 1000;
+    
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, mapSizeMeters, mapSizeMeters);
+    
+    MKCoordinateRegion adjustedRegion = [_mapView regionThatFits:viewRegion];
+    if(adjustedRegion.center.longitude != -180.00000000){
+        if (isnan(adjustedRegion.center.latitude)) {
+            adjustedRegion.center.latitude = viewRegion.center.latitude;
+            adjustedRegion.center.longitude = viewRegion.center.longitude;
+            adjustedRegion.span.latitudeDelta = 0;
+            adjustedRegion.span.longitudeDelta = 0;
+        }
+        
+        
+        [_mapView setRegion:adjustedRegion animated:YES];
+    }
+    Pin* pin = [[Pin alloc] initWithCoordinates:zoomLocation placeName:@"Start" description:@""];
+    [_mapView addAnnotation:pin];
+}
+- (IBAction)reloadLocationClick:(id)sender{
+    [self reloadMap];
+    [_locationManager startUpdatingLocation];
+}
+#pragma mark - CLLocationManagerDelegate
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+    if (newLocation != NULL) {
+ 
+    }
+}
+- (void)locationManager:(CLLocationManager *)manager
+	 didUpdateLocations:(NSArray *)locations{
+    CLLocation* location = [locations lastObject];
+    if (location != NULL) {
+        [_locationBtn setSelected:FALSE];
+        [User setLatitude:[NSString stringWithFormat:@"%lf",location.coordinate.latitude]];
+        [User setLongitude:[NSString stringWithFormat:@"%lf",location.coordinate.longitude]];
+        [self reloadMap];
+    }
+}
+- (void)locationManager:(CLLocationManager *)manager
+       didFailWithError:(NSError *)error{
+    JY_LOG(@"didFailWithError");
+    FSAlertView *alert = [[FSAlertView alloc] initWithTitle:@"Vobble" message:NSLocalizedString(@"LOCATION_NOTFOOUND", @"위치정보 못 가져옴") cancelButton: [FSBlockButton blockButtonWithTitle:NSLocalizedString(@"CONFIRM",@"취소") block:^ {
+        
+    }]otherButtons:nil];
+    [alert show];
+    //[_locationBtn setImage:[UIImage imageNamed:@"04.png"] forState:UIControlStateNormal];
+    [_locationBtn setSelected:TRUE];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+#pragma mark - AVAudioPlayerDelegate
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
+    [self stopPlay];
+}
+- (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error{
+    [self alertNetworkError:NSLocalizedString(@"PLAY_FAIL", @"플레이 실패")];
 }
 
 @end

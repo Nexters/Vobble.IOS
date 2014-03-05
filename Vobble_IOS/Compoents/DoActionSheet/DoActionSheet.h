@@ -50,7 +50,7 @@
 */
 
 // color set 3 -----------------------------------------------------------------------------
-#define DO_BACK_COLOR               DO_RGB(232, 229, 222)
+#define DO_BACK_COLOR               DO_RGB(255, 255, 255)
 
 // button background color
 #define DO_BUTTON_COLOR             DO_RGB(0x40, 0xdd, 0xc2)//DO_RGB(158, 132, 103)

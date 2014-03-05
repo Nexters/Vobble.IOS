@@ -22,7 +22,7 @@
     [dateFormat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
     NSDate *date = [dateFormat dateFromString:[dic objectForKey:@"created_at"]];
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date];
-    _createdAt = [NSString stringWithFormat:@"%ld-%02ld-%ld",components.year,components.month,components.day];
+    _createdAt = [NSString stringWithFormat:@"%ld-%02ld-%02ld",components.year,components.month,components.day];
 }
 - (NSString*)getImgUrl{
     return [NSString stringWithFormat:@"%@/%@",[URL getFilesURL],_imgUrl];

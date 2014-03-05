@@ -59,11 +59,10 @@
     }
 }
 
--(void)finishedPlayerViewCont:(NSNotification*)userInfo{
-    [self performSegueWithIdentifier:@"ToIntroSegue" sender:self];
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
-
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

@@ -22,21 +22,22 @@
 #import <AFNetworking/AFNetworking.h>
 #define MAX_AUDIO_TIME 7.0f
 #define VOBBLE_AUDIO @"vobble.m4a"
-#define VOBBLE_IMG @"vobble.png"
+#define VOBBLE_IMG @"vobble.jpeg"
 @interface CreateVobbleViewController () < DBCameraViewControllerDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate >
 {
     @private
     AVAudioRecorder* _recorder;
     AVAudioPlayer* _player;
     NSTimer *_timer;
-    float _accTime;
     BOOL _isAttachedImg;
+    float _accTime;
 }
 @property (nonatomic, weak) IBOutlet UIImageView* bgImgView;
 @property (nonatomic, weak) IBOutlet M13ProgressViewRing *progressView;
 @property (nonatomic, weak) IBOutlet NZCircularImageView* vobbleImgView;
 @property (nonatomic, weak) IBOutlet UIButton* playBtn;
 @property (nonatomic, weak) IBOutlet UIButton* recordBtn;
+@property (nonatomic, weak) IBOutlet UIButton* rewindBtn;
 @end
 
 @implementation CreateVobbleViewController
@@ -53,23 +54,31 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     _isAttachedImg = FALSE;
+    _accTime = 0.0f;
     [_progressView setShowPercentage:NO];
-    //[_progressView setBackgroundRingWidth:15];
+    [_progressView setBackgroundRingWidth:10];
     [_progressView setProgressRingWidth:10];
     [_progressView setProgress:0.0f animated:NO];
     [_progressView setPrimaryColor:ORANGE_COLOR];
     [_progressView setSecondaryColor:[UIColor whiteColor]];
+    _playBtn.alpha = .0f;
+    _rewindBtn.alpha = .0f;
+    if (IPHONE4) {
+        _playBtn.frame = CGRectMake(_playBtn.frame.origin.x, _playBtn.frame.origin.y-30, _playBtn.frame.size.width, _playBtn.frame.size.height);
+        _recordBtn.frame = CGRectMake(_recordBtn.frame.origin.x, _recordBtn.frame.origin.y-30, _recordBtn.frame.size.width, _recordBtn.frame.size.height);
+        _rewindBtn.frame = CGRectMake(_rewindBtn.frame.origin.x, _rewindBtn.frame.origin.y-30, _rewindBtn.frame.size.width, _rewindBtn.frame.size.height);
+    }
 }
 - (void)viewDidAppear:(BOOL)animated{
-    [self deleteAudioFile];
+    //[self deleteAudioFile];
 }
 - (void)viewDidDisappear:(BOOL)animated{
     if (_timer) {
         [_timer invalidate];
     }
 }
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([[segue identifier] isEqualToString:@"ToConfirmSegue"]) {
         ConfirmVobbleViewController *confirmViewCont = segue.destinationViewController;
@@ -78,6 +87,11 @@
     }
 }
 - (IBAction)pictureClick:(id)sender{
+    if (_recorder && [_recorder isRecording]) {
+        [self stopRecord];
+        return ;
+    }
+    
     if (!_isAttachedImg) {
         _vobbleImgView.image = [UIImage imageNamed:@"record_camera_icon.png"];
     }
@@ -86,20 +100,13 @@
     
     vActionSheet.nAnimationType = DoTransitionStylePop;
     vActionSheet.nContentMode = DoContentNone;
-    /*
-    vActionSheet.nContentMode = DoContentMap;
-    vActionSheet.dLocation = @{@"latitude" : @(37.78275123), @"longitude" : @(-122.40416442), @"altitude" : @200};
-    */
-    //vActionSheet.nDestructiveIndex = 2;
+    
     [vActionSheet showC:@""
-                 cancel:NSLocalizedString(@"CANCEL",@"취소")
+                 cancel:NSLocalizedString(@"CANCEL_ENG",@"취소")
                 buttons:@[NSLocalizedString(@"IMG_SELECT_CAMERA", @"카메라에서 선택"),
-                          NSLocalizedString(@"IMG_SELECT_GALLERY", @"갤러리 선택"),
-                          NSLocalizedString(@"IMG_SELECT_WEB", @"웹에서 선택")]
+                          NSLocalizedString(@"IMG_SELECT_GALLERY", @"갤러리 선택")]
                  result:^(int nResult) {
-                     
-                     NSLog(@"---------------> result : %d", nResult);
-                     if (nResult == 0) {
+                    if (nResult == 0) {
                          UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[DBCameraViewController initWithDelegate:self]];
                          [nav setNavigationBarHidden:YES];
                          [self presentViewController:nav animated:YES completion:nil];
@@ -123,67 +130,106 @@
 }
 
 - (IBAction)recordClick:(id)sender{
-    if (_recorder && [_recorder isRecording]) {
-        [self stopRecord];
-        return ;
+    [_progressView setPrimaryColor:ORANGE_COLOR];
+    if (_player) {
+        [_player stop];
+        [_timer invalidate];
+        _timer = NULL;
     }
-    NSMutableDictionary* recordSetting = [[NSMutableDictionary alloc] init];
-    [recordSetting setValue:[NSNumber numberWithInt:kAudioFormatMPEG4AAC] forKey:AVFormatIDKey];
-    [recordSetting setValue:[NSNumber numberWithFloat:16000.0] forKey:AVSampleRateKey];
-    [recordSetting setValue:[NSNumber numberWithInt: 1] forKey:AVNumberOfChannelsKey];
-    //[recordSetting setValue:[NSNumber numberWithInt:16] forKey:AVLinearPCMBitDepthKey];
-    //[recordSetting setValue:[NSNumber numberWithBool:NO] forKey:AVLinearPCMIsBigEndianKey];
-    //[recordSetting setValue:[NSNumber numberWithBool:NO] forKey:AVLinearPCMIsFloatKey];
-    
-    NSError *err = nil;
-    _recorder = [[ AVAudioRecorder alloc] initWithURL:[self getRecordURL] settings:recordSetting error:&err];
-    [_recorder setDelegate:self];
-    if (![_recorder prepareToRecord]) {
-        [self alertNetworkError:NSLocalizedString(@"RECORDER_FAIL", @"녹음 실패")];
-        return ;
+    if (_recorder && ![_recorder isRecording]) {
+        [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
+            _playBtn.alpha = 0.0f;
+            _rewindBtn.alpha = 0.0f;
+            _playBtn.center = CGPointMake(160, 364);
+            _rewindBtn.center = CGPointMake(160, 364);
+        }completion:^(BOOL finished){
+            
+        }];
+        [_recorder record];
+        
+    }else if (_recorder && [_recorder isRecording]){
+        [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
+            _playBtn.alpha = 1.0f;
+            _rewindBtn.alpha = 1.0f;
+            _playBtn.center = CGPointMake(88, 364);
+            _rewindBtn.center = CGPointMake(234, 364);
+        }completion:^(BOOL finished){
+            
+        }];
+        [_recorder pause];
+    }else{
+        [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
+            _playBtn.alpha = 0.0f;
+            _rewindBtn.alpha = 0.0f;
+            _playBtn.center = CGPointMake(160, 364);
+            _rewindBtn.center = CGPointMake(160, 364);
+        }completion:^(BOOL finished){
+            
+        }];
+        
+        NSError* err = nil;
+        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+        [audioSession setCategory :AVAudioSessionCategoryPlayAndRecord error:&err];
+        if(err){
+            JY_LOG(@"audioSession: %@ %ld %@", [err domain], (long)[err code], [[err userInfo] description]);
+        }
+        [audioSession setActive:YES error:&err];
+        if(err){
+            JY_LOG(@"audioSession: %@ %ld %@", [err domain], (long)[err code], [[err userInfo] description]);
+        }
+        
+        _accTime = 0.0f;
+        NSMutableDictionary* recordSetting = [[NSMutableDictionary alloc] init];
+        [recordSetting setValue:[NSNumber numberWithInt:kAudioFormatMPEG4AAC] forKey:AVFormatIDKey];
+        [recordSetting setValue:[NSNumber numberWithFloat:16000.0] forKey:AVSampleRateKey];
+        [recordSetting setValue:[NSNumber numberWithInt: 1] forKey:AVNumberOfChannelsKey];
+        //[recordSetting setValue:[NSNumber numberWithInt:16] forKey:AVLinearPCMBitDepthKey];
+        //[recordSetting setValue:[NSNumber numberWithBool:NO] forKey:AVLinearPCMIsBigEndianKey];
+        //[recordSetting setValue:[NSNumber numberWithBool:NO] forKey:AVLinearPCMIsFloatKey];
+        
+        _recorder = [[ AVAudioRecorder alloc] initWithURL:[self getRecordURL] settings:recordSetting error:&err];
+        [_recorder setDelegate:self];
+        if (![_recorder prepareToRecord]) {
+            [self alertNetworkError:NSLocalizedString(@"RECORDER_FAIL", @"녹음 실패")];
+            return ;
+        }
+        
+        if (![_recorder record]) {
+            [self alertNetworkError:NSLocalizedString(@"RECORDER_FAIL", @"녹음 실패")];
+            return ;
+        }
+        _timer = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(_timerAction:) userInfo:nil repeats:YES];
     }
-    _recorder.meteringEnabled = YES;
-    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-    
-    [audioSession setCategory :AVAudioSessionCategoryPlayAndRecord error:&err];
-    if(err){
-        JY_LOG(@"audioSession: %@ %ld %@", [err domain], (long)[err code], [[err userInfo] description]);
-        return;
-    }
-    err = nil;
-    [audioSession setActive:YES error:&err];
-    if(err){
-        JY_LOG(@"audioSession: %@ %ld %@", [err domain], (long)[err code], [[err userInfo] description]);
-        return;
-    }
-    if (![_recorder record]) {
-        [self alertNetworkError:NSLocalizedString(@"RECORDER_FAIL", @"녹음 실패")];
-        return ;
-    }
-    [_recordBtn setSelected:TRUE];
-     _timer = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(_timerAction:) userInfo:nil repeats:YES];
 }
+
 - (IBAction)playClick:(id)sender{
+    [_progressView setPrimaryColor:MINT_COLOR];
+    [_recorder stop];
+    _recorder = NULL;
+    
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    [audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
+    
     NSError *err = nil;
     _player = [[AVAudioPlayer alloc] initWithContentsOfURL:[self getRecordURL] error:&err];
     [_player setDelegate:self];
     [_player setMeteringEnabled:YES];
+    [_player setVolume:1.0f];
     [_player play];
-    [_playBtn setSelected:TRUE];
+    
+    [_timer invalidate];
+    _timer = NULL;
     _timer = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(_audioTimerAction:) userInfo:nil repeats:YES];
+
 }
 
 - (IBAction)rewindClick:(id)sender{
     
     [self stopRecord];
     [self stopPlay];
-    [_recordBtn setHidden:FALSE];
-    [_playBtn setHidden:TRUE];
+   
     [_progressView setProgress:0 animated:FALSE];
-    BOOL isFileExist = [self deleteAudioFile];
-    if (isFileExist) {
-        [self recordClick:NULL];
-    }
+    [self deleteAudioFile];
 }
 
 - (IBAction)confirmClick:(id)sender{
@@ -223,9 +269,12 @@
 }
 - (void)_timerAction:(id)timer
 {
-    _accTime+=0.02f;
-    [_progressView setProgress:_accTime/MAX_AUDIO_TIME animated:TRUE];
+    if ([_recorder isRecording]) {
+        _accTime += 0.02;
+    }
+    [_progressView setProgress:_accTime/MAX_AUDIO_TIME animated:FALSE];
     if (_accTime > MAX_AUDIO_TIME) {
+        [_progressView setProgress:1.0f animated:TRUE];
         [self stopRecord];
     }
 }
@@ -241,13 +290,14 @@
     }
 }
 - (NSURL*)getRecordURL{
+    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString * soundsDirectoryPath = [documentsDirectory stringByAppendingPathComponent:@"record"];
     [[NSFileManager defaultManager] createDirectoryAtPath:soundsDirectoryPath withIntermediateDirectories:YES attributes:nil error:NULL];
-    
-    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", soundsDirectoryPath,VOBBLE_AUDIO]];
-    return url;
+    NSURL* recordURL = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", soundsDirectoryPath,VOBBLE_AUDIO]];
+
+    return recordURL;
 }
 - (NSURL*)getImgURL{
    
@@ -256,28 +306,38 @@
     NSString * imageDirectoryPath = [documentsDirectory stringByAppendingPathComponent:@"image"];
     [[NSFileManager defaultManager] createDirectoryAtPath:imageDirectoryPath withIntermediateDirectories:YES attributes:nil error:NULL];
     NSString* path = [NSString stringWithFormat:@"%@/%@", imageDirectoryPath,VOBBLE_IMG];
+    [UIImageJPEGRepresentation(_vobbleImgView.image, 0.2) writeToFile:path atomically:YES];
     NSURL *url = [NSURL fileURLWithPath:path];
-    [UIImageJPEGRepresentation(_vobbleImgView.image, 1.0) writeToFile:path atomically:YES];
     return url;
 }
 
 - (void)stopRecord{
     _accTime = 0.0f;
     [_timer invalidate];
+    _timer = NULL;
+    [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
+        _playBtn.alpha = 1.0f;
+        _rewindBtn.alpha = 1.0f;
+        _playBtn.center = CGPointMake(88, 364);
+        _rewindBtn.center = CGPointMake(234, 364);
+    }completion:^(BOOL finished){
+        
+    }];
     [_recorder stop];
     _recorder = NULL;
+    /*
     AVAudioSession *session = [AVAudioSession sharedInstance];
     [session setActive:NO withFlags:AVAudioSessionSetActiveFlags_NotifyOthersOnDeactivation error:nil];
+     */
     
-    [_recordBtn setSelected:FALSE];
-    [_recordBtn setHidden:TRUE];
-    [_playBtn setHidden:FALSE];
+    //[_recordBtn setSelected:FALSE];
+    //[_recordBtn setHidden:TRUE];
+    //[_playBtn setHidden:FALSE];
 }
 - (void)stopPlay{
     [_timer invalidate];
     [_player stop];
     _player = NULL;
-    [_playBtn setSelected:FALSE];
     [_progressView setProgress:1.0f animated:FALSE];
 }
 - (BOOL)deleteAudioFile{

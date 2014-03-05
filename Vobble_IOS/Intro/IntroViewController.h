@@ -9,7 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "SuperViewController.h"
 #import "PunchScrollView.h"
-@interface IntroViewController : SuperViewController <UIScrollViewDelegate, PunchScrollViewDataSource, PunchScrollViewDelegate>
-@property (strong, nonatomic) IBOutlet PunchScrollView *scrollView;
+typedef enum eIntroType{
+    INTRO_FIRST,
+    INTRO_MENU
+}eIntroType;
+@interface IntroViewController : SuperViewController <UIScrollViewDelegate, PunchScrollViewDataSource, PunchScrollViewDelegate, UIPageViewControllerDelegate>
+@property (nonatomic, weak) IBOutlet PunchScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet UIPageControl* pageControl;
+@property (nonatomic, assign) eIntroType type;
 @end

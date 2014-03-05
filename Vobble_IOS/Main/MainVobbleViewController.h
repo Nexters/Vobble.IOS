@@ -20,6 +20,7 @@ typedef enum eVobbleType{
 @property (nonatomic, assign) eVobbleType type;
 @property (nonatomic, strong) NSMutableArray* vobbleArray;
 @property (nonatomic, assign) NSInteger vobbleCnt;
+@property (nonatomic, strong) NSMutableArray *deleteBtns;
 - (void)resetVobbleImgs;
 - (void)initVobbles;
 - (void)stopAllAnimation;

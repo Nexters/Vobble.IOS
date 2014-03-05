@@ -16,3 +16,4 @@ pod 'EasyViewPager' # ViewPager
 pod 'NZCircularImageView', '~> 0.0.3' # 이미지 동그랗게
 pod 'DOUAudioStreamer', '~> 0.2.6' # audio streamer
 pod 'DBCamera', '~> 0.9'
+pod 'iOS-blur', '~> 0.0.4'

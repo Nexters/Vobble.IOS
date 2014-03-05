@@ -48,4 +48,7 @@
 + (NSString*)getUploadVobbleURL{
     return [NSString stringWithFormat:@"%@/users/%@/vobbles",[URL getBaseURL],[User getUserId]];
 }
++ (NSString*)getVobbleDeleteURL:(NSString*)vobbleId{
+    return [NSString stringWithFormat:@"%@/users/%@/vobbles/%@/delete",[URL getBaseURL],[User getUserId],vobbleId];
+}
 @end

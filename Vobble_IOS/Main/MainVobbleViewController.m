@@ -21,7 +21,7 @@
 @property (nonatomic, weak) IBOutlet UIButton* recordBtn;
 @property (nonatomic, strong) IBOutletCollection(UIButton) NSArray *buttons;
 @property (nonatomic, strong) IBOutletCollection(NZCircularImageView) NSArray *imgViews;
-
+@property (nonatomic, strong) IBOutletCollection(UIView) NSArray *vobbleViews;
 @end
 
 @implementation MainVobbleViewController
@@ -40,10 +40,17 @@
     [super viewDidLoad];
     isConnecting = FALSE;
     _vobbleArray = [NSMutableArray new];
+    _deleteBtns = [NSMutableArray new];
     NSInteger idx = 0;
-    for (NZCircularImageView* imgView in _imgViews) {
+    for (UIView* vobbleView in _vobbleViews) {
+        if ([[UIScreen mainScreen] bounds].size.height == 480) {
+            if (idx == 3 || idx == 8 || idx == 9) {
+                [vobbleView setHidden:TRUE];
+            }
+        }
+        
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setFrame:imgView.frame];
+        [button setFrame:vobbleView.frame];
         [button setTag:idx++];
         [button addTarget:self.mainViewCont action:@selector(vobbleClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:button];
@@ -53,6 +60,16 @@
                                                                action:@selector(longPress:)];
             [longPressGesture setMinimumPressDuration:1];
             [button addGestureRecognizer:longPressGesture];
+            
+            UIButton *button2 = [UIButton buttonWithType:UIButtonTypeCustom];
+            [button2 setFrame:CGRectMake(vobbleView.frame.origin.x+60, vobbleView.frame.origin.y-3, 25, 25)];
+            [button2 setImage:[UIImage imageNamed:@"voice_remove_btn.png"] forState:UIControlStateNormal];
+            [button2 setImage:[UIImage imageNamed:@"voice_remove_btn_o.png"] forState:UIControlStateSelected];
+            [button2 addTarget:self.mainViewCont action:@selector(vobbleDelete:) forControlEvents:UIControlEventTouchUpInside];
+            [button2 setHidden:TRUE];
+            [button2 setTag:button.tag];
+            [_deleteBtns addObject:button2];
+            [self.view addSubview:button2];
         }
     }
     [_recordBtn addTarget:self.mainViewCont action:@selector(recordClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -68,8 +85,11 @@
 }
 - (void)longPress:(UILongPressGestureRecognizer*)gesture {
     if ( gesture.state == UIGestureRecognizerStateBegan ) {
-        UIImageView* imgView = [_imgViews objectAtIndex:gesture.view.tag];
+        UIView* imgView = [_vobbleViews objectAtIndex:gesture.view.tag];
+        UIButton* deleteBtn = [_deleteBtns objectAtIndex:gesture.view.tag];
+        [deleteBtn setHidden:FALSE];
         [self earthquake:imgView];
+        [self earthquake:deleteBtn];
     }
 }
 
@@ -130,6 +150,7 @@
         JY_LOG(@"%@ : %@",[URL getAllVobbleURL],responseObject);
         if ([[responseObject objectForKey:@"result"] integerValue] != 0) {
             _vobbleCnt = [[responseObject objectForKey:@"count"] integerValue];
+            [_mainViewCont changeVobbleCnt];
         }else{
             //[self alertNetworkError:[responseObject objectForKey:@"msg"]];
         }
@@ -147,7 +168,7 @@
             imgView.image = [UIImage imageNamed:@"vobble_loading_icon.png"];
         }
         Vobble* vobble = [_vobbleArray objectAtIndex:i];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.2 * i * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.13 * i * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
             //[imgView setHidden:FALSE];
             [imgView setImageWithResizeURL:[vobble getImgUrl]];
             
@@ -181,9 +202,13 @@
 }
 - (void)stopAllAnimation{
     for (int i=0; i < MAX_VOBBLE_CNT; i++) {
-        NZCircularImageView* imgView = [_imgViews objectAtIndex:i];
-        [imgView stopAnimating];
-        [imgView.layer removeAllAnimations];
+        UIView* vobbleView = [_vobbleViews objectAtIndex:i];
+        [vobbleView.layer removeAllAnimations];
+        if (i < [_deleteBtns count]) {
+            UIButton* deleteBtn = [_deleteBtns objectAtIndex:i];
+            [deleteBtn setHidden:TRUE];
+            [deleteBtn.layer removeAllAnimations];
+        }
     }
 }
 - (void)earthquakeAllVobbles{
@@ -192,6 +217,7 @@
         [self earthquake:imgView];
     }
 }
+
 - (void)earthquake:(UIView*)itemView
 {
     CGFloat t = 2.0;
@@ -221,6 +247,7 @@
     	item.transform = CGAffineTransformIdentity;
     }
 }
+
 
 - (void)didReceiveMemoryWarning
 {

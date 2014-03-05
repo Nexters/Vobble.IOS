@@ -154,6 +154,7 @@
     // make back view -----------------------------------------------------------------------------------------------
     _vActionSheet = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 0)];
     _vActionSheet.backgroundColor = DO_BACK_COLOR;
+    _vActionSheet.alpha = 0.8f;
     [self addSubview:_vActionSheet];
     
     // Title --------------------------------------------------------------------------------------------------------

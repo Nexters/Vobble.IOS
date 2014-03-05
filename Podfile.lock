@@ -26,6 +26,7 @@ PODS:
   - DOUAudioStreamer (0.2.6)
   - EasyViewPager (0.2.0)
   - FSExtendedAlertKit (0.1.0)
+  - iOS-blur (0.0.4)
   - JSONKit (1.5pre)
   - M13ProgressSuite (1.0.0)
   - MBProgressHUD (0.8)
@@ -51,6 +52,7 @@ DEPENDENCIES:
   - DOUAudioStreamer (~> 0.2.6)
   - EasyViewPager
   - FSExtendedAlertKit
+  - iOS-blur (~> 0.0.4)
   - JSONKit
   - M13ProgressSuite (~> 1.0.0)
   - MBProgressHUD
@@ -69,6 +71,7 @@ SPEC CHECKSUMS:
   DOUAudioStreamer: bd8cd5e59e6c0dea46b998dfc6527cae10bbabbc
   EasyViewPager: 29061253f6aa553cb59e92056ba989961210c62b
   FSExtendedAlertKit: f4e7dc5f0feccfa280d1f88492e8f01e8e30b97f
+  iOS-blur: 88a6776951beba2aa47be68ee037dc757781a8af
   JSONKit: 409734ab3407fce90ef7eaa95d7168f38d9a6601
   M13ProgressSuite: 34c28a6eb72313660b4676ec2f05742a665700a7
   MBProgressHUD: 2bbc6f470111daf7f3eaa4eb12b8cbf01c4c0622

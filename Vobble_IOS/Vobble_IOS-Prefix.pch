@@ -16,3 +16,5 @@
 #endif
 
 #define JY_LOG NSLog
+#define IPHONE4 [[UIScreen mainScreen] bounds].size.height == 480
+#define IPHONE5 [[UIScreen mainScreen] bounds].size.height != 480

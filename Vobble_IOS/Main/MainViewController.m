@@ -12,7 +12,10 @@
 #import "VobbleViewController.h"
 #import "FriendVobbleViewController.h"
 #import "ConfirmVobbleViewController.h"
+#import "EventViewController.h"
 #import <FSExtendedAlertKit.h>
+#import "DoActionSheet.h"
+#import "IntroViewController.h"
 @interface MainViewController ()
 @property (nonatomic, strong) CLLocationManager *locationManager;
 
@@ -43,17 +46,18 @@
                                     action:nil];
     [self.navigationItem setBackBarButtonItem:backBtn];
     
-    self.navigationController.navigationBar.tintColor = MINT_COLOR;
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
     [[EKTabHostsContainer appearance] setBackgroundColor:[UIColor clearColor]];
     [[EKTabHost appearance] setSelectedColor:[UIColor clearColor]];
     [[EKTabHost appearance] setTitleColor:[UIColor whiteColor]];
-    [[EKTabHost appearance] setTitleFont:[UIFont systemFontOfSize:14.0f]];
+    [[EKTabHost appearance] setTitleFont:[UIFont systemFontOfSize:10.5]];
     [self.viewPager reloadData];
     
     EKTabHost* select_tab = [self.viewPager.tabHostsContainer.tabs objectAtIndex:0];
     [select_tab setBackgroundColor:CLICK_GRAY_COLOR];
-    
+    [User setLatitude:@""];
+    [User setLongitude:@""];
     _locationManager = [[CLLocationManager alloc] init];
     _locationManager.delegate = self;
     _locationManager.distanceFilter = kCLDistanceFilterNone;
@@ -74,6 +78,18 @@
         vobbleViewCont.vobbleOriginalRect = _clickVobbleBtn.frame;
         vobbleViewCont.vobble = _clickVobble;
     }
+    if ([[segue identifier] isEqualToString:@"ToEventSegue"]) {
+        EventViewController *eventViewCont = segue.destinationViewController;
+        eventViewCont.type = EVENT_NOTICE;
+    }
+    if ([[segue identifier] isEqualToString:@"ToWebSegue"]) {
+        EventViewController *eventViewCont = segue.destinationViewController;
+        eventViewCont.type = EVENT_APPS;
+    }
+    if ([[segue identifier] isEqualToString:@"ToIntroSegue"]) {
+        IntroViewController *introViewCont = segue.destinationViewController;
+        introViewCont.type = INTRO_MENU;
+    }
 }
 - (IBAction)refreshClick:(id)sender{
     MainVobbleViewController* mainVobbleViewCont = NULL;
@@ -84,7 +100,7 @@
     }else{
         return ;
     }
-     [mainVobbleViewCont resetVobbleImgs];
+    [mainVobbleViewCont resetVobbleImgs];
     [mainVobbleViewCont initVobbles];
 }
 - (IBAction)eventClick:(id)sender
@@ -94,35 +110,109 @@
 - (IBAction)vobbleClick:(id)sender
 {
     long tag = ((UIButton*)sender).tag;
-    MainVobbleViewController* mainVobbleViewCont = NULL;
-    if ([_viewPager currentIndex] == ALL) {
-        mainVobbleViewCont = _allVobbleViewCont;
-    }else if ([_viewPager currentIndex] == MY) {
-        mainVobbleViewCont = _myVobbleViewCont;
+    if ([_viewPager currentIndex] == MY) {
+        UIButton* deleteBtn = [_myVobbleViewCont.deleteBtns objectAtIndex:tag];
+        if (!deleteBtn.hidden) {
+            [self vobbleDelete:sender];
+        }else{
+            MainVobbleViewController* mainVobbleViewCont = NULL;
+            if ([_viewPager currentIndex] == ALL) {
+                mainVobbleViewCont = _allVobbleViewCont;
+            }else if ([_viewPager currentIndex] == MY) {
+                mainVobbleViewCont = _myVobbleViewCont;
+            }
+            if (tag >= [[mainVobbleViewCont vobbleArray] count]) {
+                [mainVobbleViewCont stopAllAnimation];
+                return ;
+            }
+            _clickVobble = [[mainVobbleViewCont vobbleArray] objectAtIndex:tag];
+            _clickVobbleBtn = (UIButton*)sender;
+            [self performSegueWithIdentifier:@"ToVobbleSegue" sender:self];
+        }
+    }else{
+        MainVobbleViewController* mainVobbleViewCont = NULL;
+        if ([_viewPager currentIndex] == ALL) {
+            mainVobbleViewCont = _allVobbleViewCont;
+        }else if ([_viewPager currentIndex] == MY) {
+            mainVobbleViewCont = _myVobbleViewCont;
+        }
+        if (tag >= [[mainVobbleViewCont vobbleArray] count]) {
+            [mainVobbleViewCont stopAllAnimation];
+            return ;
+        }
+        _clickVobble = [[mainVobbleViewCont vobbleArray] objectAtIndex:tag];
+        _clickVobbleBtn = (UIButton*)sender;
+        [self performSegueWithIdentifier:@"ToVobbleSegue" sender:self];
     }
-    if (tag >= [[mainVobbleViewCont vobbleArray] count]) {
-        [mainVobbleViewCont stopAllAnimation];
-        return ;
+}
+- (IBAction)vobbleDelete:(id)sender{
+    long tag = ((UIButton*)sender).tag;
+    UIButton* deleteBtn = [_myVobbleViewCont.deleteBtns objectAtIndex:tag];
+    if (!deleteBtn.hidden) {
+        FSAlertView *alert = [[FSAlertView alloc] initWithTitle:@"Vobble" message:NSLocalizedString(@"VOBBLE_DELETE_QUESTION", @"보블삭제?") cancelButton: [FSBlockButton blockButtonWithTitle:NSLocalizedString(@"CANCEL",@"취소") block:^ {
+            
+        }] otherButtons:[FSBlockButton blockButtonWithTitle:NSLocalizedString(@"CONFIRM",@"확인") block:^ {
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+            Vobble* deleteVobble = [[_myVobbleViewCont vobbleArray] objectAtIndex:tag];
+            NSDictionary *parameters = @{@"token": [User getToken]};
+            [manager POST:[URL getVobbleDeleteURL:deleteVobble.vobbleId] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                JY_LOG(@"%@ : %@",[URL getVobbleDeleteURL:deleteVobble.vobbleId],responseObject);
+                if ([[responseObject objectForKey:@"result"] integerValue] != 0) {
+                    [_myVobbleViewCont resetVobbleImgs];
+                    [_myVobbleViewCont initVobbles];
+                    [_myVobbleViewCont stopAllAnimation];
+                }else{
+                    [self alertNetworkError:[responseObject objectForKey:@"msg"]];
+                }
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                [self alertNetworkError:NSLocalizedString(@"NETWORK_ERROR", @"네트워크 실패")];
+            }];
+        }],nil];
+        [alert show];
     }
-    _clickVobble = [[mainVobbleViewCont vobbleArray] objectAtIndex:tag];
-    _clickVobbleBtn = (UIButton*)sender;
-    [self performSegueWithIdentifier:@"ToVobbleSegue" sender:self];
 }
 - (IBAction)recordClick:(id)sender
 {
     [self performSegueWithIdentifier:@"ToCreateVobbleSegue" sender:self];
 }
-- (IBAction)logOutClick:(id)sender{
-    FSAlertView *alert = [[FSAlertView alloc] initWithTitle:@"Vobble" message:NSLocalizedString(@"LOGOUT_DESCRIPTION", @"로그아웃") cancelButton: [FSBlockButton blockButtonWithTitle:NSLocalizedString(@"CANCEL",@"취소") block:^ {
-        
-    }]otherButtons: [FSBlockButton blockButtonWithTitle:NSLocalizedString(@"CONFIRM",@"확인") block:^ {
-        [User setLogOut];
-        [self performSegueWithIdentifier:@"ToSignSegue" sender:self];
-        
-    }],nil];
-    [alert show];
+- (IBAction)settingClick:(id)sender{
+    DoActionSheet *vActionSheet = [[DoActionSheet alloc] init];
     
+    vActionSheet.nAnimationType = DoTransitionStylePop;
+    vActionSheet.nContentMode = DoContentNone;
+    
+    [vActionSheet showC:@""
+                 cancel:@"Cancel"
+                buttons:@[@"Feedback",
+                          @"Tutorial",
+                          @"AboutUs",
+                          @"Nexters",
+                          @"Logout"]
+                 result:^(int nResult) {
+                     
+                     if (nResult == 0) {
+                         if ([MFMailComposeViewController canSendMail]) {
+                             MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
+                             
+                             controller.mailComposeDelegate = self;
+                             [controller setSubject:@"Vobble Feedback!!!"];
+                             //[controller setMessageBody:[NSString stringWithFormat:@"%@ 님으로부터!",[User getUserId]] isHTML:FALSE];
+                             [controller setToRecipients:@[@"nexters.vobble@gmail.com"]];
+                             [self presentViewController:controller animated:TRUE completion:NULL];
+                         }
+                     }else if (nResult == 1) {
+                          [self performSegueWithIdentifier:@"ToIntroSegue" sender:self];
+                     }else if (nResult == 2) {
+                         
+                     }else if (nResult == 3) {
+                         [self performSegueWithIdentifier:@"ToWebSegue" sender:self];
+                     }else if (nResult == 4) {
+                         [User setLogOut];
+                         [self performSegueWithIdentifier:@"ToSignSegue" sender:self];
+                     }
+                 }];
 }
+
 #pragma mark - CLLocationManagerDelegate
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     if (newLocation != NULL) {
@@ -131,6 +221,15 @@
             [User setLongitude:[NSString stringWithFormat:@"%lf",newLocation.coordinate.longitude]];
             [_myVobbleViewCont initVobbles];
             [_allVobbleViewCont initVobbles];
+        }else{
+            float latitude = [[User getLatitude] floatValue];
+            float longitude = [[User getLongitude] floatValue];
+            float latitude_sub = newLocation.coordinate.latitude-latitude;
+            float longitude_sub = newLocation.coordinate.longitude-longitude;
+            if (sqrt(latitude_sub*latitude_sub+longitude_sub*longitude_sub) > 0.1) {
+                [_myVobbleViewCont initVobbles];
+                [_allVobbleViewCont initVobbles];
+            }
         }
         
     }
@@ -145,7 +244,6 @@
             [_myVobbleViewCont initVobbles];
             [_allVobbleViewCont initVobbles];
         }
-        
     }
 }
 - (void)locationManager:(CLLocationManager *)manager
@@ -171,6 +269,24 @@
     }
     _prevNaviClass = [viewController class];
 }
+- (void)changeVobbleCnt{
+    if ([_viewPager currentIndex] == ALL) {
+        _vobbleCntLabel.text = [NSString stringWithFormat:@"%ld",_allVobbleViewCont.vobbleCnt];
+        _vobbleDescLabel.text = @"All vobbles";
+        [_vobbleCntLabel setHidden:FALSE];
+        [_vobbleDescLabel setHidden:FALSE];
+    }
+    if ([_viewPager currentIndex] == MY) {
+        _vobbleCntLabel.text = [NSString stringWithFormat:@"%ld",_myVobbleViewCont.vobbleCnt];
+        _vobbleDescLabel.text = @"My vobbles";
+        [_vobbleCntLabel setHidden:FALSE];
+        [_vobbleDescLabel setHidden:FALSE];
+    }
+    if ([_viewPager currentIndex] == FRIEND) {
+        [_vobbleCntLabel setHidden:TRUE];
+        [_vobbleDescLabel setHidden:TRUE];
+    }
+}
 #pragma mark - EKViewPagerDataSource
 - (NSInteger)numberOfItemsForViewPager:(EKViewPager *)viewPager
 {
@@ -180,13 +296,13 @@
 - (NSString *)viewPager:(EKViewPager *)viewPager titleForItemAtIndex:(NSInteger)index
 {
     if (index == 0) {
-        return @"ALL";
+        return @"Everyone";
     }
     if (index == 1) {
-        return @"MY";
+        return @" My";
     }
     if (index == 2) {
-        return @"FRIEND";
+        return @"Friend";
     }
     return @"";
 }
@@ -221,7 +337,22 @@
             [tab setBackgroundColor:[UIColor clearColor]];
         }
     }
-    
+    if (index == ALL) {
+        _vobbleCntLabel.text = [NSString stringWithFormat:@"%ld",_allVobbleViewCont.vobbleCnt];
+        _vobbleDescLabel.text = @"All vobbles";
+        [_vobbleCntLabel setHidden:FALSE];
+        [_vobbleDescLabel setHidden:FALSE];
+    }
+    if (index == MY) {
+        _vobbleCntLabel.text = [NSString stringWithFormat:@"%ld",_myVobbleViewCont.vobbleCnt];
+        _vobbleDescLabel.text = @"My vobbles";
+        [_vobbleCntLabel setHidden:FALSE];
+        [_vobbleDescLabel setHidden:FALSE];
+    }
+    if (index == FRIEND) {
+        [_vobbleCntLabel setHidden:TRUE];
+        [_vobbleDescLabel setHidden:TRUE];
+    }
 }
 
 - (void)viewPager:(EKViewPager *)viewPager willMoveFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex
@@ -231,7 +362,6 @@
 
 - (void)viewPager:(EKViewPager *)viewPager didMoveFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex
 {
-    _pageControl.currentPage = toIndex;
     
     EKTabHost* select_tab = [viewPager.tabHostsContainer.tabs objectAtIndex:toIndex];
     for (EKTabHost* tab in viewPager.tabHostsContainer.tabs) {
@@ -244,12 +374,27 @@
     if (toIndex == ALL) {
         _vobbleCntLabel.text = [NSString stringWithFormat:@"%ld",_allVobbleViewCont.vobbleCnt];
         _vobbleDescLabel.text = @"All vobbles";
+        [_vobbleCntLabel setHidden:FALSE];
+        [_vobbleDescLabel setHidden:FALSE];
     }
     if (toIndex == MY) {
         _vobbleCntLabel.text = [NSString stringWithFormat:@"%ld",_myVobbleViewCont.vobbleCnt];
         _vobbleDescLabel.text = @"My vobbles";
+        [_vobbleCntLabel setHidden:FALSE];
+        [_vobbleDescLabel setHidden:FALSE];
     }
     if (toIndex == FRIEND) {
+        [_vobbleCntLabel setHidden:TRUE];
+        [_vobbleDescLabel setHidden:TRUE];
     }
+}
+#pragma mark -- MFMailComposeViewControllerDelegate
+- (void)mailComposeController:(MFMailComposeViewController*)controller
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError*)error;
+{
+    if (result == MFMailComposeResultSent) {
+    }
+    [self dismissViewControllerAnimated:TRUE completion:NULL];
 }
 @end

@@ -7,9 +7,9 @@
 //
 
 #import "IntroViewController.h"
-#define PAGE_CONTROL_COUNT 6
+#define PAGE_CONTROL_COUNT 4
 @interface IntroViewController ()
-
+@property (nonatomic, weak) IBOutlet UIButton* backBtn;
 @end
 
 @implementation IntroViewController
@@ -33,9 +33,17 @@
     _pageControl.currentPage = 0;
     _pageControl.numberOfPages = PAGE_CONTROL_COUNT;
     
+    if (_type == INTRO_FIRST) {
+        [_backBtn setHidden:TRUE];
+    }else{
+        [_backBtn setHidden:FALSE];
+    }
 }
 - (void)viewDidAppear:(BOOL)animated{
     
+}
+- (IBAction)backClick:(id)sender{
+    [self.presentingViewController dismissViewControllerAnimated:TRUE completion:nil];
 }
 - (void)setPageControl{
     _pageControl.currentPage = _scrollView.currentIndexPath.row % PAGE_CONTROL_COUNT;
@@ -49,8 +57,12 @@
         [scrollView setContentOffset: CGPointMake(scrollView.contentOffset.x, 0)];
     }
     if (scrollView.contentOffset.x > 320*(PAGE_CONTROL_COUNT-1)) {
-        [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"IsViewIntro"];
-        [self performSegueWithIdentifier:@"ToSignSegue" sender:self];
+        if (_type == INTRO_FIRST) {
+            [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"IsViewIntro"];
+            [self performSegueWithIdentifier:@"ToSignSegue" sender:self];
+        }else if (_type == INTRO_MENU){
+            [self.presentingViewController dismissViewControllerAnimated:TRUE completion:nil];
+        }
     }
 }
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView

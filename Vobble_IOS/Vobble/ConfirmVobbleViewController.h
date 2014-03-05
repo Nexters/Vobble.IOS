@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "SuperViewController.h"
-@interface ConfirmVobbleViewController : SuperViewController
+#import <CoreLocation/CoreLocation.h>
+@interface ConfirmVobbleViewController : SuperViewController < CLLocationManagerDelegate >
 @property (nonatomic, strong) NSURL* voiceURL;
 @property (nonatomic, strong) NSURL* imageURL;
 @end

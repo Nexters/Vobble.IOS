@@ -56,10 +56,10 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
     //[DOUAudioStreamer setOptions:[DOUAudioStreamer options] | DOUAudioStreamerDefaultOptions];
     [_mapView showsUserLocation];
     [_progressView setShowPercentage:NO];
-    //[_progressView setBackgroundRingWidth:15];
+    [_progressView setBackgroundRingWidth:10];
     [_progressView setProgressRingWidth:10];
     [_progressView setProgress:0.0f animated:NO];
-    [_progressView setPrimaryColor:ORANGE_COLOR];
+    [_progressView setPrimaryColor:MINT_COLOR];
     [_progressView setSecondaryColor:[UIColor whiteColor]];
     [_vobbleImgView setImageWithResizeURL:[_vobble getImgUrl]];
     
@@ -86,6 +86,15 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
                     CFRelease(font);
                 }
                 
+                NSRange boldRange2 = [[mutableAttributedString string] rangeOfString:_vobble.createdAt options:NSCaseInsensitiveSearch];
+                UIFont *boldSystemFont2 = [UIFont boldSystemFontOfSize:19];
+                CTFontRef font2 = CTFontCreateWithName((__bridge CFStringRef)boldSystemFont.fontName, boldSystemFont2.pointSize, NULL);
+                if (font2) {
+                    [mutableAttributedString addAttribute:(NSString *)kCTFontAttributeName value:(__bridge id)font2 range:boldRange2];
+                    //[mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(__bridge id)[[UIColor redColor] CGColor] range:redRange];
+                    CFRelease(font2);
+                }
+                
                 return mutableAttributedString;
             }];
              
@@ -100,17 +109,14 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
     CLLocationCoordinate2D zoomLocation;
     zoomLocation.latitude = _vobble.latitude;
     zoomLocation.longitude= _vobble.longitude;
-    JY_LOG(@" _vobble.latitude : %lf", _vobble.latitude);
-    JY_LOG(@" _vobble.longitude : %lf", _vobble.longitude);
     
-    CLLocationDistance mapSizeMeters = 5000;
+    CLLocationDistance mapSizeMeters = 1000;
     
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, mapSizeMeters, mapSizeMeters);
     
     MKCoordinateRegion adjustedRegion = [_mapView regionThatFits:viewRegion];
     if(adjustedRegion.center.longitude != -180.00000000){
         if (isnan(adjustedRegion.center.latitude)) {
-            // iOS 6 will result in nan. 2012-10-15
             adjustedRegion.center.latitude = viewRegion.center.latitude;
             adjustedRegion.center.longitude = viewRegion.center.longitude;
             adjustedRegion.span.latitudeDelta = 0;

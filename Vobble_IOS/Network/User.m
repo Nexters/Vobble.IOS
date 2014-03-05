@@ -10,7 +10,7 @@
 
 @implementation User
 static NSString * latitude = @"";
-static NSString * logitude = @"";
+static NSString * longitude = @"";
 +(NSString*)getToken{
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"Token"];
 }
@@ -20,17 +20,19 @@ static NSString * logitude = @"";
 +(void)setLogOut{
     [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"Token"];
     [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"UserId"];
+    latitude=@"";
+    longitude=@"";
 }
 +(NSString*)getLatitude{
     return latitude;
 }
 +(NSString*)getLongitude{
-    return latitude;
+    return longitude;
 }
 +(void)setLatitude:(NSString*)str{
     latitude = str;
 }
 +(void)setLongitude:(NSString*)str{
-    logitude = str;
+    longitude = str;
 }
 @end
