@@ -48,6 +48,9 @@
                 [vobbleView setHidden:TRUE];
             }
         }
+        if (idx >= 6) {
+            vobbleView.alpha = 0.5f;
+        }
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setFrame:vobbleView.frame];

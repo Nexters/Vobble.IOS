@@ -80,9 +80,13 @@
     }
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSDictionary *parameters = @{@"email": _emailTextField.text,@"username": _nameTextField.text, @"password": _passwordTextField};
+    NSDictionary *parameters = @{@"email": _emailTextField.text,@"username": _nameTextField.text, @"password": _passwordTextField.text};
     [manager POST:[URL getSignUpURL] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject objectForKey:@"result"] integerValue] != 0) {
+            _emailTextField.text = @"";
+            _nameTextField.text = @"";
+            _passwordTextField.text = @"";
+            _passwordConfirmTextField.text = @"";
             [self  performSegueWithIdentifier:@"ToSignInSegue" sender:self];
         }else{
             [self alertNetworkError:[responseObject objectForKey:@"msg"]];

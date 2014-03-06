@@ -82,10 +82,6 @@
         EventViewController *eventViewCont = segue.destinationViewController;
         eventViewCont.type = EVENT_NOTICE;
     }
-    if ([[segue identifier] isEqualToString:@"ToWebSegue"]) {
-        EventViewController *eventViewCont = segue.destinationViewController;
-        eventViewCont.type = EVENT_APPS;
-    }
     if ([[segue identifier] isEqualToString:@"ToIntroSegue"]) {
         IntroViewController *introViewCont = segue.destinationViewController;
         introViewCont.type = INTRO_MENU;
@@ -178,7 +174,7 @@
 - (IBAction)settingClick:(id)sender{
     DoActionSheet *vActionSheet = [[DoActionSheet alloc] init];
     
-    vActionSheet.nAnimationType = DoTransitionStylePop;
+    //vActionSheet.nAnimationType = DoTransitionStylePop;
     vActionSheet.nContentMode = DoContentNone;
     
     [vActionSheet showC:@""
@@ -186,7 +182,6 @@
                 buttons:@[@"Feedback",
                           @"Tutorial",
                           @"AboutUs",
-                          @"Nexters",
                           @"Logout"]
                  result:^(int nResult) {
                      
@@ -203,10 +198,8 @@
                      }else if (nResult == 1) {
                           [self performSegueWithIdentifier:@"ToIntroSegue" sender:self];
                      }else if (nResult == 2) {
-                         
+                         [self performSegueWithIdentifier:@"ToAboutSegue" sender:self];
                      }else if (nResult == 3) {
-                         [self performSegueWithIdentifier:@"ToWebSegue" sender:self];
-                     }else if (nResult == 4) {
                          [User setLogOut];
                          [self performSegueWithIdentifier:@"ToSignSegue" sender:self];
                      }

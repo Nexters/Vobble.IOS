@@ -11,6 +11,15 @@
 		CD08A88318BB9E920013FC53 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = CD08A88218BB9E920013FC53 /* User.m */; };
 		CD08A88618BBA2870013FC53 /* Vobble.m in Sources */ = {isa = PBXBuildFile; fileRef = CD08A88518BBA2870013FC53 /* Vobble.m */; };
 		CD08A88918BBA6EB0013FC53 /* SKBounceAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = CD08A88818BBA6EB0013FC53 /* SKBounceAnimation.m */; };
+		CD11160918C81FA300B382D4 /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD11160818C81FA300B382D4 /* AboutUsViewController.m */; };
+		CD11161118C8292700B382D4 /* hansol.png in Resources */ = {isa = PBXBuildFile; fileRef = CD11160A18C8292700B382D4 /* hansol.png */; };
+		CD11161218C8292700B382D4 /* jaeyoung.png in Resources */ = {isa = PBXBuildFile; fileRef = CD11160B18C8292700B382D4 /* jaeyoung.png */; };
+		CD11161318C8292700B382D4 /* more_btn_press.png in Resources */ = {isa = PBXBuildFile; fileRef = CD11160C18C8292700B382D4 /* more_btn_press.png */; };
+		CD11161418C8292700B382D4 /* more_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = CD11160D18C8292700B382D4 /* more_btn.png */; };
+		CD11161518C8292700B382D4 /* seungjin.png in Resources */ = {isa = PBXBuildFile; fileRef = CD11160E18C8292700B382D4 /* seungjin.png */; };
+		CD11161618C8292700B382D4 /* soyoon.png in Resources */ = {isa = PBXBuildFile; fileRef = CD11160F18C8292700B382D4 /* soyoon.png */; };
+		CD11161718C8292700B382D4 /* suwan.png in Resources */ = {isa = PBXBuildFile; fileRef = CD11161018C8292700B382D4 /* suwan.png */; };
+		CD11161918C833F300B382D4 /* bgbg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD11161818C833F300B382D4 /* bgbg@2x.png */; };
 		CD119E3018C5860E00286C32 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD119E2C18C5860E00286C32 /* Main_iPad.storyboard */; };
 		CD119E3118C5860E00286C32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD119E2E18C5860E00286C32 /* Main.storyboard */; };
 		CD264C5518B9C38B00D9035A /* SuperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD264C5418B9C38B00D9035A /* SuperViewController.m */; };
@@ -60,7 +69,6 @@
 		CDB4AEF518C617A50095D0DD /* agree_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB4AE9218C617A40095D0DD /* agree_btn@2x.png */; };
 		CDB4AEF618C617A50095D0DD /* back_btn_o.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB4AE9318C617A40095D0DD /* back_btn_o.png */; };
 		CDB4AEF718C617A50095D0DD /* back_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB4AE9418C617A40095D0DD /* back_btn.png */; };
-		CDB4AEFA18C617A50095D0DD /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB4AE9718C617A40095D0DD /* bg.png */; };
 		CDB4AEFB18C617A50095D0DD /* bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB4AE9818C617A40095D0DD /* bg@2x.png */; };
 		CDB4AEFC18C617A50095D0DD /* camera_press@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB4AE9918C617A40095D0DD /* camera_press@2x.png */; };
 		CDB4AEFD18C617A50095D0DD /* camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB4AE9A18C617A40095D0DD /* camera@2x.png */; };
@@ -170,6 +178,16 @@
 		CD08A88518BBA2870013FC53 /* Vobble.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vobble.m; sourceTree = "<group>"; };
 		CD08A88718BBA6EB0013FC53 /* SKBounceAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKBounceAnimation.h; sourceTree = "<group>"; };
 		CD08A88818BBA6EB0013FC53 /* SKBounceAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKBounceAnimation.m; sourceTree = "<group>"; };
+		CD11160718C81FA300B382D4 /* AboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUsViewController.h; sourceTree = "<group>"; };
+		CD11160818C81FA300B382D4 /* AboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUsViewController.m; sourceTree = "<group>"; };
+		CD11160A18C8292700B382D4 /* hansol.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hansol.png; sourceTree = "<group>"; };
+		CD11160B18C8292700B382D4 /* jaeyoung.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jaeyoung.png; sourceTree = "<group>"; };
+		CD11160C18C8292700B382D4 /* more_btn_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more_btn_press.png; sourceTree = "<group>"; };
+		CD11160D18C8292700B382D4 /* more_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more_btn.png; sourceTree = "<group>"; };
+		CD11160E18C8292700B382D4 /* seungjin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = seungjin.png; sourceTree = "<group>"; };
+		CD11160F18C8292700B382D4 /* soyoon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = soyoon.png; sourceTree = "<group>"; };
+		CD11161018C8292700B382D4 /* suwan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = suwan.png; sourceTree = "<group>"; };
+		CD11161818C833F300B382D4 /* bgbg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bgbg@2x.png"; sourceTree = "<group>"; };
 		CD119E2D18C5860E00286C32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		CD119E3218C5864F00286C32 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CD264C5318B9C38B00D9035A /* SuperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuperViewController.h; sourceTree = "<group>"; };
@@ -248,7 +266,6 @@
 		CDB4AE9218C617A40095D0DD /* agree_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "agree_btn@2x.png"; sourceTree = "<group>"; };
 		CDB4AE9318C617A40095D0DD /* back_btn_o.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_btn_o.png; sourceTree = "<group>"; };
 		CDB4AE9418C617A40095D0DD /* back_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_btn.png; sourceTree = "<group>"; };
-		CDB4AE9718C617A40095D0DD /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
 		CDB4AE9818C617A40095D0DD /* bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg@2x.png"; sourceTree = "<group>"; };
 		CDB4AE9918C617A40095D0DD /* camera_press@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_press@2x.png"; sourceTree = "<group>"; };
 		CDB4AE9A18C617A40095D0DD /* camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera@2x.png"; sourceTree = "<group>"; };
@@ -405,6 +422,8 @@
 				CD264C6818B9CC3F00D9035A /* EventViewController.m */,
 				CD5CDE8A18BD993E00C77413 /* FriendVobbleViewController.h */,
 				CD5CDE8B18BD993E00C77413 /* FriendVobbleViewController.m */,
+				CD11160718C81FA300B382D4 /* AboutUsViewController.h */,
+				CD11160818C81FA300B382D4 /* AboutUsViewController.m */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -546,9 +565,15 @@
 				CDB4AF5618C6180F0095D0DD /* record_btn_press@2x.png */,
 				CDB4AE9118C617A40095D0DD /* agree_btn_press@2x.png */,
 				CDB4AE9218C617A40095D0DD /* agree_btn@2x.png */,
+				CD11160A18C8292700B382D4 /* hansol.png */,
+				CD11160B18C8292700B382D4 /* jaeyoung.png */,
+				CD11160C18C8292700B382D4 /* more_btn_press.png */,
+				CD11160D18C8292700B382D4 /* more_btn.png */,
+				CD11160E18C8292700B382D4 /* seungjin.png */,
+				CD11160F18C8292700B382D4 /* soyoon.png */,
+				CD11161018C8292700B382D4 /* suwan.png */,
 				CDB4AE9318C617A40095D0DD /* back_btn_o.png */,
 				CDB4AE9418C617A40095D0DD /* back_btn.png */,
-				CDB4AE9718C617A40095D0DD /* bg.png */,
 				CDB4AE9818C617A40095D0DD /* bg@2x.png */,
 				CDB4AE9918C617A40095D0DD /* camera_press@2x.png */,
 				CDB4AE9A18C617A40095D0DD /* camera@2x.png */,
@@ -627,6 +652,7 @@
 				CDB4AEEE18C617A50095D0DD /* voice_reload.png */,
 				CDB4AEEF18C617A50095D0DD /* voice_remove_btn_o.png */,
 				CDB4AEF018C617A50095D0DD /* voice_remove_btn.png */,
+				CD11161818C833F300B382D4 /* bgbg@2x.png */,
 				CDB4AEF118C617A50095D0DD /* voice_vobble.png */,
 				CDB4AEF218C617A50095D0DD /* x_btn_press.png */,
 				CDB4AEF318C617A50095D0DD /* x_btn.png */,
@@ -794,7 +820,9 @@
 			files = (
 				CD96DC9118BB972600E284A5 /* InfoPlist.strings in Resources */,
 				CDB4AF3E18C617A50095D0DD /* sign_up_btn_press@2x.png in Resources */,
+				CD11161118C8292700B382D4 /* hansol.png in Resources */,
 				CDB4AF4318C617A50095D0DD /* start_signup_btn.png in Resources */,
+				CD11161718C8292700B382D4 /* suwan.png in Resources */,
 				CDB4AF2118C617A50095D0DD /* myplace_press@2x.png in Resources */,
 				CDB4AF3318C617A50095D0DD /* reload_btn@2x.png in Resources */,
 				CDB4AF5718C6180F0095D0DD /* record_btn_press@2x.png in Resources */,
@@ -803,6 +831,7 @@
 				CDB4AEFD18C617A50095D0DD /* camera@2x.png in Resources */,
 				CDB4AF1E18C617A50095D0DD /* login_btn.png in Resources */,
 				CDB4AF3B18C617A50095D0DD /* setting@2x.png in Resources */,
+				CD11161918C833F300B382D4 /* bgbg@2x.png in Resources */,
 				CDB4AF0218C617A50095D0DD /* event_icn.png in Resources */,
 				CDB4AF1718C617A50095D0DD /* join_line.png in Resources */,
 				CDB4AF1418C617A50095D0DD /* join_back_btn.png in Resources */,
@@ -816,7 +845,6 @@
 				CDB4AF3C18C617A50095D0DD /* shadow_bottom@2x.png in Resources */,
 				CDB4AF0418C617A50095D0DD /* events_btn@2x.png in Resources */,
 				CD119E3018C5860E00286C32 /* Main_iPad.storyboard in Resources */,
-				CDB4AEFA18C617A50095D0DD /* bg.png in Resources */,
 				CDB4AF2A18C617A50095D0DD /* record_btn@2x.png in Resources */,
 				CDB4AF4D18C617A50095D0DD /* voice_prev_btn.png in Resources */,
 				CDB4AF2418C617A50095D0DD /* pause2_btn@2x.png in Resources */,
@@ -830,6 +858,7 @@
 				CDB4AF5218C617A50095D0DD /* voice_remove_btn.png in Resources */,
 				CDB4AF1D18C617A50095D0DD /* login_btn_o.png in Resources */,
 				CDB4AF0118C617A50095D0DD /* disagree_btn@2x.png in Resources */,
+				CD11161618C8292700B382D4 /* soyoon.png in Resources */,
 				CDB4AF3818C617A50095D0DD /* setting_btn_press@2x.png in Resources */,
 				CDB4AF1118C617A50095D0DD /* intro.mp4 in Resources */,
 				CDB4AF5318C617A50095D0DD /* voice_vobble.png in Resources */,
@@ -845,12 +874,14 @@
 				CDB4AF4818C617A50095D0DD /* tu04.png in Resources */,
 				CDB4AF2C18C617A50095D0DD /* record_camera_icon.png in Resources */,
 				CDB4AEF418C617A50095D0DD /* agree_btn_press@2x.png in Resources */,
+				CD11161318C8292700B382D4 /* more_btn_press.png in Resources */,
 				CDB4AF0318C617A50095D0DD /* events_btn_press@2x.png in Resources */,
 				CDB4AF5518C617A50095D0DD /* x_btn.png in Resources */,
 				CDB4AF0618C617A50095D0DD /* ic_pin_01.png in Resources */,
 				CDB4AF2218C617A50095D0DD /* myplace@2x.png in Resources */,
 				CDB4AF1218C617A50095D0DD /* intro.png in Resources */,
 				CDB4AF1918C617A50095D0DD /* log_in_btn_press@2x.png in Resources */,
+				CD11161418C8292700B382D4 /* more_btn.png in Resources */,
 				CD67084B18BCFB49001EA671 /* LICENSE in Resources */,
 				CDB4AF2E18C617A50095D0DD /* record_re_btn.png in Resources */,
 				CDB4AF1818C617A50095D0DD /* loading@2x.png in Resources */,
@@ -868,6 +899,7 @@
 				CDB4AF2518C617A50095D0DD /* play_btn_o.png in Resources */,
 				CDB4AF2818C617A50095D0DD /* play2_btn@2x.png in Resources */,
 				CD96DC8B18BB96C500E284A5 /* Localizable.strings in Resources */,
+				CD11161518C8292700B382D4 /* seungjin.png in Resources */,
 				CDB4AF4C18C617A50095D0DD /* voice_prev_btn_o.png in Resources */,
 				CDB4AF0718C617A50095D0DD /* icn_96.png in Resources */,
 				CDB4AF4418C617A50095D0DD /* tab_mask.png in Resources */,
@@ -882,6 +914,7 @@
 				CDB4AF3618C617A50095D0DD /* reload_press@2x.png in Resources */,
 				CDB4AF4118C617A50095D0DD /* start_login_btn.png in Resources */,
 				CDB4AF3118C617A50095D0DD /* record2_btn@2x.png in Resources */,
+				CD11161218C8292700B382D4 /* jaeyoung.png in Resources */,
 				CD67084A18BCFB49001EA671 /* .gitignore in Resources */,
 				CDB4AF1C18C617A50095D0DD /* login_back_btn.png in Resources */,
 				CDB4AF4018C617A50095D0DD /* start_login_btn_o.png in Resources */,
@@ -943,6 +976,7 @@
 				CD264C6618B9CC3700D9035A /* MainViewController.m in Sources */,
 				CD264C5B18B9C84D00D9035A /* SignInViewController.m in Sources */,
 				CDB7295018BA2F21009EC23F /* URL.m in Sources */,
+				CD11160918C81FA300B382D4 /* AboutUsViewController.m in Sources */,
 				CDB7295318BA3052009EC23F /* IBCellFlipSegue.m in Sources */,
 				CD3155C818BA34BC00208393 /* MainVobbleViewController.m in Sources */,
 				CD264C6118B9C88800D9035A /* SignViewController.m in Sources */,

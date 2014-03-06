@@ -225,7 +225,7 @@
                         <outlet property="passwordConfirmTextField" destination="vlr-1O-J9x" id="bOw-Eb-275"/>
                         <outlet property="passwordTextField" destination="UAG-KP-Nc1" id="K3b-nX-m1l"/>
                         <segue destination="MNj-yN-kHw" kind="custom" identifier="ToMainInSegue" customClass="RootTransitionDissolve" id="48i-NP-FH8"/>
-                        <segue destination="rKs-Mr-s7w" kind="custom" identifier="ToSignInSegue" customClass="RootTransitionFlipSegue" id="zuL-f6-vW4"/>
+                        <segue destination="rKs-Mr-s7w" kind="push" identifier="ToSignInSegue" customClass="RootTransitionFlipSegue" id="zuL-f6-vW4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f7s-rq-dUf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -241,7 +241,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg.png" id="Uo5-SW-IZ9">
-                                <rect key="frame" x="0.0" y="-116" width="320" height="800"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="nJQ-R6-9wh" customClass="EKViewPager">
@@ -342,6 +342,7 @@
                         <segue destination="rCz-GN-RPZ" kind="custom" identifier="ToSignSegue" customClass="RootTransitionDissolve" id="QXQ-a2-oA5"/>
                         <segue destination="7Jb-AS-BNG" kind="custom" identifier="ToWebSegue" customClass="DCModalSegue" id="nQS-Cf-yCe"/>
                         <segue destination="OG4-GP-7L5" kind="custom" identifier="ToIntroSegue" customClass="DCModalSegue" id="pCl-nd-Uso"/>
+                        <segue destination="ejo-1m-0R8" kind="custom" identifier="ToAboutSegue" customClass="DCModalSegue" id="PyM-gp-NpW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jf5-jK-F1C" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -461,11 +462,11 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7qW-sp-UmE">
-                                <rect key="frame" x="0.0" y="477.99999362708957" width="320" height="90"/>
+                                <rect key="frame" x="0.0" y="477.99999769497663" width="320" height="90"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <state key="normal" title="Save">
+                                <state key="normal" title="Vobbling">
                                     <color key="titleColor" red="0.0" green="0.84705882349999995" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -503,7 +504,7 @@
                                 </connections>
                             </button>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="cex-Xm-FCv">
-                                <rect key="frame" x="0.0" y="349.99999362708951" width="320" height="128"/>
+                                <rect key="frame" x="0.0" y="350" width="320" height="127.9999976949766"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                             </mapView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow_top.png" id="MKY-Fv-u7J">
@@ -1277,6 +1278,214 @@ vobble</string>
             </objects>
             <point key="canvasLocation" x="1296" y="1443"/>
         </scene>
+        <!--About Us View Controller-->
+        <scene sceneID="b2W-V7-uvV">
+            <objects>
+                <viewController id="ejo-1m-0R8" customClass="AboutUsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vm3-fL-Rs3">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bgbg.png" id="xxg-5J-OPi">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Listen to the vobble" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a7A-ai-u7f">
+                                <rect key="frame" x="0.0" y="34" width="320" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nexters" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="u3C-mz-fCd">
+                                <rect key="frame" x="0.0" y="96" width="320" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="im4-7D-nBu">
+                                <rect key="frame" x="30" y="158" width="77" height="77"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" image="hansol.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="memberClick:" destination="ejo-1m-0R8" eventType="touchUpInside" id="GCV-cj-YCc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uxb-px-mf0">
+                                <rect key="frame" x="122" y="158" width="77" height="77"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" image="jaeyoung.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="memberClick:" destination="ejo-1m-0R8" eventType="touchUpInside" id="DGU-SD-33Q"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4lR-Tu-7bH">
+                                <rect key="frame" x="213" y="158" width="77" height="77"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" image="soyoon.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="memberClick:" destination="ejo-1m-0R8" eventType="touchUpInside" id="yDv-Do-d9f"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3oq-EK-OhP">
+                                <rect key="frame" x="75" y="292" width="77" height="77"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" image="suwan.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="memberClick:" destination="ejo-1m-0R8" eventType="touchUpInside" id="gdK-fu-aE9"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wjP-YD-1U6">
+                                <rect key="frame" x="168" y="292" width="77" height="77"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" image="seungjin.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="memberClick:" destination="ejo-1m-0R8" eventType="touchUpInside" id="cZ7-1l-5jU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2J3-UA-dKB">
+                                <rect key="frame" x="30" y="478" width="260" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" image="more_btn.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="7Jb-AS-BNG" kind="custom" identifier="ToWebSegue" customClass="DCModalSegue" id="gA7-qK-QLR"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Designer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CTs-T9-LfZ">
+                                <rect key="frame" x="21" y="236" width="95" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="1" green="0.99773185483870963" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hansol Shin" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vZg-lp-Gs5">
+                                <rect key="frame" x="16" y="253" width="104" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="1" green="0.99773185483870963" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Developer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ygS-Xf-6Cd">
+                                <rect key="frame" x="113" y="236" width="95" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="1" green="0.99773185480000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jaeyoung Kim" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kkR-C5-QJF">
+                                <rect key="frame" x="108" y="253" width="104" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="1" green="0.99773185480000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Developer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Jrt-9F-ALU">
+                                <rect key="frame" x="204" y="236" width="95" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="1" green="0.99773185480000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Soyoon Kim" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HjG-Tc-igZ">
+                                <rect key="frame" x="199" y="253" width="104" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="1" green="0.99773185480000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Developer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FeM-dN-6uq">
+                                <rect key="frame" x="66" y="377" width="95" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="1" green="0.99773185480000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="blaswan" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UDf-o7-RMH">
+                                <rect key="frame" x="61" y="394" width="104" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="1" green="0.99773185480000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Developer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hsO-cd-t0N">
+                                <rect key="frame" x="159" y="377" width="95" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="1" green="0.99773185480000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ksjin" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xLk-vw-C5V">
+                                <rect key="frame" x="154" y="394" width="104" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="1" green="0.99773185480000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="CON-Qu-TQX">
+                                <rect key="frame" x="286" y="28" width="17" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" image="x_btn.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" image="x_btn_press.png"/>
+                                <state key="highlighted" image="x_btn_press.png"/>
+                                <connections>
+                                    <action selector="backClick:" destination="ejo-1m-0R8" eventType="touchUpInside" id="Xg1-fj-yRD"/>
+                                </connections>
+                            </button>
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oCN-hp-l8d">
+                                <rect key="frame" x="148" y="430" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.99773185480000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="oCN-hp-l8d" id="PJ0-wM-tuH"/>
+                        <outletCollection property="buttons" destination="im4-7D-nBu" id="lqr-KV-LBK"/>
+                        <outletCollection property="buttons" destination="uxb-px-mf0" id="W1O-Ww-6qh"/>
+                        <outletCollection property="buttons" destination="4lR-Tu-7bH" id="zcG-ne-GFi"/>
+                        <outletCollection property="buttons" destination="3oq-EK-OhP" id="QqR-5N-irh"/>
+                        <outletCollection property="buttons" destination="wjP-YD-1U6" id="uuD-Rd-yCg"/>
+                        <outletCollection property="nameLabels" destination="vZg-lp-Gs5" id="4K0-0a-9RN"/>
+                        <outletCollection property="nameLabels" destination="kkR-C5-QJF" id="WuT-Oy-gdV"/>
+                        <outletCollection property="nameLabels" destination="HjG-Tc-igZ" id="Uha-Fh-oZM"/>
+                        <outletCollection property="nameLabels" destination="UDf-o7-RMH" id="MvQ-rR-RZ1"/>
+                        <outletCollection property="nameLabels" destination="xLk-vw-C5V" id="w9d-go-4F5"/>
+                        <outletCollection property="titleLabels" destination="CTs-T9-LfZ" id="njG-Qs-Dc5"/>
+                        <outletCollection property="titleLabels" destination="ygS-Xf-6Cd" id="BXl-l5-hXQ"/>
+                        <outletCollection property="titleLabels" destination="Jrt-9F-ALU" id="kPh-TE-k8x"/>
+                        <outletCollection property="titleLabels" destination="FeM-dN-6uq" id="Rcv-bU-lW3"/>
+                        <outletCollection property="titleLabels" destination="hsO-cd-t0N" id="JaO-iI-UJ9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5ws-ld-v6q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1698" y="1436"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="dSA-4o-NIj">
             <objects>
@@ -1318,18 +1527,22 @@ vobble</string>
     <resources>
         <image name="agree_btn.png" width="110" height="42"/>
         <image name="agree_btn_press.png" width="110" height="42"/>
-        <image name="bg.png" width="720" height="1280"/>
+        <image name="bg.png" width="320" height="568"/>
+        <image name="bgbg.png" width="320" height="568"/>
         <image name="disagree_btn.png" width="110" height="42"/>
         <image name="disagree_btn_press.png" width="110" height="42"/>
         <image name="events_btn.png" width="21" height="21"/>
         <image name="events_btn_press.png" width="21" height="21"/>
         <image name="friends.png" width="258" height="139"/>
+        <image name="hansol.png" width="154" height="154"/>
         <image name="intro.png" width="720" height="1230"/>
+        <image name="jaeyoung.png" width="154" height="154"/>
         <image name="join_line.png" width="600" height="1"/>
         <image name="loading.png" width="77" height="77"/>
         <image name="log_in_btn.png" width="127" height="60"/>
         <image name="log_in_btn_press.png" width="127" height="60"/>
         <image name="logo.png" width="200" height="200"/>
+        <image name="more_btn.png" width="520" height="120"/>
         <image name="myplace.png" width="30" height="30"/>
         <image name="myplace_press.png" width="30" height="30"/>
         <image name="play_btn.png" width="134" height="134"/>
@@ -1344,14 +1557,17 @@ vobble</string>
         <image name="reload_btn_press.png" width="21" height="21"/>
         <image name="setting_btn.png" width="21" height="21"/>
         <image name="setting_btn_press.png" width="21" height="21"/>
+        <image name="seungjin.png" width="154" height="154"/>
         <image name="shadow_bottom.png" width="320" height="62"/>
         <image name="shadow_top.png" width="320" height="62"/>
         <image name="sign_up_btn.png" width="127" height="60"/>
         <image name="sign_up_btn_press.png" width="127" height="60"/>
+        <image name="soyoon.png" width="154" height="154"/>
         <image name="start_login_btn.png" width="600" height="120"/>
         <image name="start_login_btn_o.png" width="600" height="120"/>
         <image name="start_signup_btn.png" width="600" height="120"/>
         <image name="start_signup_btn_o.png" width="600" height="120"/>
+        <image name="suwan.png" width="154" height="154"/>
         <image name="voice_vobble.png" width="200" height="200"/>
         <image name="x_btn.png" width="34" height="34"/>
         <image name="x_btn_press.png" width="34" height="34"/>
@@ -1363,9 +1579,9 @@ vobble</string>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="c86-yn-jOw"/>
-        <segue reference="nQS-Cf-yCe"/>
-        <segue reference="Vx5-lg-Tow"/>
-        <segue reference="i4X-SC-uB8"/>
+        <segue reference="pCl-nd-Uso"/>
+        <segue reference="QXQ-a2-oA5"/>
+        <segue reference="gA7-qK-QLR"/>
         <segue reference="zuL-f6-vW4"/>
     </inferredMetricsTieBreakers>
 </document>
