@@ -24,6 +24,7 @@
 @property (nonatomic, strong) IBOutletCollection(UILabel) NSArray *nameLabels;
 @property (nonatomic, weak) IBOutlet UILabel* nameLabel;
 @property (nonatomic, weak) IBOutlet UILabel* descriptionLabel;
+@property (nonatomic, weak) IBOutlet UIButton* moreAppBtn;
 @end
 
 @implementation AboutUsViewController
@@ -40,9 +41,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if (IPHONE4) {
+        _moreAppBtn.hidden = TRUE;
+    }
     int i = 0;
     nameArr = @[@"Hansol Shin",@"",@"Soyoon Kim",@"blaswan",@"ksjin"];
-    descriptionArr = @[@"넥터 엉망징창녀!",@"넥터 평범남......",@"넥터 귀염둥이!",@"넥터 엄친남!",@"넥터 최고미녀!"];
+    descriptionArr = @[@"넥터 크리스탈!!!",@"넥터 상남자!!!",@"넥터 귀염둥이!!!",@"넥터 엄친남!!!",@"넥터 최고미녀!!!"];
     
 	for (UIButton* btn in _buttons) {
         btn.tag = i;

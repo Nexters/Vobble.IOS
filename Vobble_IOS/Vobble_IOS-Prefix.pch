@@ -18,3 +18,5 @@
 #define JY_LOG NSLog
 #define IPHONE4 [[UIScreen mainScreen] bounds].size.height == 480
 #define IPHONE5 [[UIScreen mainScreen] bounds].size.height != 480
+#define IOS6 [[[UIDevice currentDevice] systemVersion] floatValue] < 7.0
+#define IOS7 [[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0

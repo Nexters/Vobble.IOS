@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		738F2A975B374B3496EE6156 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F60FDE2AA1EE48A5895DDF13 /* libPods.a */; };
+		CD02709918C9BB1C007CB8BC /* AFAppDotNetAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CD02709818C9BB1C007CB8BC /* AFAppDotNetAPIClient.m */; };
 		CD08A88318BB9E920013FC53 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = CD08A88218BB9E920013FC53 /* User.m */; };
 		CD08A88618BBA2870013FC53 /* Vobble.m in Sources */ = {isa = PBXBuildFile; fileRef = CD08A88518BBA2870013FC53 /* Vobble.m */; };
 		CD08A88918BBA6EB0013FC53 /* SKBounceAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = CD08A88818BBA6EB0013FC53 /* SKBounceAnimation.m */; };
@@ -20,7 +21,6 @@
 		CD11161618C8292700B382D4 /* soyoon.png in Resources */ = {isa = PBXBuildFile; fileRef = CD11160F18C8292700B382D4 /* soyoon.png */; };
 		CD11161718C8292700B382D4 /* suwan.png in Resources */ = {isa = PBXBuildFile; fileRef = CD11161018C8292700B382D4 /* suwan.png */; };
 		CD11161918C833F300B382D4 /* bgbg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD11161818C833F300B382D4 /* bgbg@2x.png */; };
-		CD119E3018C5860E00286C32 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD119E2C18C5860E00286C32 /* Main_iPad.storyboard */; };
 		CD119E3118C5860E00286C32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD119E2E18C5860E00286C32 /* Main.storyboard */; };
 		CD264C5518B9C38B00D9035A /* SuperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD264C5418B9C38B00D9035A /* SuperViewController.m */; };
 		CD264C5818B9C6F400D9035A /* App.m in Sources */ = {isa = PBXBuildFile; fileRef = CD264C5718B9C6F400D9035A /* App.m */; };
@@ -38,7 +38,7 @@
 		CD264C8018B9D06400D9035A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD264C7F18B9D06400D9035A /* MediaPlayer.framework */; };
 		CD3155C818BA34BC00208393 /* MainVobbleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD3155C718BA34BC00208393 /* MainVobbleViewController.m */; };
 		CD49BD2318BC1EEF00E67C90 /* Track.m in Sources */ = {isa = PBXBuildFile; fileRef = CD49BD2218BC1EEF00E67C90 /* Track.m */; };
-		CD49BD2518BC203F00E67C90 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD49BD2418BC203F00E67C90 /* AVFoundation.framework */; };
+		CD49BD2518BC203F00E67C90 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD49BD2418BC203F00E67C90 /* AVFoundation.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		CD5CDE8C18BD993E00C77413 /* FriendVobbleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5CDE8B18BD993E00C77413 /* FriendVobbleViewController.m */; };
 		CD5CDE8F18BDA3ED00C77413 /* NavigationRootPopSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5CDE8E18BDA3ED00C77413 /* NavigationRootPopSegue.m */; };
 		CD67083E18BCD412001EA671 /* Pin.m in Sources */ = {isa = PBXBuildFile; fileRef = CD67083D18BCD412001EA671 /* Pin.m */; };
@@ -158,7 +158,7 @@
 		CDD0246718BA5DDC005CD08D /* NavagtionBlurSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD0246618BA5DDC005CD08D /* NavagtionBlurSegue.m */; };
 		CDD0246918BA62C6005CD08D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD0246818BA62C6005CD08D /* CoreLocation.framework */; };
 		CDD0247218BA659C005CD08D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD0247118BA659C005CD08D /* SystemConfiguration.framework */; };
-		CDD024AC18BA6D99005CD08D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD0246A18BA63DF005CD08D /* MapKit.framework */; };
+		CDD024AC18BA6D99005CD08D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD0246A18BA63DF005CD08D /* MapKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -172,6 +172,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CD02709718C9BB1C007CB8BC /* AFAppDotNetAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFAppDotNetAPIClient.h; sourceTree = "<group>"; };
+		CD02709818C9BB1C007CB8BC /* AFAppDotNetAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFAppDotNetAPIClient.m; sourceTree = "<group>"; };
 		CD08A88118BB9E920013FC53 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		CD08A88218BB9E920013FC53 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		CD08A88418BBA2870013FC53 /* Vobble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vobble.h; sourceTree = "<group>"; };
@@ -726,6 +728,8 @@
 		CDB7294D18BA2F16009EC23F /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				CD02709718C9BB1C007CB8BC /* AFAppDotNetAPIClient.h */,
+				CD02709818C9BB1C007CB8BC /* AFAppDotNetAPIClient.m */,
 				CDB7294E18BA2F21009EC23F /* URL.h */,
 				CDB7294F18BA2F21009EC23F /* URL.m */,
 				CD08A88118BB9E920013FC53 /* User.h */,
@@ -844,7 +848,6 @@
 				CDB4AEFE18C617A50095D0DD /* cancel_btn@2x.png in Resources */,
 				CDB4AF3C18C617A50095D0DD /* shadow_bottom@2x.png in Resources */,
 				CDB4AF0418C617A50095D0DD /* events_btn@2x.png in Resources */,
-				CD119E3018C5860E00286C32 /* Main_iPad.storyboard in Resources */,
 				CDB4AF2A18C617A50095D0DD /* record_btn@2x.png in Resources */,
 				CDB4AF4D18C617A50095D0DD /* voice_prev_btn.png in Resources */,
 				CDB4AF2418C617A50095D0DD /* pause2_btn@2x.png in Resources */,
@@ -985,6 +988,7 @@
 				CD08A88318BB9E920013FC53 /* User.m in Sources */,
 				CD264C7E18B9CDFC00D9035A /* RootTransitionDissolve.m in Sources */,
 				CD6C1DE218B99860004DA3AB /* main.m in Sources */,
+				CD02709918C9BB1C007CB8BC /* AFAppDotNetAPIClient.m in Sources */,
 				CD264C5818B9C6F400D9035A /* App.m in Sources */,
 				CD08A88618BBA2870013FC53 /* Vobble.m in Sources */,
 				CD264C5518B9C38B00D9035A /* SuperViewController.m in Sources */,
@@ -1173,14 +1177,8 @@
 					"\"${PODS_ROOT}/Headers/UIImage+BlurredFrame\"",
 				);
 				INFOPLIST_FILE = "Vobble_IOS/Vobble_IOS-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/Rangken/Dropbox/Rangken/Programming/IOS/Vobble_IOS/Vobble_IOS/Resources/Lib,
-					/Users/Rangken/Dropbox/Rangken/Programming/IOS/Vobble_IOS/Vobble_IOS/Resources/Lib/ApiGateway,
-					/Users/Rangken/Dropbox/Rangken/Programming/IOS/Vobble_IOS/Vobble_IOS/Resources/Lib/NMapViewer,
-					/Users/Rangken/Dropbox/Rangken/Programming/IOS/Vobble_IOS/Lib/ApiGateway,
-					/Users/Rangken/Dropbox/Rangken/Programming/IOS/Vobble_IOS/Lib/NMapViewer,
-				);
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-framework",
@@ -1208,6 +1206,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1242,14 +1241,8 @@
 					"\"${PODS_ROOT}/Headers/UIImage+BlurredFrame\"",
 				);
 				INFOPLIST_FILE = "Vobble_IOS/Vobble_IOS-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/Rangken/Dropbox/Rangken/Programming/IOS/Vobble_IOS/Vobble_IOS/Resources/Lib,
-					/Users/Rangken/Dropbox/Rangken/Programming/IOS/Vobble_IOS/Vobble_IOS/Resources/Lib/ApiGateway,
-					/Users/Rangken/Dropbox/Rangken/Programming/IOS/Vobble_IOS/Vobble_IOS/Resources/Lib/NMapViewer,
-					/Users/Rangken/Dropbox/Rangken/Programming/IOS/Vobble_IOS/Lib/ApiGateway,
-					/Users/Rangken/Dropbox/Rangken/Programming/IOS/Vobble_IOS/Lib/NMapViewer,
-				);
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-framework",
@@ -1277,6 +1270,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

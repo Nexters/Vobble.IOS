@@ -31,8 +31,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    UIBarButtonItem *backBtn =
+    [[UIBarButtonItem alloc] initWithTitle:@""
+                                     style:UIBarButtonItemStyleBordered
+                                    target:nil
+                                    action:nil];
+    [self.navigationItem setBackBarButtonItem:backBtn];
 }
-
+- (void)viewDidAppear:(BOOL)animated{
+    [_nameTextField resignFirstResponder];
+    [_emailTextField resignFirstResponder];
+    [_passwordTextField resignFirstResponder];
+    [_passwordConfirmTextField resignFirstResponder];
+}
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     [UIView animateWithDuration:0.4f delay:0.0f options:UIViewAnimationOptionCurveLinear animations:^(void){
         if (textField == _passwordTextField) {
@@ -79,6 +90,25 @@
         return ;
     }
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSDictionary *parameters = @{@"email": _emailTextField.text,@"username": _nameTextField.text, @"password": _passwordTextField.text};
+    [[AFAppDotNetAPIClient sharedClient] postPath:[URL getSignUpURL]  parameters:parameters success:^(AFHTTPRequestOperation *response, id responseObject) {
+        if ([[responseObject objectForKey:@"result"] integerValue] != 0) {
+            _emailTextField.text = @"";
+            _nameTextField.text = @"";
+            _passwordTextField.text = @"";
+            _passwordConfirmTextField.text = @"";
+            [self  performSegueWithIdentifier:@"ToSignInSegue" sender:self];
+        }else{
+            [self alertNetworkError:[responseObject objectForKey:@"msg"]];
+        }
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self alertNetworkError:NSLocalizedString(@"NETWORK_ERROR", @"네트워크 실패")];
+    }];
+    
+    /*
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *parameters = @{@"email": _emailTextField.text,@"username": _nameTextField.text, @"password": _passwordTextField.text};
     [manager POST:[URL getSignUpURL] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -96,6 +126,7 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self alertNetworkError:NSLocalizedString(@"NETWORK_ERROR", @"네트워크 실패")];
     }];
+     */
 }
 
 - (void)didReceiveMemoryWarning

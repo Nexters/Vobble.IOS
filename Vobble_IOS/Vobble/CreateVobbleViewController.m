@@ -54,6 +54,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     _isAttachedImg = FALSE;
     _accTime = 0.0f;
     [_progressView setShowPercentage:NO];
@@ -140,8 +141,8 @@
         [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
             _playBtn.alpha = 0.0f;
             _rewindBtn.alpha = 0.0f;
-            _playBtn.center = CGPointMake(160, 364);
-            _rewindBtn.center = CGPointMake(160, 364);
+            _playBtn.center = CGPointMake(160, _recordBtn.center.y);
+            _rewindBtn.center = CGPointMake(160, _recordBtn.center.y);
         }completion:^(BOOL finished){
             
         }];
@@ -151,8 +152,8 @@
         [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
             _playBtn.alpha = 1.0f;
             _rewindBtn.alpha = 1.0f;
-            _playBtn.center = CGPointMake(88, 364);
-            _rewindBtn.center = CGPointMake(234, 364);
+            _playBtn.center = CGPointMake(88, _recordBtn.center.y);
+            _rewindBtn.center = CGPointMake(234, _recordBtn.center.y);
         }completion:^(BOOL finished){
             
         }];
@@ -161,8 +162,8 @@
         [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
             _playBtn.alpha = 0.0f;
             _rewindBtn.alpha = 0.0f;
-            _playBtn.center = CGPointMake(160, 364);
-            _rewindBtn.center = CGPointMake(160, 364);
+            _playBtn.center = CGPointMake(160, _recordBtn.center.y);
+            _rewindBtn.center = CGPointMake(160, _recordBtn.center.y);
         }completion:^(BOOL finished){
             
         }];

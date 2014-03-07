@@ -13,42 +13,42 @@
     return BASE_URL;
 }
 + (NSString*)getFilesURL{
-    return [NSString stringWithFormat:@"%@/files",[URL getBaseURL]];;
+    return [NSString stringWithFormat:@"%@/files",[self getBaseURL]];
 }
 + (NSString*)getMovieURL{
-    return [NSString stringWithFormat:@"%@/videos/video.mp4",[URL getBaseURL]];
+    return [NSString stringWithFormat:@"%@/videos/video.mp4",[self getBaseURL]];
 }
 + (NSString*)getEventURL{
-    return [NSString stringWithFormat:@"%@/events",[URL getBaseURL]];
+    return [NSString stringWithFormat:@"%@/events",[self getBaseURL]];
 }
 + (NSString*)getLoginURL{
-    return [NSString stringWithFormat:@"%@/tokens",[URL getBaseURL]];
+    return @"tokens";
 }
 + (NSString*)getSignUpURL{
-    return [NSString stringWithFormat:@"%@/users",[URL getBaseURL]];
+    return @"users";
 }
 + (NSString*)getMeURL{
-    return [NSString stringWithFormat:@"%@/users/%@",[URL getBaseURL],[User getUserId]];
+    return [NSString stringWithFormat:@"users/%@",[User getUserId]];
 }
 + (NSString*)getUserURL:(NSString*)userId{
-    return [NSString stringWithFormat:@"%@/users/%@",[URL getBaseURL],userId];
+    return [NSString stringWithFormat:@"users/%@",userId];
 }
 + (NSString*)getAllVobbleURL{
-    return [NSString stringWithFormat:@"%@/vobbles",[URL getBaseURL]];
+    return @"vobbles";
 }
 + (NSString*)getAllVobbleCountURL{
-    return [NSString stringWithFormat:@"%@/vobbles/count",[URL getBaseURL]];
+    return @"vobbles/count";
 }
 + (NSString*)getMyVobbleURL{
-    return [NSString stringWithFormat:@"%@/users/%@/vobbles",[URL getBaseURL],[User getUserId]];
+    return [NSString stringWithFormat:@"users/%@/vobbles",[User getUserId]];
 }
 + (NSString*)getMyVobbleCountURL{
-    return [NSString stringWithFormat:@"%@/users/%@/vobbles/count",[URL getBaseURL],[User getUserId]];
+    return [NSString stringWithFormat:@"users/%@/vobbles/count",[User getUserId]];
 }
 + (NSString*)getUploadVobbleURL{
-    return [NSString stringWithFormat:@"%@/users/%@/vobbles",[URL getBaseURL],[User getUserId]];
+    return [NSString stringWithFormat:@"users/%@/vobbles",[User getUserId]];
 }
 + (NSString*)getVobbleDeleteURL:(NSString*)vobbleId{
-    return [NSString stringWithFormat:@"%@/users/%@/vobbles/%@/delete",[URL getBaseURL],[User getUserId],vobbleId];
+    return [NSString stringWithFormat:@"users/%@/vobbles/%@/delete",[User getUserId],vobbleId];
 }
 @end

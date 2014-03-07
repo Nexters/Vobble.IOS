@@ -148,6 +148,23 @@
         FSAlertView *alert = [[FSAlertView alloc] initWithTitle:@"Vobble" message:NSLocalizedString(@"VOBBLE_DELETE_QUESTION", @"보블삭제?") cancelButton: [FSBlockButton blockButtonWithTitle:NSLocalizedString(@"CANCEL",@"취소") block:^ {
             
         }] otherButtons:[FSBlockButton blockButtonWithTitle:NSLocalizedString(@"CONFIRM",@"확인") block:^ {
+            Vobble* deleteVobble = [[_myVobbleViewCont vobbleArray] objectAtIndex:tag];
+            NSDictionary *parameters = @{@"token": [User getToken]};
+            [[AFAppDotNetAPIClient sharedClient] postPath:[URL getVobbleDeleteURL:deleteVobble.vobbleId] parameters:parameters success:^(AFHTTPRequestOperation *response, id responseObject) {
+                JY_LOG(@"%@ : %@",[URL getVobbleDeleteURL:deleteVobble.vobbleId],responseObject);
+                if ([[responseObject objectForKey:@"result"] integerValue] != 0) {
+                    [_myVobbleViewCont resetVobbleImgs];
+                    [_myVobbleViewCont initVobbles];
+                    [_myVobbleViewCont stopAllAnimation];
+                }else{
+                    [self alertNetworkError:[responseObject objectForKey:@"msg"]];
+                }
+            } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [self alertNetworkError:NSLocalizedString(@"NETWORK_ERROR", @"네트워크 실패")];
+            }];
+            
+            /*
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             Vobble* deleteVobble = [[_myVobbleViewCont vobbleArray] objectAtIndex:tag];
             NSDictionary *parameters = @{@"token": [User getToken]};
@@ -163,6 +180,7 @@
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 [self alertNetworkError:NSLocalizedString(@"NETWORK_ERROR", @"네트워크 실패")];
             }];
+             */
         }],nil];
         [alert show];
     }
@@ -187,21 +205,29 @@
                      
                      if (nResult == 0) {
                          if ([MFMailComposeViewController canSendMail]) {
-                             MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
-                             
-                             controller.mailComposeDelegate = self;
-                             [controller setSubject:@"Vobble Feedback!!!"];
-                             //[controller setMessageBody:[NSString stringWithFormat:@"%@ 님으로부터!",[User getUserId]] isHTML:FALSE];
-                             [controller setToRecipients:@[@"nexters.vobble@gmail.com"]];
-                             [self presentViewController:controller animated:TRUE completion:NULL];
+                             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                                 MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
+                                 
+                                 controller.mailComposeDelegate = self;
+                                 [controller setSubject:@"Vobble Feedback!!!"];
+                                 //[controller setMessageBody:[NSString stringWithFormat:@"%@ 님으로부터!",[User getUserId]] isHTML:FALSE];
+                                 [controller setToRecipients:@[@"nexters.vobble@gmail.com"]];
+                                 [self presentViewController:controller animated:TRUE completion:NULL];
+                             });
                          }
                      }else if (nResult == 1) {
-                          [self performSegueWithIdentifier:@"ToIntroSegue" sender:self];
+                         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                             [self performSegueWithIdentifier:@"ToIntroSegue" sender:self];
+                         });
                      }else if (nResult == 2) {
-                         [self performSegueWithIdentifier:@"ToAboutSegue" sender:self];
+                         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                             [self performSegueWithIdentifier:@"ToAboutSegue" sender:self];
+                         });
                      }else if (nResult == 3) {
-                         [User setLogOut];
-                         [self performSegueWithIdentifier:@"ToSignSegue" sender:self];
+                         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                             [User setLogOut];
+                             [self performSegueWithIdentifier:@"ToSignSegue" sender:self];
+                         });
                      }
                  }];
 }

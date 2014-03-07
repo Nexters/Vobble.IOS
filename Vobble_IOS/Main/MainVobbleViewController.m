@@ -43,7 +43,7 @@
     _deleteBtns = [NSMutableArray new];
     NSInteger idx = 0;
     for (UIView* vobbleView in _vobbleViews) {
-        if ([[UIScreen mainScreen] bounds].size.height == 480) {
+        if (IPHONE4) {
             if (idx == 3 || idx == 8 || idx == 9) {
                 [vobbleView setHidden:TRUE];
             }
@@ -54,6 +54,11 @@
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setFrame:vobbleView.frame];
+        if (IPHONE4) {
+            if (idx == 3 || idx == 8 || idx == 9) {
+                [button setEnabled:FALSE];
+            }
+        }
         [button setTag:idx++];
         [button addTarget:self.mainViewCont action:@selector(vobbleClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:button];
@@ -74,6 +79,7 @@
             [_deleteBtns addObject:button2];
             [self.view addSubview:button2];
         }
+        
     }
     [_recordBtn addTarget:self.mainViewCont action:@selector(recordClick:) forControlEvents:UIControlEventTouchUpInside];
   
@@ -118,6 +124,29 @@
     }
     NSString* latitude = [User getLatitude];
     NSString* longitude = [User getLongitude];
+    isConnecting = TRUE;
+    
+    NSDictionary *parameters = @{@"latitude": latitude,@"longitude": longitude, @"limit": @"12"};
+    
+    [[AFAppDotNetAPIClient sharedClient] getPath:url parameters:parameters success:^(AFHTTPRequestOperation *response, id responseObject) {
+        JY_LOG(@"%@ : %@",[URL getAllVobbleURL],responseObject);
+        if ([[responseObject objectForKey:@"result"] integerValue] != 0) {
+            [_vobbleArray removeAllObjects];
+            for (NSDictionary* dic in [responseObject objectForKey:@"vobbles"]) {
+                Vobble* vobble = [Vobble new];
+                [vobble setVobble:dic];
+                [_vobbleArray addObject:vobble];
+            }
+            [self initVobblesAnimation];
+        }else{
+            [self alertNetworkError:[responseObject objectForKey:@"msg"]];
+        }
+        isConnecting = FALSE;
+    } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
+        [self alertNetworkError:NSLocalizedString(@"NETWORK_ERROR", @"네트워크 실패")];
+        isConnecting = FALSE;
+    }];
+    /*
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     isConnecting = TRUE;
     
@@ -140,6 +169,7 @@
         [self alertNetworkError:NSLocalizedString(@"NETWORK_ERROR", @"네트워크 실패")];
         isConnecting = FALSE;
     }];
+     */
     if (_type == ALL) {
         url = [URL getAllVobbleCountURL];
         self.view.clipsToBounds = FALSE;
@@ -149,6 +179,18 @@
     }else if (_type == FRIEND){
         url = [URL getMyVobbleCountURL];
     }
+    [[AFAppDotNetAPIClient sharedClient] getPath:url parameters:parameters success:^(AFHTTPRequestOperation *response, id responseObject) {
+        JY_LOG(@"%@ : %@",[URL getAllVobbleURL],responseObject);
+        if ([[responseObject objectForKey:@"result"] integerValue] != 0) {
+            _vobbleCnt = [[responseObject objectForKey:@"count"] integerValue];
+            [_mainViewCont changeVobbleCnt];
+        }else{
+            //[self alertNetworkError:[responseObject objectForKey:@"msg"]];
+        }
+    } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
+        
+    }];
+    /*
     [manager GET:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         JY_LOG(@"%@ : %@",[URL getAllVobbleURL],responseObject);
         if ([[responseObject objectForKey:@"result"] integerValue] != 0) {
@@ -160,15 +202,17 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //[self alertNetworkError:NSLocalizedString(@"NETWORK_ERROR", @"네트워크 실패")];
     }];
+     */
 }
 - (void)initVobblesAnimation{
     for (int i=0; i < MAX_VOBBLE_CNT; i++) {
         NZCircularImageView* imgView = [_imgViews objectAtIndex:i];
+        UIView* vobbleView = [_vobbleViews objectAtIndex:i];
         if (i >= [_vobbleArray count]) {
             imgView.image = NULL;
             return ;
         }else{
-            imgView.image = [UIImage imageNamed:@"vobble_loading_icon.png"];
+            imgView.image = [UIImage imageNamed:@"loading.png"];
         }
         Vobble* vobble = [_vobbleArray objectAtIndex:i];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.13 * i * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
@@ -176,7 +220,7 @@
             [imgView setImageWithResizeURL:[vobble getImgUrl]];
             
             NSString *keyPath = @"transform";
-            CATransform3D transform = imgView.layer.transform;
+            CATransform3D transform = vobbleView.layer.transform;
             id fromValue = [NSValue valueWithCATransform3D:
                             CATransform3DScale(transform, 0.2, 0.2, 0.2)
                             ];
@@ -191,15 +235,15 @@
             bounceAnimation.numberOfBounces = 2;
             //bounceAnimation.shouldOvershoot = YES;
             //bounceAnimation.beginTime = CACurrentMediaTime() + 0.2*i;
-            [imgView.layer addAnimation:bounceAnimation forKey:@"scale"];
+            [vobbleView.layer addAnimation:bounceAnimation forKey:@"scale"];
             
-            [imgView.layer setValue:finalValue forKeyPath:keyPath];
+            [vobbleView.layer setValue:finalValue forKeyPath:keyPath];
             
             CABasicAnimation *fadeInAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
             fadeInAnimation.fromValue = [NSNumber numberWithFloat:0.0];
             fadeInAnimation.toValue = [NSNumber numberWithFloat:1.0];
             //fadeInAnimation.beginTime = CACurrentMediaTime() + 0.2*i;
-            [imgView.layer addAnimation:fadeInAnimation forKey:@"opacity"];
+            [vobbleView.layer addAnimation:fadeInAnimation forKey:@"opacity"];
         });
     }
 }

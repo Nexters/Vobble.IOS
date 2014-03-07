@@ -29,11 +29,28 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    AMBlurView* blurView = [AMBlurView new];
-    [blurView setFrame:CGRectMake(15, 45, 290, 498)];
-    //blurView.layer.cornerRadius = 8;
-    blurView.alpha = 0.7;
-    [_bgImgView addSubview:blurView];
+    if (IOS7) {
+        AMBlurView* blurView = [AMBlurView new];
+        if (IPHONE4) {
+            [blurView setFrame:CGRectMake(15, 45, 290, 498-100)];
+        }else{
+            [blurView setFrame:CGRectMake(15, 45, 290, 498)];
+        }
+        //blurView.layer.cornerRadius = 8;
+        blurView.alpha = 0.7;
+        [_bgImgView addSubview:blurView];
+    }else{
+        UIView* blurView = [UIView new];
+        if (IPHONE4) {
+            [blurView setFrame:CGRectMake(15, 45, 290, 498-100)];
+        }else{
+            [blurView setFrame:CGRectMake(15, 45, 290, 498)];
+        }
+        //blurView.layer.cornerRadius = 8;
+        blurView.alpha = 0.7;
+        [blurView setBackgroundColor:[UIColor whiteColor]];
+        [_bgImgView addSubview:blurView];
+    }
     
     //_agreeBtn.layer.cornerRadius = 4;
     //_disAgreeBtn.layer.cornerRadius = 4;

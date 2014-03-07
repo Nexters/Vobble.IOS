@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vXZ-lx-hvc">
     <dependencies>
+        <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
@@ -43,7 +44,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Lri-9Q-5Ua">
-                                <rect key="frame" x="283" y="30" width="17" height="17"/>
+                                <rect key="frame" x="270" y="10" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" image="x_btn_press.png">
@@ -368,19 +369,6 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="WaY-xa-eiF">
-                                <rect key="frame" x="283" y="30" width="17" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" image="x_btn.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="selected" image="x_btn_press.png"/>
-                                <state key="highlighted" image="x_btn_press.png"/>
-                                <connections>
-                                    <action selector="backClick:" destination="7Cx-CO-5xP" eventType="touchUpInside" id="YVO-03-6o1"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" id="w9U-Fp-osh">
                                 <rect key="frame" x="60" y="95" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -414,23 +402,36 @@
                             </view>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="uod-Lh-dd2">
                                 <rect key="frame" x="0.0" y="440" width="320" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                             </mapView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow_top.png" id="d7r-3D-pCV">
-                                <rect key="frame" x="0.0" y="440" width="320" height="62"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="0.0" y="439.9999982242179" width="320" height="62"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow_bottom.png" id="2SP-VT-fyl">
                                 <rect key="frame" x="0.0" y="506" width="320" height="62"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TF6-bk-RwN" customClass="TTTAttributedLabel">
                                 <rect key="frame" x="29" y="351" width="263" height="59"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.43137254901960786" green="0.43529411764705883" blue="0.44313725490196076" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="WaY-xa-eiF">
+                                <rect key="frame" x="270" y="10" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" image="x_btn.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" image="x_btn_press.png"/>
+                                <state key="highlighted" image="x_btn_press.png"/>
+                                <connections>
+                                    <action selector="backClick:" destination="7Cx-CO-5xP" eventType="touchUpInside" id="YVO-03-6o1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -441,6 +442,7 @@
                         <outlet property="mapView" destination="uod-Lh-dd2" id="Ekm-jS-r1w"/>
                         <outlet property="progressBackView" destination="w9U-Fp-osh" id="EgU-zP-OHL"/>
                         <outlet property="progressView" destination="8aU-Zv-AZe" id="GcX-x8-Zhu"/>
+                        <outlet property="shadowImgView" destination="d7r-3D-pCV" id="owY-X0-nD7"/>
                         <outlet property="vobbleImgView" destination="hLV-wU-F9j" id="OLA-QV-UOV"/>
                         <outlet property="vobbleInfoLabel" destination="TF6-bk-RwN" id="Kpz-zf-CvP"/>
                     </connections>
@@ -462,7 +464,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7qW-sp-UmE">
-                                <rect key="frame" x="0.0" y="477.99999657667257" width="320" height="90"/>
+                                <rect key="frame" x="0.0" y="477.99999769497663" width="320" height="90"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
@@ -504,16 +506,16 @@
                                 </connections>
                             </button>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="cex-Xm-FCv">
-                                <rect key="frame" x="0.0" y="349.99999657667263" width="320" height="128"/>
+                                <rect key="frame" x="0.0" y="349.99999769497663" width="320" height="128"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                             </mapView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow_top.png" id="MKY-Fv-u7J">
                                 <rect key="frame" x="0.0" y="350" width="320" height="62"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow_bottom.png" id="EXY-i2-cid">
                                 <rect key="frame" x="0.0" y="415" width="320" height="62"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="V1z-IM-cWs">
                                 <rect key="frame" x="10" y="359" width="30" height="30"/>
@@ -537,6 +539,7 @@
                         <outlet property="locationBtn" destination="V1z-IM-cWs" id="Ihb-GC-bWw"/>
                         <outlet property="mapView" destination="cex-Xm-FCv" id="Lqh-Jf-a30"/>
                         <outlet property="progressView" destination="CF0-5w-6yp" id="dup-1g-t1O"/>
+                        <outlet property="shadowImgView" destination="MKY-Fv-u7J" id="1B9-f4-QDM"/>
                         <outlet property="vobbleImgView" destination="djd-8x-N9f" id="U7T-qD-Cau"/>
                         <segue destination="MNj-yN-kHw" kind="custom" identifier="ToMainSegue" customClass="NavigationRootPopSegue" id="c86-yn-jOw"/>
                     </connections>
@@ -1138,7 +1141,7 @@ vobble</string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log In" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ANh-3h-Ye3">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log in" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ANh-3h-Ye3">
                                 <rect key="frame" x="97" y="31" width="126" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1214,7 +1217,7 @@ vobble</string>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </webView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="IUn-NB-LQv">
-                                <rect key="frame" x="283" y="30" width="17" height="17"/>
+                                <rect key="frame" x="270" y="10" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" image="x_btn.png">
@@ -1441,7 +1444,7 @@ vobble</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="CON-Qu-TQX">
-                                <rect key="frame" x="286" y="28" width="17" height="17"/>
+                                <rect key="frame" x="270" y="10" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" image="x_btn.png">
@@ -1472,6 +1475,7 @@ vobble</string>
                     </view>
                     <connections>
                         <outlet property="descriptionLabel" destination="oCN-hp-l8d" id="TOo-lE-tAn"/>
+                        <outlet property="moreAppBtn" destination="2J3-UA-dKB" id="Dgo-jy-Tra"/>
                         <outlet property="nameLabel" destination="rrw-ix-HGQ" id="OzO-fb-exW"/>
                         <outletCollection property="buttons" destination="im4-7D-nBu" id="lqr-KV-LBK"/>
                         <outletCollection property="buttons" destination="uxb-px-mf0" id="W1O-Ww-6qh"/>
@@ -1577,8 +1581,8 @@ vobble</string>
         <image name="start_signup_btn_o.png" width="600" height="120"/>
         <image name="suwan.png" width="154" height="154"/>
         <image name="voice_vobble.png" width="200" height="200"/>
-        <image name="x_btn.png" width="34" height="34"/>
-        <image name="x_btn_press.png" width="34" height="34"/>
+        <image name="x_btn.png" width="100" height="100"/>
+        <image name="x_btn_press.png" width="100" height="100"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -1586,10 +1590,10 @@ vobble</string>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="c86-yn-jOw"/>
-        <segue reference="pCl-nd-Uso"/>
-        <segue reference="QXQ-a2-oA5"/>
-        <segue reference="gA7-qK-QLR"/>
+        <segue reference="XRZ-hq-AjO"/>
         <segue reference="zuL-f6-vW4"/>
+        <segue reference="Vx5-lg-Tow"/>
+        <segue reference="pCl-nd-Uso"/>
+        <segue reference="nQS-Cf-yCe"/>
     </inferredMetricsTieBreakers>
 </document>

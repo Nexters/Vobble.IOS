@@ -29,6 +29,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    UIBarButtonItem *backBtn =
+    [[UIBarButtonItem alloc] initWithTitle:@""
+                                     style:UIBarButtonItemStyleBordered
+                                    target:nil
+                                    action:nil];
+    [self.navigationItem setBackBarButtonItem:backBtn];
+}
+- (void)viewDidAppear:(BOOL)animated{
+    [_emailTextField resignFirstResponder];
+    [_passwordTextField resignFirstResponder];
 }
 - (IBAction)signInClick:(id)sender{
     if (![_emailTextField.text isEmail]) {
@@ -36,6 +46,22 @@
         return ;
     }
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSDictionary *parameters = @{@"email": _emailTextField.text,@"password": _passwordTextField.text};
+    [[AFAppDotNetAPIClient sharedClient] postPath:[URL getLoginURL] parameters:parameters success:^(AFHTTPRequestOperation *response, id responseObject) {
+        JY_LOG(@"%@ : %@",[URL getLoginURL],responseObject);
+        if ([[responseObject objectForKey:@"result"] integerValue] != 0) {
+            [[NSUserDefaults standardUserDefaults] setValue:[responseObject objectForKey:@"token"] forKey:@"Token"];
+            [[NSUserDefaults standardUserDefaults] setValue:[responseObject objectForKey:@"user_id"] forKey:@"UserId"];
+            [self  performSegueWithIdentifier:@"ToMainInSegue" sender:self];
+        }else{
+            [self alertNetworkError:[responseObject objectForKey:@"msg"]];
+        }
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self alertNetworkError:NSLocalizedString(@"NETWORK_ERROR", @"네트워크 실패")];
+    }];
+    /*
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *parameters = @{@"email": _emailTextField.text,@"password": _passwordTextField.text};
     [manager POST:[URL getLoginURL] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -52,6 +78,7 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self alertNetworkError:NSLocalizedString(@"NETWORK_ERROR", @"네트워크 실패")];
     }];
+     */
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{

@@ -26,6 +26,7 @@
 @property (nonatomic, weak) IBOutlet NZCircularImageView* vobbleImgView;
 @property (nonatomic, weak) IBOutlet MKMapView* mapView;
 @property (nonatomic, weak) IBOutlet UIButton* locationBtn;
+@property (nonatomic, weak) IBOutlet UIImageView* shadowImgView;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @end
 
@@ -43,6 +44,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if (IPHONE4) {
+        _shadowImgView.frame = CGRectMake(_shadowImgView.frame.origin.x, _shadowImgView.frame.origin.y+53, _shadowImgView.frame.size.width, _shadowImgView.frame.size.height);
+    }
     UIBarButtonItem *backBtn =
     [[UIBarButtonItem alloc] initWithTitle:@""
                                      style:UIBarButtonItemStyleBordered
@@ -84,6 +88,37 @@
      */
 }
 - (IBAction)saveClick:(id)sender{
+    NSData *voiceData = [NSData dataWithContentsOfURL:_voiceURL];
+    NSData *imageData = [NSData dataWithContentsOfURL:_imageURL];
+    NSDictionary *parameters = @{@"token": [User getToken],
+                                 @"latitude": [User getLatitude],
+                                 @"longitude": [User getLongitude]};
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSMutableURLRequest* request = [[AFAppDotNetAPIClient sharedClient]  multipartFormRequestWithMethod:@"POST" path:[URL getUploadVobbleURL] parameters:parameters constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
+        [formData appendPartWithFileData:voiceData name:@"voice" fileName:[_voiceURL lastPathComponent] mimeType:@"image/m4a"];
+        [formData appendPartWithFileData:imageData name:@"image" fileName:[_imageURL lastPathComponent] mimeType:@"image/jpeg"];
+    }];
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+        JY_LOG(@"Sent %lld of %lld bytes", totalBytesWritten, totalBytesExpectedToWrite);
+    }];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id JSON) {
+        id jsonResponse = [NSJSONSerialization JSONObjectWithData:JSON
+                                                          options:NSJSONReadingAllowFragments | NSJSONReadingMutableContainers
+                                                            error:nil];
+        JY_LOG(@"%@ : %@",[URL getUploadVobbleURL] ,jsonResponse);
+        if ([[jsonResponse objectForKey:@"result"] integerValue] != 0) {
+            [self performSegueWithIdentifier:@"ToMainSegue" sender:self];
+        }else{
+            [self alertNetworkError:[jsonResponse objectForKey:@"msg"]];
+        }
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        [self alertNetworkError:NSLocalizedString(@"NETWORK_ERROR", @"")];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }];
+    [operation start];
+    /*
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     NSDictionary *parameters = @{@"token": [User getToken],
@@ -106,6 +141,7 @@
         [self alertNetworkError:NSLocalizedString(@"NETWORK_ERROR", @"")];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
+     */
 }
 
 - (IBAction)playClick:(id)sender{

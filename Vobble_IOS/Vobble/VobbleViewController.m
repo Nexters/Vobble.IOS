@@ -37,6 +37,7 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
 @property (nonatomic, weak) IBOutlet M13ProgressViewRing *progressView;
 @property (nonatomic, weak) IBOutlet NZCircularImageView* vobbleImgView;
 @property (nonatomic, weak) IBOutlet TTTAttributedLabel* vobbleInfoLabel;
+@property (nonatomic, weak) IBOutlet UIImageView* shadowImgView;
 @end
 
 @implementation VobbleViewController
@@ -53,6 +54,10 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if (IPHONE4) {
+        _vobbleInfoLabel.frame = CGRectMake(_vobbleInfoLabel.frame.origin.x, _vobbleInfoLabel.frame.origin.y-50, _vobbleInfoLabel.frame.size.width, _vobbleInfoLabel.frame.size.height);
+        _shadowImgView.frame = CGRectMake(_shadowImgView.frame.origin.x, _shadowImgView.frame.origin.y+8, _shadowImgView.frame.size.width, _shadowImgView.frame.size.height);
+    }
     //[DOUAudioStreamer setOptions:[DOUAudioStreamer options] | DOUAudioStreamerDefaultOptions];
     [_mapView showsUserLocation];
     [_progressView setShowPercentage:NO];
@@ -64,8 +69,8 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
     [_vobbleImgView setImageWithResizeURL:[_vobble getImgUrl]];
     
 	[self animateOnEntry];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:[URL getUserURL:_vobble.userId] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    
+    [[AFAppDotNetAPIClient sharedClient] getPath:[URL getUserURL:_vobble.userId]  parameters:nil success:^(AFHTTPRequestOperation *response, id responseObject) {
         JY_LOG(@"%@ : %@",[URL getUserURL:_vobble.userId],responseObject);
         if ([[responseObject objectForKey:@"result"] integerValue] != 0) {
             NSDictionary* dic = [responseObject objectForKey:@"user"];
@@ -73,7 +78,7 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
             _user.userId = [dic objectForKey:@"user_id"];
             _user.email = [dic objectForKey:@"email"];
             _user.userName = [dic objectForKey:@"username"];
-
+            
             [_vobbleInfoLabel setText:[NSString stringWithFormat:NSLocalizedString(@"VOBBLE_NAME_TIME_DESCTIPTION", @"보블 설명"),_user.userName ,_vobble.createdAt] afterInheritingLabelAttributesAndConfiguringWithBlock:^ NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
                 
                 NSRange boldRange = [[mutableAttributedString string] rangeOfString:_user.userName options:NSCaseInsensitiveSearch];
@@ -97,12 +102,12 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
                 
                 return mutableAttributedString;
             }];
-             
+            
         }else{
             [self alertNetworkError:[responseObject objectForKey:@"msg"]];
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [self alertNetworkError:NSLocalizedString(@"NETWORK_ERROR", @"네트워크 실패")];
+    } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
+         [self alertNetworkError:NSLocalizedString(@"NETWORK_ERROR", @"네트워크 실패")];
     }];
 }
 - (void)viewDidAppear:(BOOL)animated{
