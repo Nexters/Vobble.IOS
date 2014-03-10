@@ -29,16 +29,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIBarButtonItem *backBtn =
-    [[UIBarButtonItem alloc] initWithTitle:@""
-                                     style:UIBarButtonItemStyleBordered
-                                    target:nil
-                                    action:nil];
-    [self.navigationItem setBackBarButtonItem:backBtn];
+    self.navigationController.navigationBarHidden = TRUE;
+    self.navigationItem.hidesBackButton = TRUE;
 }
 - (void)viewDidAppear:(BOOL)animated{
     [_emailTextField resignFirstResponder];
     [_passwordTextField resignFirstResponder];
+}
+- (IBAction)backClick:(id)sender{
+    [self.navigationController popViewControllerAnimated:TRUE];
 }
 - (IBAction)signInClick:(id)sender{
     if (![_emailTextField.text isEmail]) {

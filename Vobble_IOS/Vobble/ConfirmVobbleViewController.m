@@ -44,6 +44,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationController.navigationBarHidden = TRUE;
+    self.navigationItem.hidesBackButton = TRUE;
     if (IPHONE4) {
         _shadowImgView.frame = CGRectMake(_shadowImgView.frame.origin.x, _shadowImgView.frame.origin.y+53, _shadowImgView.frame.size.width, _shadowImgView.frame.size.height);
     }
@@ -86,6 +88,9 @@
      MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
      [_mapView setRegion:viewRegion animated:YES];
      */
+}
+- (IBAction)backClick:(id)sender{
+    [self.navigationController popViewControllerAnimated:TRUE];
 }
 - (IBAction)saveClick:(id)sender{
     NSData *voiceData = [NSData dataWithContentsOfURL:_voiceURL];

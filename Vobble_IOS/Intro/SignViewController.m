@@ -31,14 +31,17 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
+    self.navigationItem.hidesBackButton = TRUE;
+    /*
     UIBarButtonItem *backBtn =
     [[UIBarButtonItem alloc] initWithTitle:@""
-                                     style:UIBarButtonItemStyleBordered
+                                     style:UIBarButtonItemStylePlain
                                     target:nil
                                     action:nil];
     [self.navigationItem setBackBarButtonItem:backBtn];
     
     self.navigationController.navigationBar.tintColor = MINT_COLOR;
+     */
     
     _vobbleImgView.alpha = 0;
     NSString *filepath   =   [[NSBundle mainBundle] pathForResource:@"intro" ofType:@"mp4"];

@@ -54,7 +54,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.navigationController.navigationBarHidden = TRUE;
+    self.navigationItem.hidesBackButton = TRUE;
     _isAttachedImg = FALSE;
     _accTime = 0.0f;
     [_progressView setShowPercentage:NO];
@@ -79,7 +80,9 @@
         [_timer invalidate];
     }
 }
-
+- (IBAction)backClick:(id)sender{
+    [self.navigationController popViewControllerAnimated:TRUE];
+}
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([[segue identifier] isEqualToString:@"ToConfirmSegue"]) {
         ConfirmVobbleViewController *confirmViewCont = segue.destinationViewController;

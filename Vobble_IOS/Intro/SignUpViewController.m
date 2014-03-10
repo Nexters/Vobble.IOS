@@ -31,18 +31,25 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationController.navigationBarHidden = TRUE;
+    self.navigationItem.hidesBackButton = TRUE;
+    /*
     UIBarButtonItem *backBtn =
     [[UIBarButtonItem alloc] initWithTitle:@""
                                      style:UIBarButtonItemStyleBordered
                                     target:nil
                                     action:nil];
     [self.navigationItem setBackBarButtonItem:backBtn];
+     */
 }
 - (void)viewDidAppear:(BOOL)animated{
     [_nameTextField resignFirstResponder];
     [_emailTextField resignFirstResponder];
     [_passwordTextField resignFirstResponder];
     [_passwordConfirmTextField resignFirstResponder];
+}
+- (IBAction)backClick:(id)sender{
+    [self.navigationController popViewControllerAnimated:TRUE];
 }
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     [UIView animateWithDuration:0.4f delay:0.0f options:UIViewAnimationOptionCurveLinear animations:^(void){

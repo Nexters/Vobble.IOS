@@ -216,6 +216,19 @@
                                     <action selector="signUpClick:" destination="rWY-VK-OOR" eventType="touchUpInside" id="Lc8-LQ-mLJ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="l4J-hn-Cru">
+                                <rect key="frame" x="0.0" y="20" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" image="back_btn_m.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" image="back_btn.png"/>
+                                <state key="highlighted" image="back_btn.png"/>
+                                <connections>
+                                    <action selector="backClick:" destination="uDf-g9-bzU" eventType="touchUpInside" id="xPC-Sd-Qtk"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -405,7 +418,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                             </mapView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow_top.png" id="d7r-3D-pCV">
-                                <rect key="frame" x="0.0" y="439.9999982242179" width="320" height="62"/>
+                                <rect key="frame" x="0.0" y="440.00000015686413" width="320" height="62"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow_bottom.png" id="2SP-VT-fyl">
@@ -530,6 +543,19 @@
                                     <action selector="reloadLocationClick:" destination="ycR-cJ-g1h" eventType="touchUpInside" id="9hR-ns-BvR"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="kZw-Dn-JkF">
+                                <rect key="frame" x="0.0" y="20" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" image="back_btn.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" image="back_btn_o.png"/>
+                                <state key="highlighted" image="back_btn_o.png"/>
+                                <connections>
+                                    <action selector="backClick:" destination="ycR-cJ-g1h" eventType="touchUpInside" id="CjH-mE-1g9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -560,6 +586,15 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="h6S-tU-5oJ">
+                                <rect key="frame" x="135" y="259" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" image="back_btn.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="back_btn_o.png"/>
+                            </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Your Vobble" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MEV-B7-19o">
                                 <rect key="frame" x="0.0" y="34" width="320" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -636,6 +671,19 @@
                                 </state>
                                 <connections>
                                     <action selector="confirmClick:" destination="kPN-CA-fwZ" eventType="touchUpInside" id="098-Ms-lOU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XND-Bh-RjA">
+                                <rect key="frame" x="0.0" y="20" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" image="back_btn.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" image="back_btn_o.png"/>
+                                <state key="highlighted" image="back_btn_o.png"/>
+                                <connections>
+                                    <action selector="backClick:" destination="kPN-CA-fwZ" eventType="touchUpInside" id="9ae-Na-Vie"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1148,6 +1196,19 @@ vobble</string>
                                 <color key="textColor" red="0.0" green="0.84705882349999995" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="aj8-h9-qVa">
+                                <rect key="frame" x="0.0" y="20" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" image="back_btn_m.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" image="back_btn.png"/>
+                                <state key="highlighted" image="back_btn.png"/>
+                                <connections>
+                                    <action selector="backClick:" destination="rKs-Mr-s7w" eventType="touchUpInside" id="VsM-2r-cKm"/>
+                                </connections>
+                            </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="E-mail" minimumFontSize="17" id="noG-Oo-BVX" customClass="MHTextField">
                                 <rect key="frame" x="36" y="90" width="248" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1369,6 +1430,8 @@ vobble</string>
                                 <state key="normal" image="more_btn.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="selected" image="more_btn_press.png"/>
+                                <state key="highlighted" image="more_btn_press.png"/>
                                 <connections>
                                     <segue destination="7Jb-AS-BNG" kind="custom" identifier="ToWebSegue" customClass="DCModalSegue" id="gA7-qK-QLR"/>
                                 </connections>
@@ -1539,6 +1602,9 @@ vobble</string>
     <resources>
         <image name="agree_btn.png" width="110" height="42"/>
         <image name="agree_btn_press.png" width="110" height="42"/>
+        <image name="back_btn.png" width="100" height="100"/>
+        <image name="back_btn_m.png" width="100" height="100"/>
+        <image name="back_btn_o.png" width="100" height="100"/>
         <image name="bg.png" width="320" height="568"/>
         <image name="bgbg.png" width="320" height="568"/>
         <image name="disagree_btn.png" width="110" height="42"/>
@@ -1555,6 +1621,7 @@ vobble</string>
         <image name="log_in_btn_press.png" width="127" height="60"/>
         <image name="logo.png" width="200" height="200"/>
         <image name="more_btn.png" width="520" height="120"/>
+        <image name="more_btn_press.png" width="520" height="120"/>
         <image name="myplace.png" width="30" height="30"/>
         <image name="myplace_press.png" width="30" height="30"/>
         <image name="play_btn.png" width="134" height="134"/>
@@ -1592,7 +1659,7 @@ vobble</string>
     <inferredMetricsTieBreakers>
         <segue reference="XRZ-hq-AjO"/>
         <segue reference="zuL-f6-vW4"/>
-        <segue reference="Vx5-lg-Tow"/>
+        <segue reference="QXQ-a2-oA5"/>
         <segue reference="pCl-nd-Uso"/>
         <segue reference="nQS-Cf-yCe"/>
     </inferredMetricsTieBreakers>
