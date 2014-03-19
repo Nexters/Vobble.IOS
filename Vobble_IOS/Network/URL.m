@@ -51,4 +51,7 @@
 + (NSString*)getVobbleDeleteURL:(NSString*)vobbleId{
     return [NSString stringWithFormat:@"users/%@/vobbles/%@/delete",[User getUserId],vobbleId];
 }
++ (NSString*)getVobbleReportURL:(NSString*)vobbleId{
+    return [NSString stringWithFormat:@"vobbles/%@/report",vobbleId];
+}
 @end

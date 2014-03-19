@@ -44,19 +44,45 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationController.navigationBarHidden = TRUE;
-    self.navigationItem.hidesBackButton = TRUE;
+    //self.navigationController.navigationBarHidden = TRUE;
+    //self.navigationItem.hidesBackButton = TRUE;
     if (IPHONE4) {
         _shadowImgView.frame = CGRectMake(_shadowImgView.frame.origin.x, _shadowImgView.frame.origin.y+53, _shadowImgView.frame.size.width, _shadowImgView.frame.size.height);
     }
-    UIBarButtonItem *backBtn =
-    [[UIBarButtonItem alloc] initWithTitle:@""
-                                     style:UIBarButtonItemStyleBordered
-                                    target:nil
-                                    action:nil];
-    [self.navigationItem setBackBarButtonItem:backBtn];
-    self.navigationItem.backBarButtonItem.title = @"";
-    self.navigationController.navigationBar.topItem.title = @"";
+    if (IOS6) {
+        UIImage *leftBtnImg=[UIImage imageNamed:@"back_btn.png"];
+        UIImage *leftBtnImgOn=[UIImage imageNamed:@"back_btn_m.png"];
+        UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [leftBtn setImage:leftBtnImg forState:UIControlStateNormal];
+        [leftBtn setImage:leftBtnImgOn forState:UIControlStateHighlighted];
+        [leftBtn addTarget:self action:@selector(backClick:) forControlEvents:UIControlEventTouchUpInside];
+        leftBtn.frame = CGRectMake(-10, 0,50, 50);
+        UIView* containView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50+10, 50)];
+        [containView addSubview:leftBtn];
+        
+        if (IOS6) {
+            leftBtn.frame = CGRectMake(-10, 20,50, 50);
+        }
+        
+        UIBarButtonItem *leftBarBtn = [[UIBarButtonItem alloc]
+                                       initWithCustomView:containView];
+        self.navigationItem.leftBarButtonItem = leftBarBtn;
+    }else{
+        UIImage *leftBtnImg=[UIImage imageNamed:@"back_btn.png"];
+        UIImage *leftBtnImgOn=[UIImage imageNamed:@"back_btn_m.png"];
+        UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [leftBtn setImage:leftBtnImg forState:UIControlStateNormal];
+        [leftBtn setImage:leftBtnImgOn forState:UIControlStateHighlighted];
+        [leftBtn addTarget:self action:@selector(backClick:) forControlEvents:UIControlEventTouchUpInside];
+        leftBtn.frame = CGRectMake(-10, 0,50, 50);
+        UIView* containView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50+10, 50)];
+        [containView addSubview:leftBtn];
+        
+        UIBarButtonItem *leftBarBtn = [[UIBarButtonItem alloc]
+                                       initWithCustomView:containView];
+        self.navigationItem.leftBarButtonItem = leftBarBtn;
+    }
+    
     //[self.navigationItem setHidesBackButton:YES];
     [_mapView showsUserLocation];
 	[_progressView setShowPercentage:NO];

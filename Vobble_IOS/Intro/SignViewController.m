@@ -28,26 +28,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
     self.navigationItem.hidesBackButton = TRUE;
-    /*
-    UIBarButtonItem *backBtn =
-    [[UIBarButtonItem alloc] initWithTitle:@""
-                                     style:UIBarButtonItemStylePlain
-                                    target:nil
-                                    action:nil];
-    [self.navigationItem setBackBarButtonItem:backBtn];
-    
-    self.navigationController.navigationBar.tintColor = MINT_COLOR;
-     */
     
     _vobbleImgView.alpha = 0;
     NSString *filepath   =   [[NSBundle mainBundle] pathForResource:@"intro" ofType:@"mp4"];
     NSURL    *fileURL    =   [NSURL fileURLWithPath:filepath];
     moviePlayerController = [[MPMoviePlayerController alloc] initWithContentURL:fileURL];
     [_bgImgView addSubview:moviePlayerController.view];
+    
     moviePlayerController.scalingMode = MPMovieScalingModeAspectFill;
     moviePlayerController.controlStyle = MPMovieControlStyleNone;
     [moviePlayerController.view setFrame:[[UIScreen mainScreen] bounds]];

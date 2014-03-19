@@ -38,10 +38,12 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
+    self.navigationItem.hidesBackButton = TRUE;
     [self.navigationController setDelegate:self];
+    
     UIBarButtonItem *backBtn =
     [[UIBarButtonItem alloc] initWithTitle:@""
-                                     style:UIBarButtonItemStyleBordered
+                                     style:UIBarButtonItemStylePlain
                                     target:nil
                                     action:nil];
     [self.navigationItem setBackBarButtonItem:backBtn];
@@ -231,7 +233,9 @@
                      }
                  }];
 }
-
+- (void)applicationDidBecomeActive:(UIApplication *)application{
+    [self refreshClick:NULL];
+}
 #pragma mark - CLLocationManagerDelegate
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     if (newLocation != NULL) {

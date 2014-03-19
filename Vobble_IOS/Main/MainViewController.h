@@ -23,4 +23,5 @@
 @property (nonatomic, strong) MainVobbleViewController* myVobbleViewCont;
 @property (nonatomic, strong) MainVobbleViewController* allVobbleViewCont;
 - (void)changeVobbleCnt;
+- (void)applicationDidBecomeActive:(UIApplication *)application;
 @end

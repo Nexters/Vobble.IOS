@@ -54,8 +54,41 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationController.navigationBarHidden = TRUE;
-    self.navigationItem.hidesBackButton = TRUE;
+
+    if (IOS6) {
+        UIImage *leftBtnImg=[UIImage imageNamed:@"back_btn.png"];
+        UIImage *leftBtnImgOn=[UIImage imageNamed:@"back_btn_m.png"];
+        UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [leftBtn setImage:leftBtnImg forState:UIControlStateNormal];
+        [leftBtn setImage:leftBtnImgOn forState:UIControlStateHighlighted];
+        [leftBtn addTarget:self action:@selector(backClick:) forControlEvents:UIControlEventTouchUpInside];
+        leftBtn.frame = CGRectMake(-10, 0,50, 50);
+        UIView* containView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50+10, 50)];
+        [containView addSubview:leftBtn];
+        
+        if (IOS6) {
+            leftBtn.frame = CGRectMake(-10, 20,50, 50);
+        }
+        
+        UIBarButtonItem *leftBarBtn = [[UIBarButtonItem alloc]
+                                       initWithCustomView:containView];
+        self.navigationItem.leftBarButtonItem = leftBarBtn;
+    }else{
+        UIImage *leftBtnImg=[UIImage imageNamed:@"back_btn.png"];
+        UIImage *leftBtnImgOn=[UIImage imageNamed:@"back_btn_m.png"];
+        UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [leftBtn setImage:leftBtnImg forState:UIControlStateNormal];
+        [leftBtn setImage:leftBtnImgOn forState:UIControlStateHighlighted];
+        [leftBtn addTarget:self action:@selector(backClick:) forControlEvents:UIControlEventTouchUpInside];
+        leftBtn.frame = CGRectMake(-10, 0,50, 50);
+        UIView* containView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50+10, 50)];
+        [containView addSubview:leftBtn];
+        
+        UIBarButtonItem *leftBarBtn = [[UIBarButtonItem alloc]
+                                       initWithCustomView:containView];
+        self.navigationItem.leftBarButtonItem = leftBarBtn;
+    }
+    
     _isAttachedImg = FALSE;
     _accTime = 0.0f;
     [_progressView setShowPercentage:NO];

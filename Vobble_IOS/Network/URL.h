@@ -25,4 +25,5 @@
 + (NSString*)getMyVobbleCountURL;
 + (NSString*)getUploadVobbleURL;
 + (NSString*)getVobbleDeleteURL:(NSString*)vobbleId;
++ (NSString*)getVobbleReportURL:(NSString*)vobbleId;
 @end

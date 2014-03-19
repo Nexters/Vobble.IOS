@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "SignViewController.h"
+#import "MainViewController.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -40,6 +41,9 @@
     if ([self.window.rootViewController isKindOfClass:[UINavigationController class]]) {
         if ([navi.topViewController isKindOfClass:[SignViewController class]]) {
             [(SignViewController*)navi.topViewController applicationDidBecomeActive:application];
+        }
+        if ([navi.topViewController isKindOfClass:[MainViewController class]]) {
+            [(MainViewController*)navi.topViewController applicationDidBecomeActive:application];
         }
     }
     

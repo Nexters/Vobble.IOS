@@ -18,7 +18,7 @@
 #import "User.h"
 #import "Pin.h"
 #import "TTTAttributedLabel.h"
-
+#import <FSExtendedAlertKit.h>
 #define METERS_PER_MILE 1609.344
 
 static void *kStatusKVOKey = &kStatusKVOKey;
@@ -179,6 +179,21 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [self dismissViewControllerAnimated:NO completion:nil];
     });
+}
+- (IBAction)reportClick:(id)sender{
+    [[AFAppDotNetAPIClient sharedClient] postPath:[URL getVobbleReportURL:_vobble.vobbleId] parameters:NULL success:^(AFHTTPRequestOperation *response, id responseObject) {
+        JY_LOG(@"%@ : %@",[URL getVobbleReportURL:_vobble.vobbleId],responseObject);
+        if ([[responseObject objectForKey:@"result"] integerValue] != 0) {
+            FSAlertView *alert = [[FSAlertView alloc] initWithTitle:@"Vobble" message:NSLocalizedString(@"REPORT_OK", @"신고접수") cancelButton:[FSBlockButton blockButtonWithTitle:@"확인" block:^ {
+                
+            }] otherButtons: nil];
+            [alert show];
+        }else{
+            [self alertNetworkError:[responseObject objectForKey:@"msg"]];
+        }
+    } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
+        [self alertNetworkError:NSLocalizedString(@"NETWORK_ERROR", @"네트워크 실패")];
+    }];
 }
 - (void) animateOnEntry
 {
