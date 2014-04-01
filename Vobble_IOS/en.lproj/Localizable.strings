@@ -27,4 +27,5 @@
 "IMG_SELECT_WEB" = "웹에서 선택";
 "LOCATION_NOTFOOUND" = "위치정보를 가져올 수 없습니다.";
 "VOBBLE_DELETE_QUESTION" = "보블을 삭제 하시겠습니까?";
+"REPORT_QUESTION" = "신고를 하시겠습니까?";
 "REPORT_OK" = "신고를 접수했습니다.";

@@ -181,19 +181,26 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
     });
 }
 - (IBAction)reportClick:(id)sender{
-    [[AFAppDotNetAPIClient sharedClient] postPath:[URL getVobbleReportURL:_vobble.vobbleId] parameters:NULL success:^(AFHTTPRequestOperation *response, id responseObject) {
-        JY_LOG(@"%@ : %@",[URL getVobbleReportURL:_vobble.vobbleId],responseObject);
-        if ([[responseObject objectForKey:@"result"] integerValue] != 0) {
-            FSAlertView *alert = [[FSAlertView alloc] initWithTitle:@"Vobble" message:NSLocalizedString(@"REPORT_OK", @"신고접수") cancelButton:[FSBlockButton blockButtonWithTitle:@"확인" block:^ {
-                
-            }] otherButtons: nil];
-            [alert show];
-        }else{
-            [self alertNetworkError:[responseObject objectForKey:@"msg"]];
-        }
-    } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-        [self alertNetworkError:NSLocalizedString(@"NETWORK_ERROR", @"네트워크 실패")];
-    }];
+    FSAlertView *alert = [[FSAlertView alloc] initWithTitle:@"Vobble" message:NSLocalizedString(@"REPORT_QUESTION", @"신고할래?") cancelButton:[FSBlockButton blockButtonWithTitle:@"취소" block:^ {
+        
+    }] otherButtons: [FSBlockButton blockButtonWithTitle:@"확인" block:^ {
+        [[AFAppDotNetAPIClient sharedClient] postPath:[URL getVobbleReportURL:_vobble.vobbleId] parameters:NULL success:^(AFHTTPRequestOperation *response, id responseObject) {
+            JY_LOG(@"%@ : %@",[URL getVobbleReportURL:_vobble.vobbleId],responseObject);
+            if ([[responseObject objectForKey:@"result"] integerValue] != 0) {
+                FSAlertView *alert = [[FSAlertView alloc] initWithTitle:@"Vobble" message:NSLocalizedString(@"REPORT_OK", @"신고접수") cancelButton:[FSBlockButton blockButtonWithTitle:@"확인" block:^ {
+                    
+                }] otherButtons: nil];
+                [alert show];
+            }else{
+                [self alertNetworkError:[responseObject objectForKey:@"msg"]];
+            }
+        } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
+            [self alertNetworkError:NSLocalizedString(@"NETWORK_ERROR", @"네트워크 실패")];
+        }];
+    }],nil];
+    [alert show];
+    
+    
 }
 - (void) animateOnEntry
 {
